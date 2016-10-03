@@ -1,0 +1,7 @@
+dn: uid=hkalia,ou=july,ou=2016,ou=people,dc=42,dc=us,dc=org
+changetype: modify
+delete: mobile
+mobile: 1112223333
+-
+add: mobile
+mobile: (972)876-6029

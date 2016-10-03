@@ -1,0 +1,5 @@
+Credentials cache: API:5012ABF3-34BA-4C2B-93DC-D75237CA9168
+        Principal: hkalia@42.US.ORG
+
+  Issued                Expires               Principal
+Jul 12 22:12:14 2016  Jul 13 08:12:14 2016  krbtgt/42.US.ORG@42.US.ORG
