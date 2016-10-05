@@ -1,0 +1,78 @@
+= Host-specific information ====================================================
+$> hostname; uname -msr
+e1z1r2p15.42.us.org
+Darwin 15.6.0 x86_64
+$> date
+Tue Oct  4 11:52:24 PDT 2016
+$> gcc --version
+Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
+Apple LLVM version 7.3.0 (clang-703.0.31)
+Target: x86_64-apple-darwin15.6.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+$> clang --version
+Apple LLVM version 7.3.0 (clang-703.0.31)
+Target: x86_64-apple-darwin15.6.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+
+= User files collection ========================================================
+Collecting user files from Vogsphere
+Repository URL: auto-exam/2016/c-exam-beginner/exam_20161004/hkalia
+
+= Git history ==================================================================
+$> git -C /var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user log --pretty='%H - %an, %ad : %s'
+a1af73d758e50cd192af2fbc74456b2ae84be037 - Exam 42, Tue Oct 4 11:40:51 2016 -0700 : brainfuck too lazy
+80f9a8065e6c2cdbfae571a91391ea4c0acc9194 - Exam 42, Tue Oct 4 11:21:08 2016 -0700 : ft_list_foreach
+9df4b9e296a02f4fd190f2a6b8970e48fcecd8ee - Exam 42, Tue Oct 4 11:11:20 2016 -0700 : paramsum
+d312a637f89c111efd53330d125871fdd4e82ee9 - Exam 42, Tue Oct 4 10:37:09 2016 -0700 : print_hex
+9007aee47b0ee7c613917d123f60f2e912083c6f - Exam 42, Tue Oct 4 09:54:18 2016 -0700 : ft_atoi
+4900cd036ee70bd0ce239e93ce062d6a853b0fd6 - Exam 42, Tue Oct 4 09:25:13 2016 -0700 : rev_print
+c6d4fe4362341b0e6758048f09bf5f028a5ff759 - Exam 42, Tue Oct 4 09:13:01 2016 -0700 : ft_countdown
+ 
+= Collected files ==========================================
+$> ls -lAR /var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user
+total 8
+-rw-r--r--  1 deepthought  deepthought  1735 Oct  4 11:52 __GIT_HISTORY
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 brainfuck
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 ft_atoi
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 ft_countdown
+drwxr-xr-x  4 deepthought  deepthought   136 Oct  4 11:52 ft_list_foreach
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 paramsum
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 print_hex
+drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 rev_print
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/brainfuck:
+total 8
+-rw-r--r--  1 deepthought  deepthought  535 Oct  4 11:52 main.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_atoi:
+total 8
+-rw-r--r--  1 deepthought  deepthought  425 Oct  4 11:52 ft_atoi.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_countdown:
+total 8
+-rw-r--r--  1 deepthought  deepthought  249 Oct  4 11:52 ft_countdown.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_list_foreach:
+total 16
+-rw-r--r--  1 deepthought  deepthought  137 Oct  4 11:52 ft_list.h
+-rw-r--r--  1 deepthought  deepthought  180 Oct  4 11:52 ft_list_foreach.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/paramsum:
+total 8
+-rw-r--r--  1 deepthought  deepthought  378 Oct  4 11:52 paramsum.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/print_hex:
+total 8
+-rw-r--r--  1 deepthought  deepthought  1340 Oct  4 11:52 print_hex.c
+
+/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/rev_print:
+total 8
+-rw-r--r--  1 deepthought  deepthought  462 Oct  4 11:52 rev_print.c
+ 
+= ft_itoa_base =================================================================
+Nothing turned in
+Grade: 0
+
+= Final grade: 0 ===============================================================
