@@ -1,0 +1,34 @@
+NAME = fillit
+
+CC = gcc
+
+CFLAG = -c -Wall -Werror -Wextra
+
+OFLAG = -o
+
+SRC_NAME = fillit.c
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+RM = rm -f
+
+NORM = norminette
+
+.PHONY: all clean fclean norm re $(NAME)
+
+all: $(NAME)
+
+$(NAME): 
+	$(CC) $(CFLAG) $(SRC_NAME)
+	$(CC) $(OBJ_NAME) $(OFLAG) $(NAME)
+
+clean:
+	$(RM) $(OBJ_NAME)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+norm: 
+	$(NORM) $(SRC_NAME)
