@@ -1,7 +1,4 @@
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+#include "fillit.h"
 
 /* 
 ** 0	"####"			I
@@ -24,9 +21,7 @@
 ** 17	"##...##"		Z
 ** 18	"#..##..#"		Z
 */
-
-/*
-char	*tet[]=	{"####", "#...#...#...#",
+/*char	*tet[]=	{"####", "#...#...#...#",
 				"#...###", "##..#...#", "###...#", "#...#..##",
 				"#.###", "#...#...##", "###.#", "##...#...#",
 				"##..##",
@@ -34,80 +29,31 @@ char	*tet[]=	{"####", "#...#...#...#",
 				"#..###", "#...##..#", "###..#", "#..##...#",
 				"##...##", "#..##..#"};*/
 
-void	ft_putstr(const char *src)
+void	assign_tbl(char **src_tbl, char *src)
 {
-	size_t	i;
+	int		i;
+	int		j;
+	int		k;
 
 	i = 0;
+	j = 0;
+	k = 0;
 	while (src[i])
 	{
-		write(1, &src[i], 1);
+		if (src[i] == '\n' && src[i + 1] == '\n')
+		{
+			src_tbl[j][k] = src[i];
+			i += 2;
+			j++;
+			k = 0;
+		} 
+		src_tbl[j][k] = src[i];
+		k++;
 		i++;
 	}
+	ft_puttbl(src_tbl);
 }
 
-char	*ft_strnew(size_t len)
-{
-	size_t	i;
-	char	*new;
-
-	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		new[i] = '\0';
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-char	**ft_tblnew(size_t len)
-{
-	size_t	i;
-	char	**new;
-
-	if (!(new = (char **)malloc(sizeof(char *) * (len + 1))))
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		new[i] = 0;
-		i++;
-	}
-	new[i] = 0;
-	return (new);
-}
-
-void	ft_strdel(char **src)
-{
-	free(*src);
-	*src = NULL;
-}
-
-void	ft_tbldel(char ***tbl)
-{
-	size_t	i;
-
-	i = 0;
-	while (*tbl[i])
-	{
-		free(*tbl[i]);
-		i++;
-	}
-	free(**tbl);
-	*tbl = 0;
-}
-/*
-char	*solve(char *src)
-{
-	if (1)
-		return ("under construction\n");
-	else
-		return (NULL);
-}
-*/
 int		validate2(char *src, int *blck_cnt)
 {
 	int		i;
@@ -169,7 +115,7 @@ int		validation_caller(char	*src)
 	int		src_len;
 	int		line_cnt;
 	int		blck_cnt;
-//	char	**src_tbl;
+	char	**src_tbl;
 
 	src_len = 0;
 	line_cnt = 0;
@@ -179,14 +125,9 @@ int		validation_caller(char	*src)
 		return (1);
 	if (validate2(src, &blck_cnt))
 		return (1);
-	printf("%d\n", blck_cnt);
-	/*if (!(src_tbl = ft_tblnew(blck_nbr)))
+	if (!(src_tbl = ft_tblnew(blck_cnt)))
 		return (1);
-	if (assign_tbl(src_tbl))
-	{
-		ft_tbldel(src_tbl);
-		return (1);
-	}*/
+	assign_tbl(src_tbl, src);
 	return (0);
 }
 

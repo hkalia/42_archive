@@ -6,7 +6,9 @@ CFLAG = -c -Wall -Werror -Wextra
 
 OFLAG = -o
 
-SRC_NAME = fillit.c
+SRC_NAME = fillit_main.c \
+		   fillit_str.c \
+		   fillit_tbl.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -14,7 +16,7 @@ RM = rm -f
 
 NORM = norminette
 
-.PHONY: all clean fclean norm re $(NAME)
+.PHONY: all clean fclean norm re
 
 all: $(NAME)
 
