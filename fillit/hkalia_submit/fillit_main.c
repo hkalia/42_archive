@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit_main.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/08 15:25:03 by dmclaugh          #+#    #+#             */
+/*   Updated: 2016/10/08 17:55:29 by hkalia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 /* 
@@ -29,6 +41,63 @@
 				"#..###", "#...##..#", "###..#", "#..##...#",
 				"##...##", "#..##..#"};*/
 
+char	*dot_nl_trim(char *src)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	if (!(new = ft_strnew(16)))
+		return (0);
+	while (*src && *src != '#')
+		src++;
+	while (src[j])
+	{
+		if (src[j] != '\n')
+		{
+			new[i] = src[j];
+			i++;
+		}
+		j++;
+	}
+	i = 0;
+	while (new[i])
+		i++;
+	i--;
+	while (new[i] && new[i] != '#')
+	{
+		new[i] = '\0';
+		i--;
+	}
+	return (new);
+}
+
+int		tbl_trim(char **src_tbl)
+{
+	char	*tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (src_tbl[i])
+	{
+		if (!(tmp = dot_nl_trim(src_tbl[i])))
+			return (1);
+		if (tmp[j] == '\0')
+		{
+			free(tmp);
+			return (1);
+		}
+		free(src_tbl[i]);
+		src_tbl[i] = tmp;
+		i++;
+	}
+	return (0);
+}
+
 void	assign_tbl(char **src_tbl, char *src)
 {
 	int		i;
@@ -51,7 +120,6 @@ void	assign_tbl(char **src_tbl, char *src)
 		k++;
 		i++;
 	}
-	ft_puttbl(src_tbl);
 }
 
 int		validate2(char *src, int *blck_cnt)
@@ -110,7 +178,7 @@ void	validate1(char *src, int *src_len, int *line_cnt)
 	}
 }
 
-int		validation_caller(char	*src)
+char	**validation_caller(char	*src)
 {
 	int		src_len;
 	int		line_cnt;
@@ -122,19 +190,25 @@ int		validation_caller(char	*src)
 	blck_cnt = 0;
 	validate1(src, &src_len, &line_cnt);
 	if (src_len < 21 || line_cnt > 129)
-		return (1);
+		return (0);
 	if (validate2(src, &blck_cnt))
-		return (1);
+		return (0);
 	if (!(src_tbl = ft_tblnew(blck_cnt)))
-		return (1);
+		return (0);
 	assign_tbl(src_tbl, src);
-	return (0);
+	if (tbl_trim(src_tbl))
+	{
+		ft_tbldel(src_tbl);
+		return (0);
+	}
+	return (src_tbl);
 }
 
 int		main_caller(char *file)
 {
 	int		fd;
 	char	*src;
+	char	**tbl;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (1);
@@ -156,11 +230,12 @@ int		main_caller(char *file)
 		return (1);
 	}
 	close(fd);
-	if (validation_caller(src))
+	if (!(tbl = validation_caller(src)))
 	{
 		ft_strdel(&src);
 		return (1);
 	}
+	ft_puttbl(tbl);
 	return (0);
 }
 

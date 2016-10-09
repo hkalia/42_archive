@@ -6,15 +6,15 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:41:50 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/07 16:59:36 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/08 17:49:26 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**ft_tblnew(size_t len)
+char	**ft_tblnew(int len)
 {
-	size_t	i;
+	int		i;
 	char	**new;
 
 	if (!(new = (char **)malloc(sizeof(char *) * (len + 1))))
@@ -32,7 +32,7 @@ char	**ft_tblnew(size_t len)
 
 void	ft_puttbl(char **tbl)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (tbl[i])
@@ -44,7 +44,7 @@ void	ft_puttbl(char **tbl)
 
 void	ft_tbldel(char **tbl)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (tbl[i])
