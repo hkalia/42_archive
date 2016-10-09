@@ -6,7 +6,7 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:25:03 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/08 17:55:29 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/08 21:06:37 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 ** 17	"##...##"		Z
 ** 18	"#..##..#"		Z
 */
+
 /*char	*tet[]=	{"####", "#...#...#...#",
 				"#...###", "##..#...#", "###...#", "#...#..##",
 				"#.###", "#...#...##", "###.#", "##...#...#",
@@ -41,149 +42,31 @@
 				"#..###", "#...##..#", "###..#", "#..##...#",
 				"##...##", "#..##..#"};*/
 
-char	*dot_nl_trim(char *src)
+char	*validate3(char **src_tbl)
 {
+	char	*tetri;
 	int		i;
 	int		j;
-	char	*new;
 
 	i = 0;
 	j = 0;
-	if (!(new = ft_strnew(16)))
+	if (!(tetri = ft_strnew(26)))
 		return (0);
-	while (*src && *src != '#')
-		src++;
-	while (src[j])
+	while (src_tbl[j])
 	{
-		if (src[j] != '\n')
-		{
-			new[i] = src[j];
-			i++;
-		}
+		tetri = str_tbl_cmp(src_tbl[j]);
 		j++;
 	}
-	i = 0;
-	while (new[i])
-		i++;
-	i--;
-	while (new[i] && new[i] != '#')
-	{
-		new[i] = '\0';
-		i--;
-	}
-	return (new);
+	return (tetri);
 }
 
-int		tbl_trim(char **src_tbl)
-{
-	char	*tmp;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (src_tbl[i])
-	{
-		if (!(tmp = dot_nl_trim(src_tbl[i])))
-			return (1);
-		if (tmp[j] == '\0')
-		{
-			free(tmp);
-			return (1);
-		}
-		free(src_tbl[i]);
-		src_tbl[i] = tmp;
-		i++;
-	}
-	return (0);
-}
-
-void	assign_tbl(char **src_tbl, char *src)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (src[i])
-	{
-		if (src[i] == '\n' && src[i + 1] == '\n')
-		{
-			src_tbl[j][k] = src[i];
-			i += 2;
-			j++;
-			k = 0;
-		} 
-		src_tbl[j][k] = src[i];
-		k++;
-		i++;
-	}
-}
-
-int		validate2(char *src, int *blck_cnt)
-{
-	int		i;
-	int		dot_cnt;
-	int		line_cnt;
-
-	i = 0;
-	dot_cnt = 0;
-	line_cnt = 0;
-	while (src[i])
-	{
-		if (src[i] == '.' || src[i] == '#')
-			dot_cnt++;	
-		if (src[i] == '\n' && (src[i + 1] != '\n' && src[i + 1] != '\0'))
-		{
-			if (dot_cnt != 4)
-				return (1);
-			else
-				dot_cnt = 0;
-		}
-		if (src[i] == '\n' && (src[i - 1] == '.' || src[i - 1] == '#'))
-			line_cnt++;
-		if (src[i] == '\n' && (src[i + 1] == '\n' || src[i + 1] == '\0'))
-		{
-			if (line_cnt != 4)
-				return (1);
-			else
-			{
-				line_cnt = 0;
-				(*blck_cnt)++;
-			}
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	validate1(char *src, int *src_len, int *line_cnt)
-{
-	int		i;
-
-	i = 0;
-	while (*src)
-	{
-		if (*src != '.' && *src != '#' && *src != '\n')
-		{
-			*src_len = 1;
-			return ;
-		}
-		if (*src == '\n')
-			(*line_cnt)++;
-		src++;
-		(*src_len)++;
-	}
-}
-
-char	**validation_caller(char	*src)
+char	*validation_caller(char *src)
 {
 	int		src_len;
 	int		line_cnt;
 	int		blck_cnt;
 	char	**src_tbl;
+	char	*tetri;
 
 	src_len = 0;
 	line_cnt = 0;
@@ -193,6 +76,8 @@ char	**validation_caller(char	*src)
 		return (0);
 	if (validate2(src, &blck_cnt))
 		return (0);
+	if (blck_cnt > 26)
+		return (0);
 	if (!(src_tbl = ft_tblnew(blck_cnt)))
 		return (0);
 	assign_tbl(src_tbl, src);
@@ -201,14 +86,19 @@ char	**validation_caller(char	*src)
 		ft_tbldel(src_tbl);
 		return (0);
 	}
-	return (src_tbl);
+	if (!(tetri = validate3(src_tbl)))
+	{
+		ft_tbldel(src_tbl);
+		return(0);
+	}
+	return (tetri);
 }
 
 int		main_caller(char *file)
 {
 	int		fd;
 	char	*src;
-	char	**tbl;
+	char	*tetri;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (1);
@@ -230,12 +120,12 @@ int		main_caller(char *file)
 		return (1);
 	}
 	close(fd);
-	if (!(tbl = validation_caller(src)))
+	if (!(tetri = validation_caller(src)))
 	{
 		ft_strdel(&src);
 		return (1);
 	}
-	ft_puttbl(tbl);
+	ft_putstr(tetri);
 	return (0);
 }
 

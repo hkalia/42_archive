@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:50:08 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/08 17:56:04 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/08 20:45:37 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ char	**ft_tblnew(int len);
 void	ft_puttbl(char **tbl);
 void	ft_tbldel(char **tbl);
 int		main_caller(char *file);
-char	**validation_caller(char	*src);
+char	*validation_caller(char	*src);
 void	validate1(char *src, int *src_len, int *line_cnt);
 int		validate2(char *src, int *blck_cnt);
 void	assign_tbl(char **src_tbl, char *src);
 int		tbl_trim(char **src_tbl);
 char	*dot_nl_trim(char *src);
+char	*tbl_cmp(char **src_tbl);
 
 #endif
