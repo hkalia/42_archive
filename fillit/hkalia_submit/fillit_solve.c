@@ -5,79 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/08 15:24:32 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/08 15:25:43 by dmclaugh         ###   ########.fr       */
+/*   Created: 2016/10/08 20:15:08 by dmclaugh          #+#    #+#             */
+/*   Updated: 2016/10/09 14:28:33 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	iterrow(int row, int col)
+char	*buildrow(int size)
 {
-	if (row < col)
-		return (++row);
-	else
-		return (row);
+	char	*row;
+	int		i;
+
+	if (!(row = (char *)malloc(sizeof(char) * size + 1)))
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		row[i] = '.';
+		++i;
+	}
+	row[i] = 0;
+	return (row);
 }
 
-int	itercol(int row, int col)
+char	**buildboard(int size)
 {
-	if (col <= row)
-		return (++col);
-	else
-		return (col);
+	int		i;
+	char	**tab;
+
+	if (!(tab = (char **)malloc(sizeof(char) * (size + 1) * size + 1)))
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		if (!(tab[i] = buildrow(size)))
+			return (NULL);
+		++i;
+	}
+	tab[i] = 0;
+	return (tab);
 }
 
-int	write_tet(char **board, char **tet, int row, int col)
+void	removetet(char **board, char *tet)
 {
-	int i;
+	int		row;
+	int		col;
+	char	*wipe;
+
+	wipe = tet;
+	while (*wipe == '.')
+		++wipe;
+	row = 0;
+	while (*board[row])
+	{
+		col = 0;
+		while (board[row][col])
+		{
+			if (board[row][col] == *wipe)
+				board[row][col] = '.';
+			++col;
+		}
+		++row;
+	}
+}
+
+void	writetet(char **board, char *tet, int row, int col)
+{
+	int		i;
 
 	i = 0;
-	while (*tet[i])
+	while (tet[i])
 	{
-		if (*tet[i] != '.')
-			board[row][col] = *tet[i];
-		if (*tet[i] == '.')
+		if (tet[i] != '.')
+			board[row][col] = tet[i];
+		++i;
+		++col;
+		if (i % 4 == 0)
 		{
+			++row;
+			col -= 3;
+		}
+	}
+}
 
+int		placetet(char **board, char *tet, int row, int col)
+{
+	int 	i;
+	
+	i = 0;
+	while (tet[i] && *board[row])
+	{
+		if (board[row][col] == 0 || (tet[i] != '.' && board[row][col] != '.'))
+			return (0);
+		++i;
+		++col;
+		if (i % 4 == 0)
+		{
+			++row;
+			col -= 3;
 		}
 	}
 	return (1);
-}
-
-int	place_tet(char **board, char **tet, int row, int col)
-{
-	int i;
-	int	wrow;
-	int	wcol;
-
-	i = 0;
-	wrow = row;
-	wcol = col;
-	while (*tet[i])
-	{
-		if (*tet[i] == '.')
-		{
-
-		}
-		if (*tet[i] != '.' && board[wrow][wcol] != '.')
-			return (place_tet(board, tet, iterrow(wrow, wcol), itercol(wrow, wcol)));
-	}
-	return (write_tet(board, tet, row, col));
-}
-
-int	fill_square(char **board, char *tet)
-{
-	if (tet)
-	{
-		if (!(board[row][col]))
-			if(expand_board(board))
-				return (0);
-		if (place_tet(board, tet, 0, 0))
-			fill_square(board, ++tet);
-		else
-			
-	}
-	else
-		return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:25:03 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/08 21:06:37 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/09 20:42:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,68 @@
 				"#..###", "#...##..#", "###..#", "#..##...#",
 				"##...##", "#..##..#"};*/
 
+char	**create_compare(void)
+{
+	char	**ret;
+
+	if (!(ret = ft_tblnew(18, 13)))
+		return (0);
+	ret[0] = "####";
+	ret[1] = "#...#...#...#";
+	ret[2] = "#...###";
+	ret[3] = "##..#...#";
+	ret[4] = "###...#";
+	ret[5] = "#...#..##";
+	ret[6] = "#.###";
+	ret[7] = "#...#...##";
+	ret[8] = "###.#";
+	ret[9] = "##...#...#";
+	ret[10] = "##..##";
+	ret[11] = "##.##";
+	ret[12] = "#...##...#";
+	ret[13] = "#..###";
+	ret[14] = "#...##..#";
+	ret[15] = "###..#";
+	ret[16] = "#..##...#";
+	ret[17] = "##...##";
+	ret[18] = "#..##..#";
+	return (ret);
+}
+
 char	*validate3(char **src_tbl)
 {
-	char	*tetri;
+	char	*ret;
+	char	**compare;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;
-	if (!(tetri = ft_strnew(26)))
+	k = 0;
+	if (!(ret = ft_strnew(26)))
 		return (0);
-	while (src_tbl[j])
+	if (!(compare = create_compare()))
+		return (0);
+	while (src_tbl[i])
 	{
-		tetri = str_tbl_cmp(src_tbl[j]);
-		j++;
+		while (compare[j])
+		{
+			if (ft_strequ(src_tbl[i], compare[j]))
+			{
+				ret[k] = j + '0';
+				k++;
+				j = 0;
+				break ;
+			}
+			j++;
+		}
+		if (j == 0)
+			i++;
+		else
+			return (0);
 	}
-	return (tetri);
+	return (ret);
 }
 
 char	*validation_caller(char *src)
@@ -78,7 +124,7 @@ char	*validation_caller(char *src)
 		return (0);
 	if (blck_cnt > 26)
 		return (0);
-	if (!(src_tbl = ft_tblnew(blck_cnt)))
+	if (!(src_tbl = ft_tblnew(blck_cnt, 20)))
 		return (0);
 	assign_tbl(src_tbl, src);
 	if (tbl_trim(src_tbl))
@@ -91,6 +137,7 @@ char	*validation_caller(char *src)
 		ft_tbldel(src_tbl);
 		return(0);
 	}
+	ft_tbldel(src_tbl);
 	return (tetri);
 }
 

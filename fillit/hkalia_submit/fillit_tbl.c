@@ -6,13 +6,13 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:41:50 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/08 20:42:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/09 19:50:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**ft_tblnew(int len)
+char	**ft_tblnew(int len, int str_len)
 {
 	int		i;
 	char	**new;
@@ -22,7 +22,7 @@ char	**ft_tblnew(int len)
 	i = 0;
 	while (i < len)
 	{
-		if (!(new[i] = ft_strnew(20)))
+		if (!(new[i] = ft_strnew(str_len)))
 			return (0);
 		i++;
 	}

@@ -2,14 +2,15 @@ NAME = fillit
 
 CC = gcc
 
-CFLAG = -Wall -Werror -Wextra
+CFLAG = -c -Wall -Werror -Wextra
 
-OFLAG = 
+OFLAG = -o
 
-SRC_NAME = fillit_main.c \
-		   fillit_str.c \
-		   fillit_tbl.c \
-		   fillit_validators.c
+SRC_NAME =	fillit_main.c \
+			fillit_solve.c \
+			fillit_str.c \
+			fillit_tbl.c \
+			fillit_validators.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -22,16 +23,16 @@ NORM = norminette
 all: $(NAME)
 
 $(NAME): 
-	$(CC) -c $(CFLAG) $(SRC_NAME)
-	$(CC) $(OBJ_NAME) $(OFLAG) -o $(NAME)
+	$(CC) $(CFLAG) $(SRC_NAME)
+	$(CC) $(OBJ_NAME) $(OFLAG) $(NAME)
 
 clean:
 	$(RM) $(OBJ_NAME)
 
-fclean: clean
+fclean:	clean
 	$(RM) $(NAME)
 
-re: fclean all
+re:	fclean all
 
 norm: 
 	$(NORM) $(SRC_NAME)

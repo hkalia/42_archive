@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:40:05 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/08 16:38:37 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/09 20:29:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ char	*ft_strcpy(char *dst, const char *src)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+int		ft_strequ(const char *src1, const char *src2)
+{
+	while (*src1 == *src2)
+	{
+		if (*src1 == '\0')
+			return (1);
+		src1++;
+		src2++;
+	}
+	return (0);
 }
 
 char	*ft_strnew(int len)
