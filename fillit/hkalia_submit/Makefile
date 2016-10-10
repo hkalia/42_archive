@@ -10,7 +10,8 @@ SRC_NAME =	fillit_main.c \
 			fillit_solve.c \
 			fillit_str.c \
 			fillit_tbl.c \
-			fillit_validators.c
+			fillit_validators.c \
+			fillit_specific_tbl.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
