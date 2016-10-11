@@ -6,7 +6,7 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:25:03 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/10 13:32:27 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/10 19:57:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,43 @@
 ** 17	"##...##"		Z
 ** 18	"#..##..#"		Z
 */
+void	ft_putchar(char src)
+{
+	write(1, &src, 1);
+}
+
+void	ft_putnbr(int src)
+{
+	int		src_cpy;
+
+	src_cpy = src;
+	if (src_cpy > 9)
+	{
+		ft_putnbr(src_cpy / 10);
+		ft_putnbr(src_cpy % 10);
+	}
+	else
+		ft_putchar(src_cpy + '0');
+}
+
+void	ft_putnbrstr(int *src)
+{
+	int		i;
+
+	i = 0;
+	while (src[i] != 42)
+	{
+		ft_putnbr(src[i]);
+		ft_putchar('\n');
+		i++;
+	}
+}
 
 int		main_caller(char *file)
 {
 	int		fd;
 	char	*src;
-	char	*tetri;
+	int		*tetri;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (1);
@@ -65,7 +96,7 @@ int		main_caller(char *file)
 		ft_strdel(&src);
 		return (1);
 	}
-	ft_putstr(tetri);
+	ft_putnbrstr(tetri);
 	return (0);
 }
 

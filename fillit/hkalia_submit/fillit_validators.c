@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:41:24 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/10 13:32:24 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/10 19:51:43 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ char	**create_compare(void)
 	return (ret);
 }
 
-char	*validate3(char **src_tbl)
+int		*validate3(char **src_tbl)
 {
-	char	*ret;
+	int		*ret;
 	char	**compare;
 	int		i;
 	int		j;
@@ -51,8 +51,15 @@ char	*validate3(char **src_tbl)
 	i = 0;
 	j = 0;
 	k = 0;
-	if (!(ret = ft_strnew(26)))
+	if (!(ret = (int *)malloc(sizeof(int) * (26 + 1))))
 		return (0);
+	while (i < 26)
+	{
+		ret[i] = 42;
+		i++;
+	}
+	ret[i] = 42;
+	i = 0;
 	if (!(compare = create_compare()))
 		return (0);
 	while (src_tbl[i])
@@ -61,7 +68,7 @@ char	*validate3(char **src_tbl)
 		{
 			if (ft_strequ(src_tbl[i], compare[j]))
 			{
-				ret[k] = j + '0';
+				ret[k] = j;
 				k++;
 				j = 0;
 				break ;
@@ -132,13 +139,13 @@ void	validate1(char *src, int *src_len, int *line_cnt)
 	}
 }
 
-char	*validation_caller(char *src)
+int		*validation_caller(char *src)
 {
 	int		src_len;
 	int		line_cnt;
 	int		blck_cnt;
 	char	**src_tbl;
-	char	*tetri;
+	int		*tetri;
 
 	src_len = 0;
 	line_cnt = 0;

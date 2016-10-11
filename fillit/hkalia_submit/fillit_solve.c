@@ -6,18 +6,18 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:15:08 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/09 14:28:33 by dmclaugh         ###   ########.fr       */
+/*   Updated: 2016/10/10 19:29:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+/*
 char	*buildrow(int size)
 {
 	char	*row;
 	int		i;
 
-	if (!(row = (char *)malloc(sizeof(char) * size + 1)))
+	if (!(row = (char *)malloc(sizeof(char) * size + 3)))
 		return (NULL);
 	i = 0;
 	while (i < size)
@@ -26,43 +26,45 @@ char	*buildrow(int size)
 		++i;
 	}
 	row[i] = 0;
+	row[i + 1] = 0;
+	row[i + 2] = 0;
 	return (row);
 }
-
-char	**buildboard(int size)
+*/
+char	**buildboard(int size, int str_size)
 {
+	char	**board;
 	int		i;
-	char	**tab;
+	int		j;
 
-	if (!(tab = (char **)malloc(sizeof(char) * (size + 1) * size + 1)))
-		return (NULL);
 	i = 0;
+	if (!(board = ft_tblnew(size, str_size + 3)))
+		return (0);
 	while (i < size)
 	{
-		if (!(tab[i] = buildrow(size)))
-			return (NULL);
-		++i;
+		j = 0;
+		while (j < (str_size))
+		{
+			board[i][j] = '.';
+			j++;
+		}
+		i++;
 	}
-	tab[i] = 0;
-	return (tab);
+	return (board);
 }
 
-void	removetet(char **board, char *tet)
+void	removetet(char **board, char c)
 {
 	int		row;
 	int		col;
-	char	*wipe;
 
-	wipe = tet;
-	while (*wipe == '.')
-		++wipe;
 	row = 0;
 	while (*board[row])
 	{
 		col = 0;
 		while (board[row][col])
 		{
-			if (board[row][col] == *wipe)
+			if (board[row][col] == c)
 				board[row][col] = '.';
 			++col;
 		}
@@ -96,7 +98,7 @@ int		placetet(char **board, char *tet, int row, int col)
 	i = 0;
 	while (tet[i] && *board[row])
 	{
-		if (board[row][col] == 0 || (tet[i] != '.' && board[row][col] != '.'))
+		if (tet[i] != '.' && board[row][col] != '.')
 			return (0);
 		++i;
 		++col;

@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 20:41:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/10 13:31:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/10 19:46:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 /*
 ** VALIDATORS
 */
 
-char	*validation_caller(char	*src);
+int		*validation_caller(char	*src);
 void	validate1(char *src, int *src_len, int *line_cnt);
 int		validate2(char *src, int *blck_cnt);
-char	*validate3(char **src_tbl);
+int		*validate3(char **src_tbl);
 char	**create_compare(void);
 
 /*
@@ -58,9 +59,8 @@ char	*dot_nl_trim(char *src);
 ** SOLVER FUNCTIONS
 */
 
-char	**buildboard(int size);
-void	removetet(char **board, char *tet);
-char	*buildrow(int size);
+char	**buildboard(int size, int str_size);
+void	removetet(char **board, char c);
 void	writetet(char **board, char *tet, int row, int col);
 int		placetet(char **board, char *tet, int row, int col);
 
@@ -68,6 +68,7 @@ int		placetet(char **board, char *tet, int row, int col);
 ** OTHER
 */
 
+void	ft_putnbrstr(int *src);
 int		main_caller(char *file);
 
 #endif
