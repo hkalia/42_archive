@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:41:24 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/10 19:51:43 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/12 15:50:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,16 @@ int		validate2(char *src, int *blck_cnt)
 	{
 		if (src[i] == '.' || src[i] == '#')
 			dot_cnt++;
-		if (src[i] == '\n' && (src[i + 1] != '\n' && src[i + 1] != '\0'))
+		if (src[i] == '\n' && (src[i - 1] == '.' || src[i - 1] == '#'))
 		{
 			if (dot_cnt != 4)
 				return (1);
 			else
+			{
 				dot_cnt = 0;
+				line_cnt++;
+			}
 		}
-		if (src[i] == '\n' && (src[i - 1] == '.' || src[i - 1] == '#'))
-			line_cnt++;
 		if (src[i] == '\n' && (src[i + 1] == '\n' || src[i + 1] == '\0'))
 		{
 			if (line_cnt != 4)
@@ -151,7 +152,7 @@ int		*validation_caller(char *src)
 	line_cnt = 0;
 	blck_cnt = 0;
 	validate1(src, &src_len, &line_cnt);
-	if (src_len < 21 || line_cnt > 129)
+	if (src_len < 20 || line_cnt > 129)
 		return (0);
 	if (validate2(src, &blck_cnt))
 		return (0);
