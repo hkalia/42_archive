@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 14:40:05 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/09 20:29:33 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/12 08:52:26 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,36 @@ void	ft_strdel(char **src)
 {
 	free(*src);
 	*src = NULL;
+}
+
+void	ft_putchar(char src)
+{
+	write(1, &src, 1);
+}
+
+void	ft_putnbr(int src)
+{
+	int		src_cpy;
+
+	src_cpy = src;
+	if (src_cpy > 9)
+	{
+		ft_putnbr(src_cpy / 10);
+		ft_putnbr(src_cpy % 10);
+	}
+	else
+		ft_putchar(src_cpy + '0');
+}
+
+void	ft_putnbrstr(int *src)
+{
+	int		i;
+
+	i = 0;
+	while (src[i] != 42)
+	{
+		ft_putnbr(src[i]);
+		ft_putchar('\n');
+		i++;
+	}
 }

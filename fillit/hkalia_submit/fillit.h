@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 20:41:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/10 19:46:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/12 09:45:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	**create_compare(void);
 ** STR FUNCTIONS
 */
 
+void	ft_putchar(char src);
+void	ft_putnbr(int src);
+void	ft_putnbrstr(int *src);
 void	ft_putstr(const char *src);
 void	ft_putendl(const char *src);
 char	*ft_strnew(int len);
@@ -59,10 +62,11 @@ char	*dot_nl_trim(char *src);
 ** SOLVER FUNCTIONS
 */
 
+int		solve_caller(int *tetindex);
 char	**buildboard(int size, int str_size);
 void	removetet(char **board, char c);
 void	writetet(char **board, char *tet, int row, int col);
-int		placetet(char **board, char *tet, int row, int col);
+int		checktet(char **board, char *tet, int row, int col);
 
 /*
 ** OTHER
