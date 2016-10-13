@@ -6,11 +6,12 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:15:08 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/12 15:55:30 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/12 17:03:21 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>			///
 
 char	**buildboard(int size, int str_size)
 {
@@ -49,22 +50,20 @@ char	**buildboard(int size, int str_size)
 
 void	removetet(char **board, char *tet)
 {
-	char	temp;
-	int		i;
+	char	tmp;
 	int		row;
 	int		col;
 
-	i = 0;
-	while (tet[i] == '.')
-		++i;
-	temp = tet[i];
 	row = 0;
-	while (*board[row])
+	while (*tet == '.')
+		++tet;
+	tmp = *tet;
+	while (board[row])
 	{
 		col = 0;
 		while (board[row][col])
 		{
-			if (board[row][col] == temp)
+			if (board[row][col] == tmp)
 				board[row][col] = '.';
 			++col;
 		}
@@ -75,26 +74,50 @@ void	removetet(char **board, char *tet)
 void	writetet(char **board, char *tet, int row, int col)
 {
 	int		i;
+	int		cnt;
 
 	i = 0;
+	cnt = 0;
 	while (tet[i])
 	{
 		if (tet[i] != '.')
 			board[row][col] = tet[i];
 		++i;
 		++col;
-		if (i % 4 == 0)
+		++cnt;
+		if (cnt == 4)
 		{
 			++row;
-			col -= 3;
+			col -= 4;
+			cnt = 0;
 		}
 	}
 }
-/*
+
 int		checktet(char **board, char *tet, int row, int col)
 {
+	int		i;
+	int		cnt;
+
+	i = 0;
+	cnt = 0;
+	while (tet[i])
+	{
+		if (cnt == 4)
+		{
+			row++;
+			cnt = 0;
+			col -= 4;
+		}
+		if (tet[i] >= 'A' && tet[i] <= 'Z' && board[row][col] != '.')
+			return (0);
+		cnt++;
+		col++;
+		i++;
+	}
+	return (1);
 }
-*/
+
 char	*createtet2(int tet)
 {
 	char	*str;
@@ -192,12 +215,11 @@ int		find_board_size(int *tetindex)
 		j++;
 	return (j);
 }
-/*
-int		recursor(char **board, char **tetarray, int	row, int col)
+
+int		recursor(char **board, char **tetarray, int row, int col)
 {
-	if (tetarray == 0)
+	if (tetarray[i] == 0)
 		return (1);
-	ft_puttbl(board);
 	while (board[row])
 	{
 		while (board[row][col])
@@ -205,7 +227,7 @@ int		recursor(char **board, char **tetarray, int	row, int col)
 			if (checktet(board, *tetarray, row, col))
 			{
 				writetet(board, *tetarray, row, col);
-				if (recursor(board, tetarray++, 0, 0))
+				if (recursor(board, tetarray++, i, 0, 0))
 					return (1);
 				removetet(board, *tetarray);
 			}
@@ -215,7 +237,7 @@ int		recursor(char **board, char **tetarray, int	row, int col)
 	}
 	return (0);
 }
-*/
+
 int		solve_caller(int *tetindex)
 {
 	char	**tetarray;
@@ -223,21 +245,20 @@ int		solve_caller(int *tetindex)
 	int		size;
 
 	size = find_board_size(tetindex);
-	if (!(board = buildboard(size , size)))
+	if (!(board = buildboard(size, size)))
 		return (1);
 	if (!(tetarray = createtet(tetindex)))
 		return (1);
-	/*while(recursor(board, tetarray, 0, 0))
+	ft_puttbl(tetarray);
+	ft_putchar('\n');
+	while(recursor(board, tetarray, 0, 0))
 	{
 		++size;
 		ft_tbldel(board);
 		if (!(board = buildboard(size, size)))
 			return (1);
-			}*/
-	ft_puttbl(tetarray);
-	/*ft_putstr("check\n");
-	if (checktet(board, *tetarray, 0, 0))
-		ft_putstr("hello");*/
+	}
+	ft_putchar('\n');
 	ft_puttbl(board);
 	return (0);
 }
