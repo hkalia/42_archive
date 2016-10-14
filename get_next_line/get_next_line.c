@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:21:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 16:41:30 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/14 16:49:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int 	get_next_line(const int fd, char **line)
 	{
 		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
+		{
+			ft_strdel(&buf);
 			return (-1);
+		}
 		if (read(fd, buf, 1) == 0)
 			ret = 0;
 		else
