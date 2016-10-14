@@ -10,22 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <string.h>
 #include <stdlib.h>
-
-static char		**ft_tbldel2(char **tbl)
-{
-	size_t	i;
-
-	i = 0;
-	while (tbl[i])
-	{
-		free(tbl[i]);
-		i++;
-	}
-	free(tbl);
-	return (NULL);
-}
 
 static size_t	ft_nbr_wrd_in_str(const char *src, char src_x)
 {
@@ -58,14 +45,13 @@ static char		*ft_wrddup(const char *src, char src_x)
 	i = 0;
 	while (src[wrd_len] && src[wrd_len] != src_x)
 		wrd_len++;
-	if (!(wrd = (char *)malloc(sizeof(char) * (wrd_len + 1))))
+	if (!(wrd = ft_strnew(wrd_len)))
 		return (NULL);
 	while (i < wrd_len)
 	{
 		wrd[i] = src[i];
 		i++;
 	}
-	wrd[i] = '\0';
 	return (wrd);
 }
 
@@ -79,9 +65,8 @@ char			**ft_strsplit(const char *src, char src_x)
 	i = 0;
 	flwrd = 0;
 	nbr_wrd = ft_nbr_wrd_in_str(src, src_x);
-	if (!(table = (char **)malloc(sizeof(char *) * (nbr_wrd + 1))))
+	if (!(table = ft_tblnew(nbr_wrd)))
 		return (NULL);
-	table[nbr_wrd] = NULL;
 	while (*src && i < nbr_wrd)
 	{
 		if (*src == src_x && flwrd == 1)
@@ -90,7 +75,7 @@ char			**ft_strsplit(const char *src, char src_x)
 		{
 			flwrd = 1;
 			if (!(table[i] = ft_wrddup(src, src_x)))
-				return (ft_tbldel2(table));
+				TBLDEL_RETURN(table)
 			i++;
 		}
 		src++;

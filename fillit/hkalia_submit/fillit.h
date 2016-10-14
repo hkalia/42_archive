@@ -13,6 +13,10 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
+# define CLOSE_RETURN(a) {close(a); return(1);}
+# define STRDEL_RETURN(a) {ft_strdel(&a); return(1);}
+# define STRDEL_CLOSE_RETURN(a, b) {close(a); ft_strdel(&b); return(1);}
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>

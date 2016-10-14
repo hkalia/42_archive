@@ -6,7 +6,7 @@
 /*   By: dmclaugh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:15:08 by dmclaugh          #+#    #+#             */
-/*   Updated: 2016/10/12 19:38:43 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/14 09:52:47 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int		recursor(char **board, char **tetarray, int row, int col)
 			if (checktet(board, *tetarray, row, col))
 			{
 				writetet(board, *tetarray, row, col);
-				ft_puttbl(board);
 				if (recursor(board, (1 + tetarray), 0, 0))
 					removetet(board, *tetarray);
 				else
@@ -105,28 +104,4 @@ int		recursor(char **board, char **tetarray, int row, int col)
 		col = 0;
 	}
 	return (1);
-}
-
-int		solve_caller(int *tetindex)
-{
-	char	**tetarray;
-	char	**board;
-	int		size;
-
-	size = find_board_size(tetindex);
-	if (!(board = buildboard(size, size)))
-		return (1);
-	if (!(tetarray = createtet(tetindex)))
-		return (1);
-	while(recursor(board, tetarray, 0, 0))
-	{
-		++size;
-		ft_tbldel(board);
-		if (!(board = buildboard(size, size)))
-			return (1);
-	}
-
-	cleanup_board(board);
-	ft_puttbl(board);
-	return (0);
 }

@@ -16,7 +16,7 @@ char	**create_compare(void)
 {
 	char	**ret;
 
-	if (!(ret = ft_tblnew(18, 13)))
+	if (!(ret = ft_tblnew(19, 13)))
 		return (0);
 	ret[0] = "####";
 	ret[1] = "#...#...#...#";
@@ -53,12 +53,11 @@ int		*validate3(char **src_tbl)
 	k = 0;
 	if (!(ret = (int *)malloc(sizeof(int) * (26 + 1))))
 		return (0);
-	while (i < 26)
+	while (i <= 26)
 	{
 		ret[i] = 42;
 		i++;
 	}
-	ret[i] = 42;
 	i = 0;
 	if (!(compare = create_compare()))
 		return (0);
@@ -92,6 +91,8 @@ int		validate2(char *src, int *blck_cnt)
 	i = 0;
 	dot_cnt = 0;
 	line_cnt = 0;
+	if (src[i] == '\n')
+		return (1);
 	while (src[i])
 	{
 		if (src[i] == '.' || src[i] == '#')
@@ -138,39 +139,4 @@ void	validate1(char *src, int *src_len, int *line_cnt)
 		src++;
 		(*src_len)++;
 	}
-}
-
-int		*validation_caller(char *src)
-{
-	int		src_len;
-	int		line_cnt;
-	int		blck_cnt;
-	char	**src_tbl;
-	int		*tetri;
-
-	src_len = 0;
-	line_cnt = 0;
-	blck_cnt = 0;
-	validate1(src, &src_len, &line_cnt);
-	if (src_len < 20 || line_cnt > 129)
-		return (0);
-	if (validate2(src, &blck_cnt))
-		return (0);
-	if (blck_cnt > 26)
-		return (0);
-	if (!(src_tbl = ft_tblnew(blck_cnt, 20)))
-		return (0);
-	assign_tbl(src_tbl, src);
-	if (tbl_trim(src_tbl))
-	{
-		ft_tbldel(src_tbl);
-		return (0);
-	}
-	if (!(tetri = validate3(src_tbl)))
-	{
-		ft_tbldel(src_tbl);
-		return(0);
-	}
-	ft_tbldel(src_tbl);
-	return (tetri);
 }

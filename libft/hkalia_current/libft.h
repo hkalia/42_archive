@@ -13,6 +13,8 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define TBLDEL_RETURN(a) {ft_tbldel(a); return (0);}
+
 # include <string.h>
 
 /*
@@ -117,6 +119,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 size_t				ft_strnlen(const char *src, size_t len);
 char				*ft_strndup(const char *src, size_t len);
+void				ft_putnbrstr(int *src, int stop);
 
 /*
 **	LIBC FUNCTIONS (IS) (EXTRA)
@@ -137,7 +140,9 @@ void				ft_lstaddend(t_list *lst, t_list *new);
 **	CUSTOM FUNCTIONS (TBL) (EXTRA)
 */
 
-void				ft_tbldel(char ***tbl);
+char				**ft_tblnew(int len);
+char				**ft_tblnew2(int len, int str_len);
+void				ft_tbldel(char **tbl);
 void				ft_puttbl(char **tbl);
 
 /*

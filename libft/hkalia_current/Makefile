@@ -76,11 +76,13 @@ SRC_NAME = ft_memset.c \
 			ft_lstmap.c \
 			ft_strnlen.c \
 			ft_strndup.c \
+			ft_putnbrstr.c \
 			ft_isupper.c \
 			ft_islower.c \
 			ft_isblank.c \
 			ft_putlststr.c \
 			ft_lstaddend.c \
+			ft_tblnew.c \
 			ft_tbldel.c \
 			ft_puttbl.c \
 			ft_nbrlen.c

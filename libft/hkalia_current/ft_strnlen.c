@@ -18,6 +18,6 @@ size_t	ft_strnlen(const char *src, size_t len)
 
 	i = 0;
 	while (i < len && src[i])
-		i++;
+		++i;
 	return (i);
 }

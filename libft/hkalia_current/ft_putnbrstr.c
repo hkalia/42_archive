@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_putnbrstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:40:11 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 12:30:48 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/14 14:43:55 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/14 14:44:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <string.h>
-#include <stdlib.h>
 
-char	*ft_strnew(size_t len)
+void	ft_putnbrstr(int *src, int stop)
 {
-	char	*new;
+	size_t	i;
 
-	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	while (len)
+	i = 0;
+	while (src[i] != stop)
 	{
-		new[len] = 0;
-		--len;
+		ft_putnbr(src[i]);
+		ft_putchar('\n');
+		i++;
 	}
-	new[len] = 0;
-	return (new);
 }

@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdlib.h>
 
-void	ft_tbldel(char ***tbl)
+void	ft_tbldel(char **tbl)
 {
 	size_t	i;
 
 	i = 0;
-	while (*tbl[i])
+	while (tbl[i])
 	{
-		free(*tbl[i]);
-		i++;
+		free(tbl[i]);
+		++i;
 	}
-	*tbl = NULL;
+	free(tbl);
+	tbl = 0;
 }
