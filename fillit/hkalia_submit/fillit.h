@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 20:41:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/12 17:01:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/12 17:29:41 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void	removetet(char **board, char *tet);
 void	writetet(char **board, char *tet, int row, int col);
 int		checktet(char **board, char *tet, int row, int col);
 int		recursor(char **board, char **tetarray, int row, int col);
+void	cleanup_board(char **board);
+int		find_board_size(int *tetindex);
+char	**createtet(int *tetindex);
+char	*createtet2(int tet);
 
 /*
 ** OTHER
