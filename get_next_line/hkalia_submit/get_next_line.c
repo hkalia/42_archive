@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:21:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 15:37:42 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 16:44:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,32 @@ char	*ft_strnew2(char *src, size_t len)
 
 int 	get_next_line(const int fd, char **line)
 {
-	char			*cur;
-	int				ret;
-	char			*x;
+	char		*cur;
+	int			ret;
+	char		*x;
+	static char	*storage = 0;
 
 	if (BUFF_SIZE == 0 || BUFF_SIZE >= 7516192768ULL)
 		return (-1);
-	if (!(*line = ft_strnew(BUFF_SIZE)))
-		return (-1);
+	if (storage != 0)
+	{
+		if (!(*line = ft_strdup(storage)))
+			STRDEL_RETURN(storage, -1)
+		ft_strdel(&storage);
+		if (!(*line = ft_strnew2(*line, BUFF_SIZE)))
+			return (-1);
+	}
+	else
+		if (!(*line = ft_strnew(BUFF_SIZE)))
+			return (-1);
+	if ((x = ft_strchr(*line, '\n')) != 0)
+	{
+		*x = '\0';
+		++x;
+		if (*x != '\0')
+			storage = ft_strdup(x);
+		return (1);
+	}
 	cur = *line;
 	while (1)
 	{
@@ -68,5 +86,8 @@ int 	get_next_line(const int fd, char **line)
 		}
 	}
 	*x = '\0';
+	++x;
+	if (*x != '\0')
+		storage = ft_strdup(x);
 	return (1);
 }

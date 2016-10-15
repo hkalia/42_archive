@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:40:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 15:05:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 16:48:40 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,17 @@
 int		main(void)
 {
 	int		fd;
+	int		ret;
 	char	*str;
 
 	fd = open("file", O_RDONLY);
-	if (get_next_line(fd, &str) == -1)
-		printf("error\n");
-	else
+	while ((ret = get_next_line(fd, &str)))
 	{
-		printf("%s\n", str);
+		printf("%d %s\n", ret, str);
 		free(str);
-/*		get_next_line(fd, &str);
-		printf("%s\n", str);*/
 	}
+	printf("%d %s\n", ret, str);
+	free(str);
 	close(fd);
 	return (0);
 }
