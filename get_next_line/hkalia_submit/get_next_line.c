@@ -6,45 +6,67 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:21:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 16:49:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 15:37:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+size_t	ft_strlen2(char *src)
+{
+	char	*src_cpy;
+
+	src_cpy = src;
+	if (src_cpy)
+		while (*src_cpy)
+			++src_cpy;
+	else
+		return (0);
+	return (src_cpy - src);
+}
+
+char	*ft_strnew2(char *src, size_t len)
+{
+	char	*ret;
+
+	if (!(ret = ft_strnew(ft_strlen(src) + len)))
+	{
+		ft_strdel(&src);
+		return (0);
+	}
+	ft_strcpy(ret, src);
+	ft_strdel(&src);
+	return (ret);
+}
 
 int 	get_next_line(const int fd, char **line)
 {
-	char	*buf;
-	char	*line_cpy;
-	char	*tmp;
-	int		ret;
+	char			*cur;
+	int				ret;
+	char			*x;
 
-	if (fd == 0 || fd == 1 || fd == 2)
+	if (BUFF_SIZE == 0 || BUFF_SIZE >= 7516192768ULL)
 		return (-1);
-	if (line == 0 || *line == 0)
+	if (!(*line = ft_strnew(BUFF_SIZE)))
 		return (-1);
-	if (!(buf = ft_strnew(BUFF_SIZE)))
-		return (-1);
-	line_cpy = *line;
+	cur = *line;
 	while (1)
 	{
-		ret = read(fd, buf, BUFF_SIZE);
+		ret = read(fd, cur, BUFF_SIZE);
 		if (ret == -1)
-		{
-			ft_strdel(&buf);
-			return (-1);
-		}
-		if (read(fd, buf, 1) == 0)
-			ret = 0;
+			STRDEL_RETURN(*line, -1)
+		if ((x = ft_strchr(cur, '\n')) != 0)
+			break ;
+		if (ret == 0)
+			return (0);
 		else
-			ret = 1;
-		tmp = ft_strchr(buf, '\n');
-		if (tmp != 0)
-			*tmp = '\0';
-		ft_strcpy(line_cpy, buf);
-		line_cpy += ft_strlen(line_cpy);
-		if (tmp != 0)
-			return (ret);
+		{
+			if (!(*line = ft_strnew2(*line, BUFF_SIZE)))
+				return (-1);
+			cur = *line;
+			cur += ft_strlen(*line);
+		}
 	}
-	return (-1);
+	*x = '\0';
+	return (1);
 }
