@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:21:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 16:44:33 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 17:14:18 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int 	get_next_line(const int fd, char **line)
 		return (1);
 	}
 	cur = *line;
+	cur += ft_strlen2(*line);
 	while (1)
 	{
 		ret = read(fd, cur, BUFF_SIZE);
