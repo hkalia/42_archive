@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:40:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 16:48:40 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 18:05:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int		main(void)
 		printf("%d %s\n", ret, str);
 		free(str);
 	}
-	printf("%d %s\n", ret, str);
-	free(str);
 	close(fd);
 	return (0);
 }
