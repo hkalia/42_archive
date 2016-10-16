@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:21:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 17:14:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/15 17:35:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int 	get_next_line(const int fd, char **line)
 	char		*x;
 	static char	*storage = 0;
 
+	if (line == 0)
+		return (-1);
 	if (BUFF_SIZE == 0 || BUFF_SIZE >= 7516192768ULL)
 		return (-1);
 	if (storage != 0)
