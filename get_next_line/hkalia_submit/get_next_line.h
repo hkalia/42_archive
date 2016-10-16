@@ -21,12 +21,12 @@
 # include <unistd.h>
 # include "libft.h"
 
-typedef struct			s_info
+typedef struct	s_info
 {
-	int					*fd_arr;
-	unsigned long long	fd_arr_size;
-	char				**tbl;
-}						t_info;
+	int			*fd_arr;
+	int			fd_arr_size;
+	char		**tbl;
+}				t_info;
 
 int 	get_next_line(const int fd, char **line);
 

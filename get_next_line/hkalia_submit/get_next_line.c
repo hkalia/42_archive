@@ -38,7 +38,7 @@ char	*ft_strnew2(char *src, size_t len)
 	ft_strdel(&src);
 	return (ret);
 }
-
+/*
 int 	get_next_line(const int fd, char **line)
 {
 	char		*cur;
@@ -94,3 +94,151 @@ int 	get_next_line(const int fd, char **line)
 		storage = ft_strdup(x);
 	return (1);
 }
+*/
+int		*ft_nbrstrnew(int *src, int *size, int len)
+{
+	int		*ret;
+	int		i;
+
+	i = 0;
+	if (!(ret = (int *)malloc(sizeof(int) * (*size + len))))
+		return (0);
+	while (i < *size)
+	{
+		ret[i] = src[i];
+		++i;
+	}
+	free(src);
+	len = len + *size;
+	while (i < len)
+	{
+		ret[i] = 0;
+		++i;
+	}
+	*size = len;
+	return (ret);
+}
+
+int		ft_tbllen(char	**src)
+{
+	int		i;
+
+	i = 0;
+	if (src != 0)
+		while (src[i])
+			i++;
+	else
+		return (0);
+	return (i);
+}
+
+void	ft_tblcpy(char **dst, char **src)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (src[i])
+	{
+		j = 0;
+		while (src[i][j])
+		{
+			dst[i][j] = src[i][j];
+			++j;
+		}
+		++i;
+	}
+}
+
+char	**ft_tblnew3(char **src, int len)
+{
+	char	**ret;
+	int		size;
+	int		i;
+
+	size = ft_tbllen(src);
+	if (!(ret = (char **)malloc(sizeof(char *) * (size + len + 1))))
+		return (0);
+	if (size > 0)
+		ft_tblcpy(ret, src);
+	i = 0;
+	len = len + size;
+	while (i <= len)
+	{
+		ret[i] = 0;
+		++i;
+	}
+	return (ret);
+}
+
+int		get_next_line(const int	fd, char **line)
+{
+	static t_info	storage;
+	int				i;
+	char			*cur;
+	char			buf[BUFF_SIZE];
+
+	if (fd < 0 || line == 0 || BUFF_SIZE == 0)
+		return (-1);
+	i = 0;
+	cur = 0;
+	while (i < storage.fd_arr_size)
+	{
+		if (storage.fdarr[i] == fd)
+			cur = table[i];
+		++i;
+	}
+	if (cur == 0)
+	{
+		if (!(storage.fd_arr = ft_nbrstrnew(storage.fd_arr, &storage.fd_arr_size, 1)))
+		{
+			if (storage.fd_arr_size != 0)
+			{
+				free(storage.fd_arr);
+				return (-1);
+			}
+		}
+		if (!(storage.tbl = ft_tblnew3(1)))
+		{
+			free(storage.fd_arr);
+			if (storage.tbl != 0)
+				ft_tbldel(storage.tbl);
+			return (-1);
+		}
+		cur = storage.tbl[ft_tbllen(storage.tbl)];
+	}
+	i = read(fd, buf, BUFF_SIZE);
+	if (ft_strchr(buf, '\n'))
+	{
+		while (buf[i])
+	}
+	printf("%d\n", storage.fd_arr_size);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
