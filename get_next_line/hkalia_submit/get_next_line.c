@@ -12,12 +12,13 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
+
 size_t	ft_strlen2(char *src)
 {
 	char	*src_cpy;
 
 	src_cpy = src;
-	if (src_cpy)
+	if (src_cpy != 0)
 		while (*src_cpy)
 			++src_cpy;
 	else
@@ -29,72 +30,22 @@ char	*ft_strnew2(char *src, size_t len)
 {
 	char	*ret;
 
-	if (!(ret = ft_strnew(ft_strlen(src) + len)))
+	if (src != 0 && *src != '\0')
 	{
+		if (!(ret = ft_strnew(ft_strlen2(src) + len)))
+		{
+			ft_strdel(&src);
+			return (0);
+		}
+		ft_strcpy(ret, src);
 		ft_strdel(&src);
-		return (0);
-	}
-	ft_strcpy(ret, src);
-	ft_strdel(&src);
-	return (ret);
-}
-/*
-int 	get_next_line(const int fd, char **line)
-{
-	char		*cur;
-	int			ret;
-	char		*x;
-	static char	*storage = 0;
-
-	if (line == 0)
-		return (-1);
-	if (BUFF_SIZE == 0 || BUFF_SIZE >= 7516192768ULL)
-		return (-1);
-	if (storage != 0)
-	{
-		if (!(*line = ft_strdup(storage)))
-			STRDEL_RETURN(storage, -1)
-		ft_strdel(&storage);
-		if (!(*line = ft_strnew2(*line, BUFF_SIZE)))
-			return (-1);
 	}
 	else
-		if (!(*line = ft_strnew(BUFF_SIZE)))
-			return (-1);
-	if ((x = ft_strchr(*line, '\n')) != 0)
-	{
-		*x = '\0';
-		++x;
-		if (*x != '\0')
-			storage = ft_strdup(x);
-		return (1);
-	}
-	cur = *line;
-	cur += ft_strlen2(*line);
-	while (1)
-	{
-		ret = read(fd, cur, BUFF_SIZE);
-		if (ret == -1)
-			STRDEL_RETURN(*line, -1)
-		if ((x = ft_strchr(cur, '\n')) != 0)
-			break ;
-		if (ret == 0)
+		if (!(ret = ft_strnew(len)))
 			return (0);
-		else
-		{
-			if (!(*line = ft_strnew2(*line, BUFF_SIZE)))
-				return (-1);
-			cur = *line;
-			cur += ft_strlen(*line);
-		}
-	}
-	*x = '\0';
-	++x;
-	if (*x != '\0')
-		storage = ft_strdup(x);
-	return (1);
+	return (ret);
 }
-*/
+
 int		*ft_nbrstrnew(int *src, int *size, int len)
 {
 	int		*ret;
@@ -126,7 +77,7 @@ int		ft_tbllen(char	**src)
 	i = 0;
 	if (src != 0)
 		while (src[i])
-			i++;
+			++i;
 	else
 		return (0);
 	return (i);
@@ -160,9 +111,13 @@ char	**ft_tblnew3(char **src, int len)
 	if (!(ret = (char **)malloc(sizeof(char *) * (size + len + 1))))
 		return (0);
 	if (size > 0)
+	{
 		ft_tblcpy(ret, src);
-	i = 0;
-	len = len + size;
+		i = size;
+		len = len + size;
+	}
+	else
+		i = 0;
 	while (i <= len)
 	{
 		ret[i] = 0;
@@ -171,12 +126,53 @@ char	**ft_tblnew3(char **src, int len)
 	return (ret);
 }
 
+int		new_fd(int fd, t_info *storage)
+{
+	if (!(storage->fd_arr = ft_nbrstrnew(storage->fd_arr, &(storage->fd_arr_size), 1)))
+	{
+		if (storage->fd_arr_size != 0)
+		{
+			free(storage->fd_arr);
+			ft_tbldel(storage->tbl);
+		}
+		return (-1);
+	}
+	storage->fd_arr[(storage->fd_arr_size) - 1] = fd;
+	if (!(storage->tbl = ft_tblnew3(storage->tbl, 1)))
+	{
+		if (storage->fd_arr_size != 0)
+		{
+			free(storage->fd_arr);
+			ft_tbldel(storage->tbl);
+		}
+		return (-1);
+	}
+	return (0);
+}
+
+char	*assign_line(char *cur)
+{
+	char	*tmp;
+	char	*ret;
+
+	tmp = ft_strchr(cur, '\n');
+	if (tmp != 0)
+		*tmp = '\0';
+	if (!(ret = ft_strdup(cur)))
+		return (0);
+	if (tmp != 0)
+		*tmp = '\n';
+	return (ret);
+}
+
 int		get_next_line(const int	fd, char **line)
 {
 	static t_info	storage;
 	int				i;
 	char			*cur;
+	char			*tmp;
 	char			buf[BUFF_SIZE];
+	int				ret;
 
 	if (fd < 0 || line == 0 || BUFF_SIZE == 0)
 		return (-1);
@@ -184,35 +180,110 @@ int		get_next_line(const int	fd, char **line)
 	cur = 0;
 	while (i < storage.fd_arr_size)
 	{
-		if (storage.fdarr[i] == fd)
-			cur = table[i];
+		if (storage.fd_arr[i] == fd)
+			cur = storage.tbl[i];
 		++i;
 	}
 	if (cur == 0)
 	{
-		if (!(storage.fd_arr = ft_nbrstrnew(storage.fd_arr, &storage.fd_arr_size, 1)))
+		if (new_fd(fd, &storage) == -1)
 		{
-			if (storage.fd_arr_size != 0)
-			{
-				free(storage.fd_arr);
-				return (-1);
-			}
-		}
-		if (!(storage.tbl = ft_tblnew3(1)))
-		{
-			free(storage.fd_arr);
-			if (storage.tbl != 0)
-				ft_tbldel(storage.tbl);
-			return (-1);
+			*line = 0;
+			return(-1);
 		}
 		cur = storage.tbl[ft_tbllen(storage.tbl)];
 	}
-	i = read(fd, buf, BUFF_SIZE);
-	if (ft_strchr(buf, '\n'))
+	else
 	{
-		while (buf[i])
+		if (ft_strchr(cur, '\n') != 0)
+		{
+			if (!(*line = assign_line(cur)))
+			{
+				free(storage.fd_arr);
+				ft_tbldel(storage.tbl);
+				*line = 0;
+				return (-1);
+			}
+			while (*cur != '\n')
+				++cur;
+			storage.tbl[i] =  cur;
+			return (1);
+		}
 	}
-	printf("%d\n", storage.fd_arr_size);
+	while ((ret = read(fd, buf, BUFF_SIZE)) != 0)
+	{
+		if (ret == -1)
+		{
+			free(storage.fd_arr);
+			ft_tbldel(storage.tbl);
+			*line = 0;
+			return (-1);
+		}
+		if (!(storage.tbl[i] = ft_strnew2(storage.tbl[i], BUFF_SIZE)))
+		{
+			free(storage.fd_arr);
+			ft_tbldel(storage.tbl);
+			*line = 0;
+			return (-1);
+		}
+		ft_strncpy(&storage.tbl[i][ft_strlen2(storage.tbl[i])], buf, BUFF_SIZE);
+		if (ft_strchr(storage.tbl[i], '\n') != 0)
+		{
+			if (!(*line = assign_line(storage.tbl[i])))
+			{
+				free(storage.fd_arr);
+				ft_tbldel(storage.tbl);
+				*line = 0;
+				return (-1);
+			}
+			tmp = storage.tbl[i];
+			while (*tmp != '\n')
+				++tmp;
+			++tmp;
+			if (!(tmp = ft_strnew2(tmp, 0)))
+			{
+				free(storage.fd_arr);
+				ft_tbldel(storage.tbl);
+				*line = 0;
+				return (-1);
+			}
+			free(storage.tbl[i]);
+			storage.tbl[i] = tmp;
+			return (1);
+		}
+	}
+	if (storage.tbl[i] != 0)
+	{
+		if (ft_strchr(storage.tbl[i], '\n') != 0)
+		{
+			if (!(*line = assign_line(storage.tbl[i])))
+			{
+				free(storage.fd_arr);
+				ft_tbldel(storage.tbl);
+				*line = 0;
+				return (-1);
+			}
+			cur = storage.tbl[i];
+			while (*cur != '\n')
+				++cur;
+			storage.tbl[i] =  cur;
+			return (1);
+		}
+		else
+		{
+			if (!(*line = assign_line(storage.tbl[i])))
+			{
+				free(storage.fd_arr);
+				ft_tbldel(storage.tbl);
+				*line = 0;
+				return (-1);
+			}
+			free(storage.tbl[i]);
+			storage.tbl[i] = 0;
+			return (1);
+		}
+	}
+	return (0);
 }
 
 

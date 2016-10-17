@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 2
 # define STRDEL_RETURN(a, b) {ft_strdel(&a); return (b);}
 # define STRDEL_STRDEL_RETURN(a, b, c) {ft_strdel(&a); ft_strdel(&b); return (c);}
 
