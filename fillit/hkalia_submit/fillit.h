@@ -6,12 +6,14 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 20:41:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/18 16:19:16 by dmclaugh         ###   ########.fr       */
+/*   Updated: 2016/10/19 11:23:21 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
+
+# define VALIDATE3(k, j) {ret[k] = j; k++; j = 0; break;} j++
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -24,9 +26,11 @@
 
 int		*validation_caller(char	*src);
 void	validate1(char *src, int *src_len, int *line_cnt);
+int		check(int *a, int *b);
 int		validate2(char *src, int *blck_cnt);
 int		*validate3(char **src_tbl);
 char	**create_compare(void);
+int		*nbrstrnew(int size, int stop);
 
 /*
 ** STR FUNCTIONS

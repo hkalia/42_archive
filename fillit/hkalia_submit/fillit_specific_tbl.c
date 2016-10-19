@@ -6,11 +6,27 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 13:30:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/18 16:38:19 by dmclaugh         ###   ########.fr       */
+/*   Updated: 2016/10/19 11:18:28 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+char	*dot_nl_trim2(char *new)
+{
+	int		i;
+
+	i = 0;
+	while (new[i])
+		i++;
+	i--;
+	while (new[i] && new[i] != '#')
+	{
+		new[i] = '\0';
+		i--;
+	}
+	return (new);
+}
 
 char	*dot_nl_trim(char *src)
 {
@@ -35,16 +51,7 @@ char	*dot_nl_trim(char *src)
 		}
 		j++;
 	}
-	i = 0;
-	while (new[i])
-		i++;
-	i--;
-	while (new[i] && new[i] != '#')
-	{
-		new[i] = '\0';
-		i--;
-	}
-	return (new);
+	return (dot_nl_trim2(new));
 }
 
 int		tbl_trim(char **src_tbl)
@@ -91,4 +98,20 @@ void	assign_tbl(char **src_tbl, char *src)
 		k++;
 		i++;
 	}
+}
+
+int		*nbrstrnew(int size, int stop)
+{
+	int		*ret;
+	int		i;
+
+	i = 0;
+	if (!(ret = (int *)malloc(sizeof(int) * (size + 1))))
+		return (0);
+	while (i <= size)
+	{
+		ret[i] = stop;
+		i++;
+	}
+	return (ret);
 }

@@ -19,7 +19,7 @@ RM = rm -f
 
 NORM = norminette
 
-.PHONY: all clean fclean re norm habib
+.PHONY: all clean fclean re norm
 
 all: $(NAME)
 

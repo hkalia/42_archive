@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 20:41:24 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/18 15:22:10 by dmclaugh         ###   ########.fr       */
+/*   Updated: 2016/10/19 11:22:59 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,15 @@ int		*validate3(char **src_tbl)
 	i = 0;
 	j = 0;
 	k = 0;
-	if (!(ret = (int *)malloc(sizeof(int) * (26 + 1))))
-		return (0);
-	while (i <= 26)
-	{
-		ret[i] = 42;
-		i++;
-	}
-	i = 0;
-	if (!(compare = create_compare()))
+	if ((!(ret = nbrstrnew(26, 42))) ||
+			(!(compare = create_compare())))
 		return (0);
 	while (src_tbl[i])
 	{
 		while (compare[j])
 		{
 			if (ft_strequ(src_tbl[i], compare[j]))
-			{
-				ret[k] = j;
-				k++;
-				j = 0;
-				break ;
-			}
-			j++;
+				VALIDATE3(k, j);
 		}
 		if (j == 0)
 			i++;
@@ -80,6 +67,18 @@ int		*validate3(char **src_tbl)
 			return (0);
 	}
 	return (ret);
+}
+
+int		check(int *a, int *b)
+{
+	if (*a != 4)
+		return (1);
+	else
+	{
+		*a = 0;
+		(*b)++;
+		return (0);
+	}
 }
 
 int		validate2(char *src, int *blck_cnt)
@@ -98,25 +97,11 @@ int		validate2(char *src, int *blck_cnt)
 		if (src[i] == '.' || src[i] == '#')
 			dot_cnt++;
 		if (src[i] == '\n' && (src[i - 1] == '.' || src[i - 1] == '#'))
-		{
-			if (dot_cnt != 4)
+			if (check(&dot_cnt, &line_cnt))
 				return (1);
-			else
-			{
-				dot_cnt = 0;
-				line_cnt++;
-			}
-		}
 		if (src[i] == '\n' && (src[i + 1] == '\n' || src[i + 1] == '\0'))
-		{
-			if (line_cnt != 4)
+			if (check(&line_cnt, blck_cnt))
 				return (1);
-			else
-			{
-				line_cnt = 0;
-				(*blck_cnt)++;
-			}
-		}
 		i++;
 	}
 	return (0);
