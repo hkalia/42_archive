@@ -6,16 +6,12 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 20:41:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/12 17:29:41 by dmclaugh         ###   ########.fr       */
+/*   Updated: 2016/10/18 16:19:16 by dmclaugh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-
-# define CLOSE_RETURN(a) {close(a); return(1);}
-# define STRDEL_RETURN(a) {ft_strdel(&a); return(1);}
-# define STRDEL_CLOSE_RETURN(a, b) {close(a); ft_strdel(&b); return(1);}
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -68,6 +64,7 @@ char	*dot_nl_trim(char *src);
 
 int		solve_caller(int *tetindex);
 char	**buildboard(int size, int str_size);
+char	**finishboard(char **board, int size, int str_size, int i);
 void	removetet(char **board, char *tet);
 void	writetet(char **board, char *tet, int row, int col);
 int		checktet(char **board, char *tet, int row, int col);
@@ -76,6 +73,8 @@ void	cleanup_board(char **board);
 int		find_board_size(int *tetindex);
 char	**createtet(int *tetindex);
 char	*createtet2(int tet);
+char	*createtet3(int tet, char *str);
+char	**convertarray(char **tetarray);
 
 /*
 ** OTHER
