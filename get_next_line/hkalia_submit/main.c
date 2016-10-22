@@ -6,30 +6,35 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:40:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/15 18:05:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/20 14:20:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft/libft.h"
+
 #include <fcntl.h>
 #include <unistd.h>
-#include <sys/uio.h>
-#include <sys/types.h>
+#include <stdlib.h>
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	int		fd;
-	int		ret;
-	char	*str;
+	int		status;
+	char	*line;
 
-	fd = open("file", O_RDONLY);
-	while ((ret = get_next_line(fd, &str)))
+	if (argc == 1)
+		fd = 0;
+	else if (argc == 2)
+		fd = open(argv[1], O_RDONLY);
+	else
+		return (2);
+	while ((status = get_next_line(fd, &line)) == 1)
 	{
-		printf("%d %s\n", ret, str);
-		free(str);
+		ft_putendl(line);
+		free(line);
 	}
-	close(fd);
-	return (0);
+	ft_putnbr(status);
+	if (argc == 2)
+		close(fd);
 }
