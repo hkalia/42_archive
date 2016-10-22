@@ -2,7 +2,7 @@ NAME = test_gnl
 
 CC = clang
 
-CFLAG = -Wall -Werror -Wextra 
+CFLAG = -Wall -Werror -Wextra
 
 OBJ = main.o \
 	  get_next_line.o
@@ -30,3 +30,6 @@ re: fclean all
 
 habib: re
 	$(RM) $(OBJ)
+
+sanitize: fclean
+	gcc -fsanitize=address -o $(NAME) main.c get_next_line.c -I $(HDR_DIR) -L libft/ -lft

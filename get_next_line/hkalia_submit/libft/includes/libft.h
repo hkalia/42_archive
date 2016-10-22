@@ -117,6 +117,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 **	LIBC FUNCTIONS (STR) (EXTRA)
 */
 
+char				*ft_strnew2(char *src, size_t len);
 size_t				ft_strnlen(const char *src, size_t len);
 char				*ft_strndup(const char *src, size_t len);
 void				ft_putnbrstr(int *src, int stop);

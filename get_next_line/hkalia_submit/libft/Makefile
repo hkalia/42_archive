@@ -74,6 +74,7 @@ SRC = ft_memset.c \
 	  ft_lstadd.c \
 	  ft_lstiter.c \
 	  ft_lstmap.c \
+	  ft_strnew2.c \
 	  ft_strnlen.c \
 	  ft_strndup.c \
 	  ft_putnbrstr.c \
