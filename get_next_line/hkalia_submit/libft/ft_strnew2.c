@@ -26,8 +26,7 @@ char	*ft_strnew2(char *src, size_t len)
 		ft_strcpy(ret, src);
 		ft_strdel(&src);
 	}
-	else
-		if (!(ret = ft_strnew(len)))
-			return (0);
+	else if (!(ret = ft_strnew(len)))
+		return (0);
 	return (ret);
 }

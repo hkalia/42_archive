@@ -13,7 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define TBLDEL_RETURN(a) {ft_tbldel(a); return (0);}
+# define TBLDEL_RETURN(a) {ft_tbldel(a); return (0);} ++i
 
 # include <string.h>
 

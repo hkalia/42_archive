@@ -6,7 +6,7 @@
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:14:06 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/21 18:52:16 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/25 16:10:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@ static void		del(void *content, size_t content_size)
 	if (content != 0)
 		free(content);
 	content_size = 0;
-}
-
-void	ft_putlst(t_list *elem)
-{
-	char	*str;
-
-	str =  elem->content;
-	ft_putstr(str);
-	ft_putnbr(elem->content_size);
 }
 
 static t_list	*fd_list(t_list **head, int fd)
@@ -52,108 +43,54 @@ static t_list	*fd_list(t_list **head, int fd)
 	return (tmp);
 }
 
-static int		store(t_list *cur, char **tmp)
+static int		assign_line(t_list **cur, int *ret, char **line)
 {
-	if (!(cur->content = ft_strnew2(cur->content, BUFF_SIZE)))
-		return(-1);
-	*tmp = cur->content;
-	*tmp += ft_strlen(*tmp);
-	return (0);
-}
-
-static char		*assign_line(void **cur)
-{
-	char	*x;
+	char	*cpy;
 	char	*tmp;
-	char	*ret;
+	size_t	i;
 
-	x = ft_strchr(*cur, '\n');
-	*x = '\0';
-	if (!(ret = ft_strdup(*cur)))
+	cpy = (*cur)->content;
+	i = 0;
+	tmp = 0;
+	if (*ret == 0 && ft_strlen(cpy) == 0)
 		return (0);
-	++x;
-	if (!(tmp = ft_strdup(x)))
+	while (cpy && cpy[i] && cpy[i] != '\n')
+		++i;
+	if (!(*line = ft_strndup(cpy, i)))
+		return (-1);
+	if (cpy[i] == '\n')
 	{
-		free(ret);
-		return (0);
+		if (!(tmp = ft_strdup(cpy + i + 1)))
+			STR_GUARD(&(*line));
+		tmp = ft_strnew2(tmp, BUFF_SIZE);
 	}
-	free(*cur);
-	*cur = tmp;
-	if (!(*cur = ft_strnew2(*cur, BUFF_SIZE)))
-	{
-		free(ret);
-		return (0);
-	}
-	return (ret);
+	free((*cur)->content);
+	(*cur)->content = tmp;
+	*ret = 1;
+	return (1);
 }
 
 int				get_next_line(const int fd, char **line)
 {
 	static t_list	*head = NULL;
 	t_list			*cur;
-	char			*tmp;
+	char			*buf;
 	int				ret;
 
-	if (fd < 0 || fd == 1 || fd == 2 || line == 0 || BUFF_SIZE == 0)
+	if (fd < 0 || line == 0 || BUFF_SIZE == 0)
 		return (-1);
 	*line = 0;
-	if (!(cur = fd_list(&head, fd)))
+	IF_LST_GUARD(!(cur = fd_list(&head, fd)));
+	buf = cur->content;
+	buf += ft_strlen(buf);
+	LST_GUARD(read(fd, buf, 0) == -1);
+	while ((ft_strchr(buf, '\n') == 0) && (ret = read(fd, buf, BUFF_SIZE) != 0))
 	{
-		if (head)
-			ft_lstdel(&head, del);
-		return (-1);
+		LST_GUARD(ret == -1);
+		LST_GUARD(!(cur->content = ft_strnew2(cur->content, BUFF_SIZE)));
+		buf = cur->content;
+		buf += ft_strlen(buf);
 	}
-	tmp = cur->content;
-	tmp += ft_strlen(tmp);
-	while ((ret = read(fd, tmp, BUFF_SIZE)) != 0)
-	{
-		if (ret == -1)
-		{
-			if (head)
-				ft_lstdel(&head, del);
-			return (-1);
-		}
-		else if (ft_strchr(tmp, '\n') != 0)
-		{
-			if (!(*line = assign_line(&(cur->content))))
-			{
-				if (head)
-					ft_lstdel(&head, del);
-				return (-1);
-			}
-			return (1);
-		}
-		else if (store(cur, &tmp) == -1)
-		{
-			if (head)
-				ft_lstdel(&head, del);
-			return (-1);
-		}
-	}
-	if (ft_strlen(cur->content) != 0)
-	{
-		if (ft_strchr(tmp, '\n') != 0)
-		{
-			if (!(*line = assign_line(&(cur->content))))
-			{
-				if (head)
-					ft_lstdel(&head, del);
-				return (-1);
-			}
-			return (1);
-		}
-		else
-		{
-			if (!(*line = ft_strdup(cur->content)))
-			{
-				if (head)
-					ft_lstdel(&head, del);
-				return (-1);
-			}
-			free(cur->content);
-			cur->content = 0;
-			return(1);
-		}
-	}
-	return (0);
+	LST_GUARD(assign_line(&cur, &ret, &(*line)) == -1);
+	return (ret);
 }

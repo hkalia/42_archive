@@ -75,8 +75,7 @@ char			**ft_strsplit(const char *src, char src_x)
 		{
 			flwrd = 1;
 			if (!(table[i] = ft_wrddup(src, src_x)))
-				TBLDEL_RETURN(table)
-			i++;
+				TBLDEL_RETURN(table);
 		}
 		src++;
 	}
