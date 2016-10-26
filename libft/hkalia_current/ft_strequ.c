@@ -12,6 +12,8 @@
 
 int		ft_strequ(const char *src1, const char *src2)
 {
+	if (src1 == 0 || src2 == 0)
+		return (0);
 	while (*src1 == *src2)
 	{
 		if (*src1 == '\0')

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strlen_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:39:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 14:36:27 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:37:03 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/26 15:37:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	ft_striteri(char *src, void (*f)(unsigned int, char *))
+size_t	ft_strlen2(const char *src)
 {
-	unsigned int	i;
+	const char	*src_cpy;
 
-	if (src != 0 && f != 0)
-	{
-		i = 0;
-		while (src[i])
-		{
-			f(i, &src[i]);
-			i++;
-		}
-	}
+	src_cpy = src;
+	if (src_cpy == 0)
+		return (0);
+	else
+		while (*src_cpy)
+			++src_cpy;
+	return (src_cpy - src);
 }

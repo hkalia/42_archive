@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strextend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:39:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 14:36:27 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:29:38 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/26 15:29:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	ft_striteri(char *src, void (*f)(unsigned int, char *))
+char	*ft_strextend(char *src, size_t len)
 {
-	unsigned int	i;
+	char	*ret;
 
-	if (src != 0 && f != 0)
+	if (src != 0 && *src != '\0')
 	{
-		i = 0;
-		while (src[i])
+		if (!(ret = ft_strnew(ft_strlen(src) + len)))
 		{
-			f(i, &src[i]);
-			i++;
+			ft_strdel(&src);
+			return (0);
 		}
+		ft_strcpy(ret, src);
+		ft_strdel(&src);
 	}
+	else if (!(ret = ft_strnew(len)))
+		return (0);
+	return (ret);
 }

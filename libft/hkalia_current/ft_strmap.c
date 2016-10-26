@@ -21,11 +21,13 @@ char	*ft_strmap(const char *src, char (*f)(char))
 
 	i = 0;
 	src_len = 0;
+	if (src == 0)
+		return (0);
 	if (*src)
 		while (src[src_len])
 			src_len++;
 	if (!(new = (char *)malloc(sizeof(char) * (src_len + 1))))
-		return (NULL);
+		return (0);
 	while (i < src_len)
 	{
 		new[i] = src[i];

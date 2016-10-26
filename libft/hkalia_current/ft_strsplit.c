@@ -62,6 +62,8 @@ char			**ft_strsplit(const char *src, char src_x)
 	size_t	i;
 	int		flwrd;
 
+	if (src == 0)
+		return (0);
 	i = 0;
 	flwrd = 0;
 	nbr_wrd = ft_nbr_wrd_in_str(src, src_x);
@@ -74,9 +76,8 @@ char			**ft_strsplit(const char *src, char src_x)
 		if (*src != src_x && flwrd == 0)
 		{
 			flwrd = 1;
-			if (!(table[i] = ft_wrddup(src, src_x)))
-				TBLDEL_RETURN(table)
-			i++;
+			TBLDEL_RETURN((!(table[i] = ft_wrddup(src, src_x))), table, 0);
+			++i;
 		}
 		src++;
 	}

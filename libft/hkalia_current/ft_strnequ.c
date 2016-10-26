@@ -16,6 +16,8 @@ int		ft_strnequ(const char *src1, const char *src2, size_t len)
 {
 	size_t	i;
 
+	if (src1 == 0 || src2 == 0)
+		return (0);
 	i = 0;
 	while ((*src1 != '\0' || *src2 != '\0') && i < len)
 	{

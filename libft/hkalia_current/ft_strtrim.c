@@ -10,14 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 #include <stdlib.h>
-
-static void		ft_strlen2(const char *src, size_t *len)
-{
-	while (src[*len])
-		*len = *len + 1;
-}
 
 static char		*ft_null_assign(char *new)
 {
@@ -33,17 +27,17 @@ char			*ft_strtrim(const char *src)
 	char	*new;
 
 	len = 0;
-	new = NULL;
-	while (*src == ' ' || *src == '\n' || *src == '\t')
+	new = 0;
+	while (src != 0 && (*src == ' ' || *src == '\n' || *src == '\t'))
 		src++;
-	if (*src != '\0')
+	if (src != 0 && *src != '\0')
 	{
-		ft_strlen2(src, &len);
+		len = ft_strlen(src);
 		while (src[len - 1] == ' ' || src[len - 1] == '\n'
 				|| src[len - 1] == '\t')
 			len--;
 		if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
-			return (NULL);
+			return (0);
 		new[len--] = '\0';
 		while (len)
 		{

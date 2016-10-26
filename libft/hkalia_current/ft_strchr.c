@@ -20,5 +20,5 @@ char	*ft_strchr(const char *src, int src_x)
 			return (NULL);
 		src++;
 	}
-	return (char *)src;
+	return ((char *)src);
 }
