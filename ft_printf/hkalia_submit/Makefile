@@ -4,7 +4,10 @@ CC = gcc
 
 CFLAG = -Wall -Werror -Wextra
 
-SRC =
+SRC = ft_printf.c \
+		ft_asprintf.c \
+		ft_dprintf.c \
+		ft_strnew.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -33,3 +36,9 @@ fclean: clean
 
 re: fclean all
 
+habib: fclean
+	$(CC) $(CFLAG) -c $(SRC) -I $(HDR_DIR)
+	$(AR) $(NAME) $(OBJ)
+	$(RLIB) $(NAME)
+	$(CC) $(CFLAG) main.c -I $(HDR_DIR) -L . -lftprintf
+	$(RM) $(OBJ)
