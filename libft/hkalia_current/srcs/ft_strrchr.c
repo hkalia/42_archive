@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/30 20:51:36 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/30 20:58:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_string.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+char	*ft_strrchr(const char *src, int src_x)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (src[i])
+		i++;
+	while (i > 0)
+	{
+		if (src[i] == src_x)
+			return ((char *)src + i);
+		i--;
+	}
+	if (src[i] == src_x)
+		return ((char *)src + i);
+	return (NULL);
+}

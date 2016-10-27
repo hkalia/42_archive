@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:39:31 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/27 13:32:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
-
-#endif
+void	ft_strdel(char **src)
+{
+	if (src != 0 && *src != 0)
+	{
+		free(*src);
+		*src = NULL;
+	}
+}

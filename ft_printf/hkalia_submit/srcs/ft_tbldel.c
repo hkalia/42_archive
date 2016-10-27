@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_tbldel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/30 15:49:29 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/30 15:51:43 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+void	ft_tbldel(char **tbl)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (tbl[i])
+	{
+		free(tbl[i]);
+		++i;
+	}
+	free(tbl);
+	tbl = 0;
+}

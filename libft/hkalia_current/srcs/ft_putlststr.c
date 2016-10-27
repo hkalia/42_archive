@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putlststr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/29 15:15:45 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/29 15:16:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include "libft.h"
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+void	ft_putlststr(t_list *elem)
+{
+	char	*str;
 
-#endif
+	str = elem->content;
+	ft_putendl(str);
+}

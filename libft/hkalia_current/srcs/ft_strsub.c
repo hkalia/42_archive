@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:40:26 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/27 16:08:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+char	*ft_strsub(const char *src, unsigned int src_i, size_t len)
+{
+	char	*new;
+	size_t	i;
 
-#endif
+	if (src == 0)
+		return (0);
+	i = 0;
+	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (src_i--)
+		src++;
+	while (i < len && src[i] != '\0')
+	{
+		new[i] = src[i];
+		i++;
+	}
+	new[len] = '\0';
+	return (new);
+}

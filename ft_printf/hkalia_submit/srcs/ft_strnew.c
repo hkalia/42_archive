@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:40:11 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/14 12:30:48 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+char	*ft_strnew(size_t len)
+{
+	char	*new;
 
-#endif
+	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	while (len)
+	{
+		new[len] = 0;
+		--len;
+	}
+	new[len] = 0;
+	return (new);
+}

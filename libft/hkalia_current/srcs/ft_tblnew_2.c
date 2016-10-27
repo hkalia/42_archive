@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_tblnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/14 12:28:10 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/14 12:28:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+char	**ft_tblnew2(int len, int str_len)
+{
+	int		i;
+	char	**new;
 
-#endif
+	if (!(new = (char **)malloc(sizeof(char *) * (len + 1))))
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		if (!(new[i] = ft_strnew(str_len)))
+		{
+			ft_tbldel(new);
+			return (0);
+		}
+		i++;
+	}
+	new[i] = 0;
+	return (new);
+}

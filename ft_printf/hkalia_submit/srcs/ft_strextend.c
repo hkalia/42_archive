@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strextend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:29:38 by hkalia            #+#    #+#             */
+/*   Updated: 2016/10/26 15:29:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <ft_string.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+char	*ft_strextend(char *src, size_t len)
+{
+	char	*ret;
 
-#endif
+	if (src != 0 && *src != '\0')
+	{
+		if (!(ret = ft_strnew(ft_strlen(src) + len)))
+		{
+			ft_strdel(&src);
+			return (0);
+		}
+		ft_strcpy(ret, src);
+		ft_strdel(&src);
+	}
+	else if (!(ret = ft_strnew(len)))
+		return (0);
+	return (ret);
+}

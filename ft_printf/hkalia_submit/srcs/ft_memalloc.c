@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:32 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/27 13:38:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+void	*ft_memalloc(size_t len)
+{
+	unsigned char	*new_cpy;
+	void			*new;
 
-#endif
+	new = NULL;
+	if (len)
+	{
+		new = malloc(len);
+		if (new)
+		{
+			new_cpy = (unsigned char *)new;
+			while (len--)
+				*new_cpy++ = 0;
+		}
+	}
+	return (new);
+}

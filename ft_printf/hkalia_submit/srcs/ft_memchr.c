@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:37 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/26 14:24:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_string.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+void	*ft_memchr(const void *src, int src_x, size_t len)
+{
+	unsigned char	*src_cpy;
 
-#endif
+	src_cpy = (unsigned char*)src;
+	while (len > 0 && *src_cpy != (unsigned char)src_x)
+	{
+		len--;
+		src_cpy++;
+	}
+	if (len == 0)
+		return (NULL);
+	else
+		return (src_cpy);
+}

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:57:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:40:02 by hkalia            #+#    #+#             */
+/*   Updated: 2016/09/27 15:06:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <ft_string.h>
 
-# include "ft_ctype.h"
-# include "ft_custom.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+int		ft_strncmp(const char *src1, const char *src2, size_t len)
+{
+	unsigned char src1_cpy;
+	unsigned char src2_cpy;
 
-#endif
+	while (len-- > 0)
+	{
+		src1_cpy = (unsigned char)*src1++;
+		src2_cpy = (unsigned char)*src2++;
+		if (src1_cpy != src2_cpy)
+			return (src1_cpy - src2_cpy);
+		if (src1_cpy == '\0')
+			return (0);
+	}
+	return (0);
+}
