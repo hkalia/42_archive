@@ -1,8 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/10/28 14:50:32 by hkalia            #+#    #+#              #
+#    Updated: 2016/10/28 19:45:18 by hkalia           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 EXENAME		=	libft.a
+EXENAME2	=	-lft
 CC 			=	gcc
 CFLAGS 		=	-Wall -Wextra -Werror
 INC_DIR		=	-I includes/
 SRC_DIR		=	srcs
+MAIN		=	main.c
 OBJ_DIR		=	objs
 # CUSTOM
 FILES		=	ft_str{new,del,clr,iter,iteri,map,mapi,equ,nequ,sub,join}.c	\
@@ -42,9 +56,9 @@ C_YELLOW	=	"\033[33m"
 all: $(EXENAME)
 
 $(EXENAME):
-	@$(CC) $(CFLAG) -c $(SRC) $(INC_DIR)
+	@$(CC) $(CFLAGS) -c $(SRC) $(INC_DIR)
 	@ar rcs $@ $(OBJ)
-	@echo "Compiling & incdexing" $(NAME) $(C_GREEN)[DONE]$(C_NONE)
+	@echo "Compiling & indexing" $(NAME) $(C_GREEN)[DONE]$(C_NONE)
 
 clean:
 	@/bin/rm -f $(OBJ)
@@ -55,3 +69,8 @@ fclean: clean
 	@echo $(C_RED)"Cleaning" $(EXENAME) $(C_NONE)
 
 re: fclean all
+
+test: re
+	@/bin/rm -f $(OBJ)
+	@echo $(C_RED)"Cleaning object files ..."$(C_NONE)
+	$(CC) $(CFLAGS) $(MAIN) -L . $(EXENAME2) $(INC_DIR) -o test

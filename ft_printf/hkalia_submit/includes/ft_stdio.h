@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stdio.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:09:29 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:09:32 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/10/28 20:38:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STDIO_H
 # define FT_STDIO_H
 
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *fmt, ...);
 
 #endif
