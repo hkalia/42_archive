@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbrstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 14:43:55 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 14:44:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/01 16:14:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
+#include <unistd.h>
 
 void	ft_putnbrstr(int *src, int stop)
 {
@@ -20,7 +21,7 @@ void	ft_putnbrstr(int *src, int stop)
 	while (src[i] != stop)
 	{
 		ft_putnbr(src[i]);
-		ft_putchar('\n');
+		write(1, "\n", 1);
 		i++;
 	}
 }

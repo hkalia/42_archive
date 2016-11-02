@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/28 15:28:44 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/01 17:38:08 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
 #include <unistd.h>
 
-void	ft_putchar(char src)
+int		ft_putchar(int src)
 {
-	write(1, &src, 1);
+	return (write(1, &src, 1));
 }

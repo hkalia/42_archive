@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_custom.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:14:15 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/01 16:06:34 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ size_t				ft_nbrlen(ssize_t src);
 **	PUT
 */
 
-void				ft_putchar(char src);
 void				ft_putstr(const char *src);
 void				ft_putendl(const char *src);
 void				ft_putnbr(int src);

@@ -6,12 +6,12 @@
 #    By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/28 14:50:32 by hkalia            #+#    #+#              #
-#    Updated: 2016/10/28 19:45:18 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/02 16:51:27 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-EXENAME		=	libft.a
-EXENAME2	=	-lft
+NAME		=	libftprintf.a
+NAME2		=	-lftprintf
 CC 			=	gcc
 CFLAGS 		=	-Wall -Wextra -Werror
 INC_DIR		=	-I includes/
@@ -21,7 +21,7 @@ OBJ_DIR		=	objs
 # CUSTOM
 FILES		=	ft_str{new,del,clr,iter,iteri,map,mapi,equ,nequ,sub,join}.c	\
 				ft_str{trim,split,extend,len_2}.c							\
-				ft_put{char,str,endl,nbr,char_fd,str_fd,endl_fd,nbr_fd}.c	\
+				ft_put{str,endl,nbr,char_fd,str_fd,endl_fd,nbr_fd}.c		\
 				ft_put{tbl,lststr,nbrstr}.c									\
 				ft_lst{new,delone,del,add,iter,map,addend}.c				\
 				ft_tbl{new,new_2,del}.c										\
@@ -38,7 +38,7 @@ FILES		+=	ft_is{alpha,digit,alnum,ascii,print,upper,lower,blank}.c	\
 # STDLIB
 FILES		+=	ft_atoi.c	ft_calloc.c
 # STDIO
-FILES		+=	ft_printf.c
+FILES		+=	ft_putchar.c ft_asprintf.c
 SRC			=	$(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			=	$(FILES:.c=.o)
 
@@ -53,9 +53,9 @@ C_YELLOW	=	"\033[33m"
 
 .PHONY: all clean
 
-all: $(EXENAME)
+all: $(NAME)
 
-$(EXENAME):
+$(NAME):
 	@$(CC) $(CFLAGS) -c $(SRC) $(INC_DIR)
 	@ar rcs $@ $(OBJ)
 	@echo "Compiling & indexing" $(NAME) $(C_GREEN)[DONE]$(C_NONE)
@@ -65,12 +65,12 @@ clean:
 	@echo $(C_RED)"Cleaning object files ..."$(C_NONE)
 
 fclean: clean
-	@/bin/rm -f $(EXENAME)
-	@echo $(C_RED)"Cleaning" $(EXENAME) $(C_NONE)
+	@/bin/rm -f $(NAME)
+	@echo $(C_RED)"Cleaning" $(NAME) $(C_NONE)
 
 re: fclean all
 
 test: re
 	@/bin/rm -f $(OBJ)
 	@echo $(C_RED)"Cleaning object files ..."$(C_NONE)
-	$(CC) $(CFLAGS) $(MAIN) -L . $(EXENAME2) $(INC_DIR) -o test
+	$(CC) $(CFLAGS) $(MAIN) -L . $(NAME2) $(INC_DIR) -o test

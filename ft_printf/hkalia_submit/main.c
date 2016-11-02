@@ -6,12 +6,13 @@
 /*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:32:50 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/28 20:07:40 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/01 18:18:13 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <strings.h>
 #include <stdio.h>
@@ -23,23 +24,16 @@
 int		main(int argc, char **argv)
 {
 	int		r;
-	int		fd;
-	char	buf[BUFF_SIZE] = {0};
+	char	*ret;
 
-	if (argc == 1)
-		fd = 0;
-	else
-		fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	if (argc == 2)
 	{
-		r = ft_printf(argv[1]);
+		r = ft_asprintf(&ret, argv[1]);
+		write(1, ret, ft_strlen2(ret));
+		ft_strdel(&ret);
 		ft_putnbr(r);
 	}
 	else
-	{
-		read(fd, buf, BUFF_SIZE);
-		r = ft_printf(buf);
-		ft_putnbr(r);
-	}
+		write(1, "give me input plz...\n", 21);
 	return (0);
 }

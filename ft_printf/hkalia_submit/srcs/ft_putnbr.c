@@ -3,24 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:07 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 11:39:12 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/01 16:35:14 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
 #include <unistd.h>
 
-void	ft_putnbr(int src)
+static void	print_char(char src)
+{
+	write(1, &src, 1);
+}
+
+void		ft_putnbr(int src)
 {
 	long	src_cpy;
 
 	src_cpy = src;
 	if (src_cpy < 0)
 	{
-		ft_putchar('-');
+		write(1, "-", 1);
 		src_cpy = -src_cpy;
 	}
 	if (src_cpy > 9)
@@ -29,5 +33,5 @@ void	ft_putnbr(int src)
 		ft_putnbr(src_cpy % 10);
 	}
 	else
-		ft_putchar(src_cpy + '0');
+		print_char(src_cpy + '0');
 }
