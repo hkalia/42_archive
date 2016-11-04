@@ -3,51 +3,57 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+         #
+#    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/10/28 14:50:32 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/02 16:51:27 by hkalia           ###   ########.fr        #
+#    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
+#    Updated: 2016/11/03 22:46:03 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libftprintf.a
-NAME2		=	-lftprintf
-CC 			=	gcc
-CFLAGS 		=	-Wall -Wextra -Werror
-INC_DIR		=	-I includes/
-SRC_DIR		=	srcs
-MAIN		=	main.c
-OBJ_DIR		=	objs
-# CUSTOM
-FILES		=	ft_str{new,del,clr,iter,iteri,map,mapi,equ,nequ,sub,join}.c	\
-				ft_str{trim,split,extend,len_2}.c							\
-				ft_put{str,endl,nbr,char_fd,str_fd,endl_fd,nbr_fd}.c		\
-				ft_put{tbl,lststr,nbrstr}.c									\
-				ft_lst{new,delone,del,add,iter,map,addend}.c				\
-				ft_tbl{new,new_2,del}.c										\
-				ft_mem{alloc,del}.c											\
-				ft_itoa.c	ft_nbrlen.c
-# STRING
-FILES		+=	ft_str{len,nlen,dup,ndup,cpy,ncpy,cat,ncat,lcat,chr,rchr}.c	\
-				ft_str{str,nstr,cmp,ncmp}.c									\
-				ft_mem{set,cpy,chr,ccpy,move,cmp}.c							\
-				ft_bzero.c
-# CTYPE
-FILES		+=	ft_is{alpha,digit,alnum,ascii,print,upper,lower,blank}.c	\
-				ft_to{upper,lower}.c
-# STDLIB
-FILES		+=	ft_atoi.c	ft_calloc.c
-# STDIO
-FILES		+=	ft_putchar.c ft_asprintf.c
-SRC			=	$(addprefix $(SRC_DIR)/, $(FILES))
-OBJ			=	$(FILES:.c=.o)
+NAME		:=	libft.a
+NAME2		:=	-lft
+SHELL		:=	/bin/zsh
+CC 			:=	gcc
+CFLAGS 		+=	-Wall -Wextra -Werror -I includes
+SRC_DIR		:=	srcs
+MAIN		:=	main.c
+FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
+				ft_striteri		ft_strmap		ft_strmapi		ft_strequ		\
+				ft_strnequ		ft_strsub		ft_strjoin		ft_strtrim		\
+				ft_strsplit		ft_strextend	ft_strlen_2		ft_putstr		\
+				ft_putendl		ft_putnbr		ft_putchar_fd	ft_putstr_fd	\
+				ft_putendl_fd	ft_putnbr_fd	ft_puttbl		ft_putlststr	\
+				ft_putnbrstr	ft_lstnew		ft_lstdelone	ft_lstdel		\
+				ft_lstadd		ft_lstiter		ft_lstmap		ft_lstaddend	\
+				ft_tblnew		ft_tblnew_2		ft_tbldel		ft_memalloc		\
+				ft_memdel		ft_itoa			ft_nbrlen
+FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
+				ft_strcpy		ft_strncpy		ft_strcat		ft_strncat		\
+				ft_strlcat		ft_strchr		ft_strrchr		ft_strstr		\
+				ft_strnstr		ft_strcmp		ft_strncmp		ft_memset		\
+				ft_memcpy		ft_memchr		ft_memccpy		ft_memmove		\
+				ft_memcmp		ft_bzero
+FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
+				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
+				ft_toupper		ft_tolower
+FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_flag_percent
+FT_STDLIB	:=	ft_atoi			ft_calloc
+FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
+				$(addprefix ft_string/, $(FT_STRING))	\
+				$(addprefix ft_ctype/, $(FT_CTYPE))		\
+				$(addprefix ft_stdio/, $(FT_STDIO))		\
+				$(addprefix ft_stdlib/, $(FT_STDLIB))
+SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
+OBJ			:=	$(SRC:.c=.o)
+MAX			:=	$(words $(OBJ))
 
-# COLORS
+# MATH
 
-C_NONE		=	"\033[00m"
-C_GREEN		=	"\033[32m"
-C_RED		=	"\033[31m"
-C_YELLOW	=	"\033[33m"
+n			:=	x
+increment	=	$1 x
+decrement	=	$(wordlist 2,$(words $1),$1)
+CURCOUNT	=	$(words $n)
+COUNTER		=	$(words $n)$(eval n := $(call increment,$n))
 
 # RULES
 
@@ -55,22 +61,28 @@ C_YELLOW	=	"\033[33m"
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(CFLAGS) -c $(SRC) $(INC_DIR)
-	@ar rcs $@ $(OBJ)
-	@echo "Compiling & indexing" $(NAME) $(C_GREEN)[DONE]$(C_NONE)
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	@printf "\r\e[31mCompiling(%d/%d)\e[0m" $(COUNTER) $(MAX)
+	@printf "\e[41m%-*s\e[0m" $(CURCOUNT)
+	@$(CC) $(CFLAGS) -c $< $(INC_DIR) -o $@
+
+$(NAME): $(OBJ)
+	@printf "\r\e[32mCompiling(%d/%d)\e[0m" $(MAX) $(MAX)
+	@printf "\e[42m%-*s\e[0m\e[32m[DONE]\n\e[0m" $(CURCOUNT)
+	@ar rcs $(NAME) $(OBJ)
+	@printf "\e[32mLinking and indexing... [DONE]\e[0m\n"
 
 clean:
-	@/bin/rm -f $(OBJ)
-	@echo $(C_RED)"Cleaning object files ..."$(C_NONE)
+	@-rm -f $(OBJ)
+	@printf "\e[31mDeleting object files... [DONE]\e[0m\n"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@echo $(C_RED)"Cleaning" $(NAME) $(C_NONE)
+	@-rm -f $(NAME)
+	@printf '\e[31mDeleting %s ... [DONE]\e[0m\n' $(NAME)
 
 re: fclean all
 
 test: re
-	@/bin/rm -f $(OBJ)
-	@echo $(C_RED)"Cleaning object files ..."$(C_NONE)
-	$(CC) $(CFLAGS) $(MAIN) -L . $(NAME2) $(INC_DIR) -o test
+	@-rm -f $(OBJ)
+	@printf "\e[31mDeleting object files... [DONE]\e[0m\n"
+	@$(CC) $(CFLAGS) $(MAIN) -L . $(NAME2) $(INC_DIR) -o test

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:37:03 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/26 15:37:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/03 15:44:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
 
-size_t	ft_strlen2(const char *src)
+size_t	ft_strlen_2(const char *src)
 {
 	const char	*src_cpy;
 

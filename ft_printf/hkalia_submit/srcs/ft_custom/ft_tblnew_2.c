@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tblnew.c                                        :+:      :+:    :+:   */
+/*   ft_tblnew_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 12:28:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 12:28:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/03 15:44:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
 #include <stdlib.h>
 
-char	**ft_tblnew2(int len, int str_len)
+char	**ft_tblnew_2(int len, int str_len)
 {
 	int		i;
 	char	**new;

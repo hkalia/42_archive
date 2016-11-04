@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 15:32:50 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/01 18:18:13 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/03 15:51:44 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		r = ft_asprintf(&ret, argv[1]);
-		write(1, ret, ft_strlen2(ret));
+		write(1, ret, ft_strlen_2(ret));
 		ft_strdel(&ret);
 		ft_putnbr(r);
 	}

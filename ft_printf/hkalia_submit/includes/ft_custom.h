@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_custom.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/01 16:06:34 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/03 15:44:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ char				*ft_strjoin(const char *src1, const char *src2);
 char				*ft_strtrim(const char *src);
 char				**ft_strsplit(const char *src, char src_x);
 char				*ft_strextend(char *src, size_t len);
-size_t				ft_strlen2(const char *src);
+size_t				ft_strlen_2(const char *src);
 
 /*
 **	TBL
 */
 
 char				**ft_tblnew(int len);
-char				**ft_tblnew2(int len, int str_len);
+char				**ft_tblnew_2(int len, int str_len);
 void				ft_tbldel(char **tbl);
 
 /*
