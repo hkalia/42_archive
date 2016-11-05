@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/03 16:00:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/04 17:23:52 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,69 @@
 #include <stdio.h>
 
 static char	g_spec[PRINTF_SPEC_LEN][3] = {
-	{'%'}, {'-'}, {'+'}, {' '}, {'#'}, {'0'},
+	{'-'}, {'+'}, {' '}, {'#'}, {'0'},
 	{'*'}, {'1'}, {'2'}, {'3'}, {'4'}, {'5'}, {'6'}, {'7'}, {'8'}, {'9'},
 	{'.'},
 	{'h', 'h'}, {'h'}, {'l'}, {'l', 'l'}, {'j'}, {'z'},
+	{'%'},
 	{'C'}, {'c'}, {'D'}, {'d'}, {'i'}, {'O'}, {'o'}, {'p'}, {'S'}, {'s'}, {'U'},
 	{'u'}, {'X'}, {'x'}};
 
 static t_printf_func_ptr	g_func_arr[PRINTF_SPEC_LEN] = {
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent, ft_printf_flag_percent, ft_printf_flag_percent,
-	ft_printf_flag_percent};
+	[0 ... 4] = ft_printf_flags,
+	[5 ... 14] = ft_printf_width,
+	[15 ... 36] = ft_printf_mod};
 
-static int		check(const char *fmt, const char *spec)
+static int		check(const char **fmt, int i)
 {
-	int		i;
+	int		j;
 
-	i = 0;
-	while (spec[i] && fmt[i] == spec[i])
-		++i;
-	return ((spec[i] == 0 ? 1 : 0));
+	j = 0;
+	while (g_spec[i][j] && (*fmt)[j] == g_spec[i][j])
+		++j;
+	return ((g_spec[i][j] == 0 ? 1 : 0));
+}
+
+void			print_struct(t_printf_parse *parse_state)
+{
+	if (parse_state->flag_minus)
+		write(1, "m1\n", 3);
+	if (parse_state->flag_plus)
+		write(1, "p1\n", 3);
+	if (parse_state->flag_space)
+		write(1, "s1\n", 3);
+	if (parse_state->flag_hash)
+		write(1, "h1\n", 3);
+	if (parse_state->flag_zero)
+		write(1, "z1\n", 3);
+	ft_putnbr(parse_state->flag_min_field_width);
+	write(1, "\n", 1);
+	ft_putnbr(parse_state->flag_precision);
+	write(1, "\n", 1);
+	ft_putnbr(parse_state->flag_len_mod);
+	write(1, "\n", 1);
 }
 
 static int		dispatcher(char **ret, const char **fmt, va_list *ap)
 {
-	t_printf_parse		parse_state;
-	int					i;
-	int					r;
+	t_printf_parse	parse_state;
+	int				i;
+	int				r;
 
 	PRINTF_STR_GRD(*(++*fmt) == 0, ret, -1);
+	parse_state = (t_printf_parse){0, 0, 0, 0, 0, 0, 0, 0};
 	i = 0;
 	while (i < PRINTF_SPEC_LEN)
 	{
-		if (check(*fmt, g_spec[i]))
+		if (check(fmt, i))
 		{
 			PRINTF_STR_GRD(
 				(r = g_func_arr[i](ret, fmt, ap, &parse_state)) == -1, ret, -1);
 			if (r)
+			{
+				print_struct(&parse_state);
 				return (1);
+			}
 		}
 		++i;
 	}
@@ -82,10 +97,12 @@ static int		iterator(char **ret, const char *fmt, va_list *ap)
 		j = 0;
 		while (fmt[j] && fmt[j] != '%')
 			++j;
-		*ret = ft_strextend(*ret, j);
-		i = ft_strlen(*ret);
-		while (*fmt && *fmt != '%')
-			(*ret)[i++] = *fmt++;
+		if (j)
+			*ret = ft_strextend(*ret, j);
+		i = ft_strlen_2(*ret);
+		if (*ret != 0)
+			while (*fmt && *fmt != '%')
+				(*ret)[i++] = *fmt++;
 		if (*fmt && *fmt == '%')
 			if (dispatcher(ret, &fmt, ap) == -1)
 				return (-1);

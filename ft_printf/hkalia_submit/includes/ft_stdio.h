@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/03 15:58:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/04 16:59:57 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdarg.h>
+# include <ft_custom.h>
 
 typedef struct	s_printf_parse
 {
@@ -40,7 +41,11 @@ int				ft_asprintf(char **ret, const char *fmt, ...);
 **	PART OF PRINTF
 */
 
-int				ft_printf_flag_percent(char **ret, const char **fmt,
+int				ft_printf_flags(char **ret, const char **fmt,
+	va_list *ap, t_printf_parse *parse_state);
+int				ft_printf_width(char **ret, const char **fmt,
+	va_list *ap, t_printf_parse *parse_state);
+int				ft_printf_mod(char **ret, const char **fmt,
 	va_list *ap, t_printf_parse *parse_state);
 
 #endif

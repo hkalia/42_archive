@@ -6,12 +6,11 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/03 22:46:03 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/04 16:32:20 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	libft.a
-NAME2		:=	-lft
 SHELL		:=	/bin/zsh
 CC 			:=	gcc
 CFLAGS 		+=	-Wall -Wextra -Werror -I includes
@@ -36,7 +35,8 @@ FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
 				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
 				ft_toupper		ft_tolower
-FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_flag_percent
+FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_mod	ft_printf_flags	\
+				ft_printf_width
 FT_STDLIB	:=	ft_atoi			ft_calloc
 FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
@@ -45,14 +45,12 @@ FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
-MAX			:=	$(words $(OBJ))
 
 # MATH
 
+MAX			:=	$(words $(OBJ))
 n			:=	x
 increment	=	$1 x
-decrement	=	$(wordlist 2,$(words $1),$1)
-CURCOUNT	=	$(words $n)
 COUNTER		=	$(words $n)$(eval n := $(call increment,$n))
 
 # RULES
@@ -61,28 +59,30 @@ COUNTER		=	$(words $n)$(eval n := $(call increment,$n))
 
 all: $(NAME)
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ): %.o: %.c
 	@printf "\r\e[31mCompiling(%d/%d)\e[0m" $(COUNTER) $(MAX)
-	@printf "\e[41m%-*s\e[0m" $(CURCOUNT)
-	@$(CC) $(CFLAGS) -c $< $(INC_DIR) -o $@
+	@printf "\e[41m%-*s\e[0m" $(words $n)
+	@$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
 
 $(NAME): $(OBJ)
 	@printf "\r\e[32mCompiling(%d/%d)\e[0m" $(MAX) $(MAX)
-	@printf "\e[42m%-*s\e[0m\e[32m[DONE]\n\e[0m" $(CURCOUNT)
+	@printf "\e[42m%-*s\e[0m\e[32m[DONE]\U1F44C\n\e[0m" $(MAX)
 	@ar rcs $(NAME) $(OBJ)
-	@printf "\e[32mLinking and indexing... [DONE]\e[0m\n"
+	@printf "\e[32mLinking and indexing... [DONE]\U1F44C\e[0m\n"
 
 clean:
 	@-rm -f $(OBJ)
-	@printf "\e[31mDeleting object files... [DONE]\e[0m\n"
+	@printf "\e[31mDeleting object files... [DONE]\U1F44C\e[0m\n"
 
 fclean: clean
 	@-rm -f $(NAME)
-	@printf '\e[31mDeleting %s ... [DONE]\e[0m\n' $(NAME)
+	@printf '\e[31mDeleting %s... [DONE]\U1F44C\e[0m\n' $(NAME)
 
 re: fclean all
 
 test: re
 	@-rm -f $(OBJ)
-	@printf "\e[31mDeleting object files... [DONE]\e[0m\n"
-	@$(CC) $(CFLAGS) $(MAIN) -L . $(NAME2) $(INC_DIR) -o test
+	@printf "\e[31mDeleting object files... [DONE]\U1F44C\e[0m\n"
+	@$(CC) $(CFLAGS) $(MAIN) -L . $(subst .a,,$(subst lib,-l,$(NAME)))\
+	$(INC_DIR) -o test
+	@printf "\e[32mCompiling %s with %s... [DONE]\U1F44C\e[0m\n" $(MAIN) $(NAME)
