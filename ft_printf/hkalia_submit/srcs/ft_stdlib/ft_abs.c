@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.c                                           :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/29 18:05:17 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/05 13:28:23 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/05 13:59:52 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/05 14:09:54 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <wchar.h>
-#include <locale.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include <ft_stdlib.h>
 
-int		main(void)
+int		ft_abs(int src)
 {
-	printf("%d\n", atoi("2147483648099"));
-	return (0);
+	return (src < 0 ? -src : src);
 }

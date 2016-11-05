@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_mod.c                                    :+:      :+:    :+:   */
+/*   ft_printf_dot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/05 13:35:30 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/05 14:50:33 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/05 15:04:49 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
-#include <ft_custom.h>
-#include <ft_string.h>
-#include <unistd.h>
-int		ft_printf_mod(char **ret, const char **fmt,
-						va_list *ap, t_printf_parse *parse_state)
-{
-	char	*new;
 
-	(void)ap;
-	(void)parse_state;
-	if (*ret != 0)
+#define ATOI(a) ((a) - '0')
+
+int				ft_printf_dot(char **ret, const char **fmt,
+								va_list *ap, t_printf_parse *parse_state)
+{
+	(void)ret;
+	++*fmt;
+	if (**fmt == '*')
 	{
-		PRINTF_STR_GRD(!(new = ft_strjoin(*ret, "%")), ret, -1);
+		parse_state->int_dot = va_arg(*ap, int);
+		++*fmt;
+		if (parse_state->int_dot < 0)
+			parse_state->int_dot = 0;
 	}
 	else
-		PRINTF_STR_GRD(!(new = ft_strdup("%")), ret, -1);
-	ft_strdel(ret);
-	*ret = new;
-	++*fmt;
-	return (1);
+	{
+		while(**fmt >= '0' && **fmt <= '9')
+		{
+			parse_state->int_dot = 10 * parse_state->int_dot + ATOI(**fmt);
+			++*fmt;
+		}
+	}
+	return (0);
 }

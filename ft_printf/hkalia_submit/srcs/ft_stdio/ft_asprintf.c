@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/04 17:23:52 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/05 15:53:16 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static char	g_spec[PRINTF_SPEC_LEN][3] = {
 static t_printf_func_ptr	g_func_arr[PRINTF_SPEC_LEN] = {
 	[0 ... 4] = ft_printf_flags,
 	[5 ... 14] = ft_printf_width,
-	[15 ... 36] = ft_printf_mod};
+	[15] = ft_printf_dot,
+	[16 ... 36] = ft_printf_mod};
 
 static int		check(const char **fmt, int i)
 {
@@ -52,9 +53,9 @@ void			print_struct(t_printf_parse *parse_state)
 		write(1, "h1\n", 3);
 	if (parse_state->flag_zero)
 		write(1, "z1\n", 3);
-	ft_putnbr(parse_state->flag_min_field_width);
+	ft_putnbr(parse_state->int_width);
 	write(1, "\n", 1);
-	ft_putnbr(parse_state->flag_precision);
+	ft_putnbr(parse_state->int_dot);
 	write(1, "\n", 1);
 	ft_putnbr(parse_state->flag_len_mod);
 	write(1, "\n", 1);

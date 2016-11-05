@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/04 16:59:57 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/05 14:49:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct	s_printf_parse
 	bool		flag_space;
 	bool		flag_hash;
 	bool		flag_zero;
-	int			flag_min_field_width;
-	int			flag_precision;
+	int			int_width;
+	int			int_dot;
 	int			flag_len_mod;
 }				t_printf_parse;
 typedef int	(*t_printf_func_ptr)(char **ret, const char **fmt,\
@@ -42,10 +42,12 @@ int				ft_asprintf(char **ret, const char *fmt, ...);
 */
 
 int				ft_printf_flags(char **ret, const char **fmt,
-	va_list *ap, t_printf_parse *parse_state);
+								va_list *ap, t_printf_parse *parse_state);
 int				ft_printf_width(char **ret, const char **fmt,
-	va_list *ap, t_printf_parse *parse_state);
+								va_list *ap, t_printf_parse *parse_state);
+int				ft_printf_dot(char **ret, const char **fmt,
+								va_list *ap, t_printf_parse *parse_state);
 int				ft_printf_mod(char **ret, const char **fmt,
-	va_list *ap, t_printf_parse *parse_state);
+								va_list *ap, t_printf_parse *parse_state);
 
 #endif

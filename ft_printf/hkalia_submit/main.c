@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/03 15:51:44 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/05 15:55:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,26 @@
 
 #define BUFF_SIZE 4096
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	int		r;
+	long	itest = -20;
 	char	*ret;
 
-	if (argc == 2)
-	{
-		r = ft_asprintf(&ret, argv[1]);
-		write(1, ret, ft_strlen_2(ret));
-		ft_strdel(&ret);
-		ft_putnbr(r);
-	}
-	else
-		write(1, "give me input plz...\n", 21);
+	r = ft_asprintf(&ret, "hello this is a test %%, test complete");
+	write(1, ret, ft_strlen_2(ret));
+	ft_strdel(&ret);
+	ft_putnbr(r);
+	write(1, "\n\nSPACE\n\n", 9);
+	r = asprintf(&ret, "hello this is a test %%, test complete");
+	write(1, ret, ft_strlen_2(ret));
+	ft_strdel(&ret);
+	ft_putnbr(r);
 	return (0);
 }
+
+// int		main(void)
+// {
+// 	printf("%-*%", -20);
+// 	return (0);
+// }

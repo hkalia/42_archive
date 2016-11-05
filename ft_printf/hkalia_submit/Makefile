@@ -6,14 +6,14 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/04 16:32:20 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/05 14:48:22 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libft.a
+NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 CC 			:=	gcc
-CFLAGS 		+=	-Wall -Wextra -Werror -I includes
+CFLAGS 		+=	-Wall -Wextra -I includes
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
 FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
@@ -36,8 +36,8 @@ FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
 				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
 				ft_toupper		ft_tolower
 FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_mod	ft_printf_flags	\
-				ft_printf_width
-FT_STDLIB	:=	ft_atoi			ft_calloc
+				ft_printf_width	ft_printf_dot
+FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs
 FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
