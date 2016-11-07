@@ -1,12 +1,14 @@
 #include <unistd.h>
 
-char	mem[4096] = {0};
-char	*memp = mem;
+#define MEM_SIZE 4096
+
+unsigned char mem[MEM_SIZE];
+unsigned char *memp = mem;
 
 void	brainfuck(char *src)
 {
-	int		loop;
 	int		i;
+	int		loop;
 
 	i = 0;
 	while (src[i])
@@ -51,8 +53,9 @@ void	brainfuck(char *src)
 
 int		main(int argc, char **argv)
 {
-	if (argc > 1)
+	if (argc == 2)
 		brainfuck(argv[1]);
 	else
 		write(1, "\n", 1);
+	return (0);
 }
