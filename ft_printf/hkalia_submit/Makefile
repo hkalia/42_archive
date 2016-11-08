@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/05 14:48:22 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/07 13:09:11 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_putnbrstr	ft_lstnew		ft_lstdelone	ft_lstdel		\
 				ft_lstadd		ft_lstiter		ft_lstmap		ft_lstaddend	\
 				ft_tblnew		ft_tblnew_2		ft_tbldel		ft_memalloc		\
-				ft_memdel		ft_itoa			ft_nbrlen
+				ft_memdel		ft_itoa			ft_nbrlen		ft_putnbr_base
 FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 				ft_strcpy		ft_strncpy		ft_strcat		ft_strncat		\
 				ft_strlcat		ft_strchr		ft_strrchr		ft_strstr		\

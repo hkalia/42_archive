@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/03 15:44:42 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/07 13:08:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void				ft_putchar_fd(char src, int fd);
 void				ft_putstr_fd(const char *src, int fd);
 void				ft_putendl_fd(const char *src, int fd);
 void				ft_putnbr_fd(int src, int fd);
+void				ft_putnbr_base(long long src, int base);
 void				ft_puttbl(char **tbl);
 void				ft_putlststr(t_list *elem);
 void				ft_putnbrstr(int *src, int stop);
