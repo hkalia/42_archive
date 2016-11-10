@@ -6,19 +6,19 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 15:34:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/04 17:19:20 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:00:16 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
-#include <unistd.h>
+
 int		ft_printf_flags(char **ret, const char **fmt,
 						va_list *ap, t_printf_parse *parse_state)
 {
 	(void)ret;
 	(void)ap;
-	while (**fmt && (**fmt == '-' || **fmt == '+' || **fmt == ' ' || **fmt == '#'
-			|| **fmt == '0'))
+	while (**fmt && (**fmt == '-' || **fmt == '+' || **fmt == ' '
+			|| **fmt == '#' || **fmt == '0'))
 	{
 		if (**fmt == '-')
 			parse_state->flag_minus = 1;

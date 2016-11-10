@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strextend.c                                     :+:      :+:    :+:   */
+/*   ft_printf_z.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/26 15:29:38 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/08 15:34:12 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/08 14:10:39 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/08 14:45:57 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
-#include <ft_string.h>
+#include <ft_stdio.h>
 
-char	*ft_strextend(char *src, size_t len)
+int		ft_printf_z(char **ret, const char **fmt,
+					va_list *ap, t_printf_parse *parse_state)
 {
-	char	*ret;
-
-	if (src != 0 && *src != '\0')
-	{
-		if (!(ret = ft_strnew(ft_strlen(src) + len)))
-		{
-			ft_strdel(&src);
-			return (0);
-		}
-		ft_strcpy(ret, src);
-		ft_strdel(&src);
-	}
-	else if (!(ret = ft_strnew(len)))
-		return (0);
-	return (ret);
+	(void)fmt;
+	(void)ap;
+	PRINTF_STR_GRD(parse_state->int_len_mod != 0, ret, -1);
+	parse_state->int_len_mod = 6;
+	++*fmt;
+	return (0);
 }

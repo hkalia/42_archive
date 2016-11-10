@@ -6,13 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/05 15:04:06 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:01:25 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
-#include <ft_stdlib.h>
-#include <stdlib.h>
 
 #define ATOI(a) ((a) - '0')
 
@@ -32,7 +30,7 @@ int		ft_printf_width(char **ret, const char **fmt,
 	}
 	else
 	{
-		while(**fmt >= '0' && **fmt <= '9')
+		while (**fmt >= '0' && **fmt <= '9')
 		{
 			parse_state->int_width = 10 * parse_state->int_width + ATOI(**fmt);
 			++*fmt;

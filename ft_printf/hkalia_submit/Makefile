@@ -6,14 +6,14 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/07 13:09:11 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/09 15:51:30 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libftprintf.a
+NAME		:=	libft.a
 SHELL		:=	/bin/zsh
 CC 			:=	gcc
-CFLAGS 		+=	-Wall -Wextra -I includes
+CFLAGS 		+=	-fsanitize=address -Wall -Wextra -I includes
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
 FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
@@ -35,8 +35,13 @@ FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
 				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
 				ft_toupper		ft_tolower
-FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_mod	ft_printf_flags	\
-				ft_printf_width	ft_printf_dot
+FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_flags	ft_printf_width	\
+				ft_printf_dot	ft_printf_hh	ft_printf_h		ft_printf_l		\
+				ft_printf_ll	ft_printf_j		ft_printf_z		ft_printf_mod	\
+				ft_printf_cap_c	ft_printf_c		ft_printf_cap_d	ft_printf_d		\
+				ft_printf_i		ft_printf_cap_o	ft_printf_o		ft_printf_p		\
+				ft_printf_cap_s	ft_printf_s		ft_printf_cap_u	ft_printf_u		\
+				ft_printf_cap_x	ft_printf_x
 FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs
 FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
@@ -60,13 +65,11 @@ COUNTER		=	$(words $n)$(eval n := $(call increment,$n))
 all: $(NAME)
 
 $(OBJ): %.o: %.c
-	@printf "\r\e[31mCompiling(%d/%d)\e[0m" $(COUNTER) $(MAX)
-	@printf "\e[41m%-*s\e[0m" $(words $n)
+	@printf "\r\e[31mCompiling...(%d/%d)\e[0m" $(COUNTER) $(MAX)
 	@$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
 
 $(NAME): $(OBJ)
-	@printf "\r\e[32mCompiling(%d/%d)\e[0m" $(MAX) $(MAX)
-	@printf "\e[42m%-*s\e[0m\e[32m[DONE]\U1F44C\n\e[0m" $(MAX)
+	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\U1F44C\n\e[0m" $(MAX) $(MAX)
 	@ar rcs $(NAME) $(OBJ)
 	@printf "\e[32mLinking and indexing... [DONE]\U1F44C\e[0m\n"
 
