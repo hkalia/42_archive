@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/10 14:51:15 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/10 15:50:32 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/10 16:05:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_stdio.h>
+#include <unistd.h>
 
-# include <string.h>
-# include <wchar.h>
+int		ft_printf(const char *fmt, ...)
+{
+	va_list	ap;
+	char	*ret;
+	int		r;
 
-int				ft_abs(int src);
-int				ft_atoi(const char *src);
-void			*ft_calloc(size_t count, size_t size);
-unsigned char	*ft_wctomb(wint_t c);
-
-#endif
+	va_start(ap, fmt);
+	r = ft_vasprintf(&ret, fmt, &ap);
+	write(1, ret, ft_strlen_2(ret));
+	ft_strdel(&ret);
+	va_end(ap);
+	return (r);
+}

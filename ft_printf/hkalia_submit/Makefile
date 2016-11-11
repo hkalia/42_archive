@@ -6,14 +6,14 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/09 15:51:30 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/10 15:57:09 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libft.a
+NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 CC 			:=	gcc
-CFLAGS 		+=	-fsanitize=address -Wall -Wextra -I includes
+CFLAGS 		+=	-Wall -Wextra -Werror -I includes
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
 FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
@@ -35,14 +35,14 @@ FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
 				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
 				ft_toupper		ft_tolower
-FT_STDIO	:=	ft_putchar		ft_asprintf		ft_printf_flags	ft_printf_width	\
+FT_STDIO	:=	ft_putchar		ft_vasprintf	ft_printf_flags	ft_printf_width	\
 				ft_printf_dot	ft_printf_hh	ft_printf_h		ft_printf_l		\
 				ft_printf_ll	ft_printf_j		ft_printf_z		ft_printf_mod	\
 				ft_printf_cap_c	ft_printf_c		ft_printf_cap_d	ft_printf_d		\
 				ft_printf_i		ft_printf_cap_o	ft_printf_o		ft_printf_p		\
 				ft_printf_cap_s	ft_printf_s		ft_printf_cap_u	ft_printf_u		\
-				ft_printf_cap_x	ft_printf_x
-FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs
+				ft_printf_cap_x	ft_printf_x		ft_printf
+FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs			ft_wctomb
 FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\

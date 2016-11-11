@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_asprintf.c                                      :+:      :+:    :+:   */
+/*   ft_vasprintf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/09 14:32:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/10 16:18:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_printf_func_ptr	g_func_arr[PRINTF_SPEC_LEN] = {
 	ft_printf_p, ft_printf_cap_s, ft_printf_s, ft_printf_cap_u, ft_printf_u,
 	ft_printf_cap_x, ft_printf_x};
 
-static int		check(const char *cur, int i)
+static int	check(const char *cur, int i)
 {
 	int		j;
 
@@ -46,7 +46,7 @@ static int		check(const char *cur, int i)
 	return ((g_spec[i][j] == 0 ? 1 : 0));
 }
 
-void			print_struct(t_printf_parse *parse_state)
+void		print_struct(t_printf_parse *parse_state)
 {
 	if (parse_state->flag_minus)
 		write(1, "m1\n", 3);
@@ -66,7 +66,7 @@ void			print_struct(t_printf_parse *parse_state)
 	write(1, "\n", 1);
 }
 
-static int		dispatcher(char **ret, const char **fmt, va_list *ap)
+static int	dispatcher(char **ret, const char **fmt, va_list *ap)
 {
 	t_printf_parse	parse_state;
 	int				i;
@@ -93,7 +93,7 @@ static int		dispatcher(char **ret, const char **fmt, va_list *ap)
 	return (-1);
 }
 
-static int		iterator(char **ret, const char *fmt, va_list *ap)
+static int	iterator(char **ret, const char *fmt, va_list *ap)
 {
 	int		i;
 	int		j;
@@ -117,9 +117,8 @@ static int		iterator(char **ret, const char *fmt, va_list *ap)
 	return (ft_strlen(*ret));
 }
 
-int				ft_asprintf(char **ret, const char *fmt, ...)
+int			ft_vasprintf(char **ret, const char *fmt, va_list *ap)
 {
-	va_list	ap;
 	int		r;
 
 	if (fmt == 0 || *fmt == 0 || ret == 0)
@@ -127,8 +126,6 @@ int				ft_asprintf(char **ret, const char *fmt, ...)
 	*ret = 0;
 	if (ft_strchr(fmt, '%') == 0)
 		return (((*ret = ft_strdup(fmt)) ? ft_strlen(fmt) : -1));
-	va_start(ap, fmt);
-	r = iterator(ret, fmt, &ap);
-	va_end(ap);
+	r = iterator(ret, fmt, ap);
 	return (r);
 }

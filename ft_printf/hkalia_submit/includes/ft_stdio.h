@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/09 13:17:32 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/10 16:04:58 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef int	(*t_printf_func_ptr)(char **ret, const char **fmt,\
 # define PRINTF_SPEC_LEN 37
 
 int				ft_putchar(int src);
-int				ft_asprintf(char **ret, const char *fmt, ...);
+int				ft_printf(const char *fmt, ...);
+int				ft_vasprintf(char **ret, const char *fmt, va_list *ap);
 
 /*
 **	PART OF PRINTF
