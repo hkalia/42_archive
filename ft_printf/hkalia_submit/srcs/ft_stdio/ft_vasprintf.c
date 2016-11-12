@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/10 16:18:32 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/12 11:37:54 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ static char	g_spec[PRINTF_SPEC_LEN][3] = {
 	{'u'}, {'X'}, {'x'}};
 
 static t_printf_func_ptr	g_func_arr[PRINTF_SPEC_LEN] = {
-	[0 ... 4] = ft_printf_flags,
-	[5 ... 14] = ft_printf_width,
-	ft_printf_dot, ft_printf_hh, ft_printf_h, ft_printf_l, ft_printf_ll,
-	ft_printf_j, ft_printf_z, ft_printf_mod, ft_printf_cap_c, ft_printf_c,
-	ft_printf_cap_d, ft_printf_d, ft_printf_i, ft_printf_cap_o, ft_printf_o,
-	ft_printf_p, ft_printf_cap_s, ft_printf_s, ft_printf_cap_u, ft_printf_u,
-	ft_printf_cap_x, ft_printf_x};
+	ft_printf_flags, ft_printf_flags, ft_printf_flags, ft_printf_flags,
+	ft_printf_flags, ft_printf_width, ft_printf_width, ft_printf_width,
+	ft_printf_width, ft_printf_width, ft_printf_width, ft_printf_width,
+	ft_printf_width, ft_printf_width, ft_printf_width, ft_printf_dot,
+	ft_printf_hh, ft_printf_h, ft_printf_l, ft_printf_ll, ft_printf_j,
+	ft_printf_z, ft_printf_mod, ft_printf_cap_c, ft_printf_c, ft_printf_cap_d,
+	ft_printf_d, ft_printf_i, ft_printf_cap_o, ft_printf_o, ft_printf_p,
+	ft_printf_cap_s, ft_printf_s, ft_printf_cap_u, ft_printf_u, ft_printf_cap_x,
+	ft_printf_x};
 
 static int	check(const char *cur, int i)
 {

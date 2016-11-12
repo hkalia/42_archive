@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/11 17:15:28 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/12 11:26:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		ft_printf_c(char **ret, const char **fmt,
 		PRINTF_STR_GRD(!(src = ft_calloc(2, sizeof(unsigned char))), ret, -1);
 		src[0] = (unsigned char)va_arg(*ap, int);
 	}
-	PRINTF_STR_GRD(!(*ret = ft_strextend(*ret, ft_strlen(src))), &src, -1)
+	PRINTF_STR_GRD(!(*ret = ft_strextend(*ret, ft_strlen(src))), &src, -1);
 	ft_strcat(*ret, src);
-	PRINTF_STR_GRD(width_handler(ret, parse_state, src) == -1, &src, -1);
+	PRINTF_STR_GRD((width_handler(ret, parse_state, src) == -1), &src, -1);
 	free(src);
 	++*fmt;
 	return (1);
