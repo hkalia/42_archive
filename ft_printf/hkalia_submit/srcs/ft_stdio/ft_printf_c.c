@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/10 16:16:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:15:28 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,6 @@
 #include <ft_stdlib.h>
 #include <wchar.h>
 #include <stdlib.h>
-
-int		width_handler(char **ret, t_printf_parse *parse_state, const char *src)
-{
-	int		src_len;
-	char	*tmp;
-
-	src_len = ft_strlen(src);
-	if (parse_state->int_width > src_len)
-	{
-		if (!(*ret = ft_strextend(*ret, parse_state->int_width - src_len)))
-			return (-1);
-		tmp = *ret;
-		tmp += ft_strlen(tmp);
-		if (parse_state->flag_minus)
-			while (parse_state->int_width-- - src_len)
-				*tmp++ = ' ';
-		else
-		{
-			tmp = tmp - src_len;
-			while (parse_state->int_width-- - src_len)
-				*tmp++ = ' ';
-			ft_strcat(*ret, src);
-		}
-	}
-	return (0);
-}
 
 int		ft_printf_c(char **ret, const char **fmt,
 					va_list *ap, t_printf_parse *parse_state)

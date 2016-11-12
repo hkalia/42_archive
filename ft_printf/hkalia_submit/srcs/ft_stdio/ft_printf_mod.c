@@ -6,13 +6,15 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/09 14:18:37 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:14:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 #include <ft_custom.h>
 #include <ft_string.h>
+#include <ft_stdlib.h>
+#include <stdlib.h>
 
 int		ft_printf_mod(char **ret, const char **fmt,
 						va_list *ap, t_printf_parse *parse_state)
@@ -20,19 +22,12 @@ int		ft_printf_mod(char **ret, const char **fmt,
 	char	*new;
 
 	(void)ap;
-	(void)parse_state;
-	if (*ret != 0)
-	{
-		PRINTF_STR_GRD(!(new = ft_strjoin(*ret, "%")), ret, -1);
-		ft_strdel(ret);
-		*ret = new;
-	}
-	else
-	{
-		if (!(new = ft_strdup("%")))
-			return (-1);
-		*ret = new;
-	}
+	PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
+	new[0] = '%';
+	PRINTF_STR_GRD(!(*ret = ft_strextend(*ret, 1)), &new, -1);
+	ft_strcat(*ret, new);
+	PRINTF_STR_GRD(width_handler(ret, parse_state, new) == -1, &new, -1);
+	free(new);
 	++*fmt;
 	return (1);
 }

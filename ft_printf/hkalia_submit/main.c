@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/10 16:05:56 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:22:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int		main(void)
 //	char	*ret;
 
 	setlocale(LC_ALL, "");
-	r = ft_printf("hello this is a test %c, test complete", 65);
+	r = ft_printf("%%");
 	// write(1, ret, ft_strlen_2(ret));
 	// ft_strdel(&ret);
 	ft_putnbr(r);
 	write(1, "\n\nSPACE\n\n", 9);
-	r = printf("hello this is a test %c, test complete", 65);
+	r = printf("%%");
 	// write(1, ret, ft_strlen_2(ret));
 	// ft_strdel(&ret);
 	ft_putnbr(r);
