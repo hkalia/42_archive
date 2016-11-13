@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:50:33 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/08 16:01:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 09:47:02 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		ft_printf_dot(char **ret, const char **fmt,
 {
 	(void)ret;
 	++*fmt;
+	parse_state->flag_dot = 1;
 	if (**fmt == '*')
 	{
 		parse_state->int_dot = va_arg(*ap, int);

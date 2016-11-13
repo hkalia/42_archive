@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_wcstombs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/13 11:27:08 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/13 11:30:23 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_stdlib.h>
 
-# include <string.h>
-# include <wchar.h>
+int		ft_wcstombs(char **dst, const wint_t *src)
+{
+	size_t	i;
+	size_t	j;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	if (dst == 0)
+		return (-1);
+	i = 0;
+	while (src[i])
+		++i;
+	if (!(*dst = ft_calloc((i * sizeof(wint_t)) + 1, sizeof(char))))
+		return (-1);
+	i = 0;
+	j = 0;
+	while(src[i])
+	{
+		j += ft_wctomb(&((*dst)[j]), src[i]);
+		++i;
+	}
+	return (j);
+}

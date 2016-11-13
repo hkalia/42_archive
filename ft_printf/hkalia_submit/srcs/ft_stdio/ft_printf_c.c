@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/12 11:26:04 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 11:35:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ int		ft_printf_c(char **ret, const char **fmt,
 
 	PRINTF_STR_GRD(parse_state->flag_plus || parse_state->flag_space
 		|| parse_state->flag_hash || parse_state->flag_zero
-		|| parse_state->int_dot != 0
+		|| parse_state->flag_dot != 0
 		|| !(parse_state->int_len_mod == 0 || parse_state->int_len_mod == 3)
 		, ret, -1);
 	if (parse_state->int_len_mod == 3)
 	{
-		PRINTF_STR_GRD(!(src = (char *)ft_wctomb(va_arg(*ap, wint_t))),
-						ret, -1);
+		PRINTF_STR_GRD(!(src = ft_calloc(5, sizeof(char))), ret, -1);
+		if(ft_wctomb(src, va_arg(*ap, wint_t)) == -1)
+		{
+			free(src);
+			ft_strdel(ret);
+			return (-1);
+		}
 	}
 	else
 	{

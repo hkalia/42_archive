@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/12 11:37:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 09:47:21 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	dispatcher(char **ret, const char **fmt, va_list *ap)
 	int				r;
 
 	PRINTF_STR_GRD(*(++*fmt) == 0, ret, -1);
-	parse_state = (t_printf_parse){0, 0, 0, 0, 0, 0, 0, 0};
+	parse_state = (t_printf_parse){0, 0, 0, 0, 0, 0, 0, 0, 0};
 	i = 0;
 	while (i < PRINTF_SPEC_LEN)
 	{

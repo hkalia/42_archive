@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/11 17:14:02 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 09:45:10 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_printf_parse
 	bool		flag_hash;
 	bool		flag_zero;
 	int			int_width;
+	bool		flag_dot;
 	int			int_dot;
 	int			int_len_mod;
 }				t_printf_parse;

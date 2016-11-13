@@ -1,8 +1,6 @@
 #include <unistd.h>
 
-#define MEM_SIZE 4096
-
-unsigned char mem[MEM_SIZE];
+unsigned char mem[4096] = {0};
 unsigned char *memp = mem;
 
 void	brainfuck(char *src)
