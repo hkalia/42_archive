@@ -6,14 +6,15 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/13 11:27:55 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/13 18:31:23 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 CC 			:=	gcc
-CFLAGS 		+=	-fsanitize=address -Wall -Wextra -Werror -I includes
+CFLAGS		+=	-Wall -Wextra -Werror -I includes
+CFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
 FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\

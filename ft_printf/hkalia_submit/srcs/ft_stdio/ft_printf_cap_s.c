@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:33 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/09 13:29:20 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 11:42:37 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@
 int		ft_printf_cap_s(char **ret, const char **fmt,
 						va_list *ap, t_printf_parse *parse_state)
 {
-	char	*new;
-
-	(void)ap;
-	(void)parse_state;
-	if (*ret != 0)
-	{
-		PRINTF_STR_GRD(!(new = ft_strjoin(*ret, "S")), ret, -1);
-	}
-	else
-		PRINTF_STR_GRD(!(new = ft_strdup("S")), ret, -1);
-	ft_strdel(ret);
-	*ret = new;
-	++*fmt;
-	return (1);
+	parse_state->int_len_mod = 3;
+	return (ft_printf_s(ret, fmt, ap, parse_state));
 }

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/11 17:14:09 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 18:21:25 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 #include <ft_string.h>
 #include <ft_stdlib.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int		ft_printf_mod(char **ret, const char **fmt,
 						va_list *ap, t_printf_parse *parse_state)
 {
 	char	*new;
+	char	*tmp;
 
 	(void)ap;
 	PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
 	new[0] = '%';
-	PRINTF_STR_GRD(!(*ret = ft_strextend(*ret, 1)), &new, -1);
-	ft_strcat(*ret, new);
-	PRINTF_STR_GRD(width_handler(ret, parse_state, new) == -1, &new, -1);
+	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
+	tmp = *ret;
+	if (!(*ret = ft_strjoin(*ret, new)))
+	{
+		ft_strdel(&new);
+		ft_strdel(ret);
+		return (-1);
+	}
 	free(new);
+	free(tmp);
 	++*fmt;
 	return (1);
 }

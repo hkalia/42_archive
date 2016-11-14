@@ -6,37 +6,42 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/11 17:16:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 18:21:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 #include <ft_string.h>
+#include <ft_stdlib.h>
+#include <stdlib.h>
 
 #define ATOI(a) ((a) - '0')
 
-int		width_handler(char **ret, t_printf_parse *parse_state, const char *src)
+int		width_handler(t_printf_parse *parse_state, char **src)
 {
 	int		src_len;
+	int		i;
 	char	*tmp;
 
-	src_len = ft_strlen_2(src);
+	if (src == 0 || *src == 0)
+		return (-1);
+	src_len = ft_strlen(*src);
 	if (parse_state->int_width > src_len)
 	{
-		if (!(*ret = ft_strextend(*ret, parse_state->int_width - src_len)))
+		if (!(tmp = ft_calloc(parse_state->int_width + 1, sizeof(char))))
 			return (-1);
-		tmp = *ret;
-		tmp += ft_strlen(tmp);
+		ft_memset(tmp, parse_state->flag_zero ? '0' : ' ',
+					parse_state->int_width);
+		i = -1;
 		if (parse_state->flag_minus)
-			while (parse_state->int_width-- - src_len)
-				*tmp++ = ' ';
+			while ((*src)[++i])
+				tmp[i] = (*src)[i];
 		else
-		{
-			tmp = tmp - src_len;
-			while (parse_state->int_width-- - src_len)
-				*tmp++ = ' ';
-			ft_strcat(*ret, src);
-		}
+			while ((*src)[++i])
+				tmp[--parse_state->int_width] = (*src)[i];
+		free(*src);
+		*src = tmp;
+		return (0);
 	}
 	return (0);
 }

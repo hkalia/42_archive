@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 09:45:10 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 18:09:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int				ft_printf_cap_x(char **ret, const char **fmt,
 								va_list *ap, t_printf_parse *parse_state);
 int				ft_printf_x(char **ret, const char **fmt,
 								va_list *ap, t_printf_parse *parse_state);
-int				width_handler(char **ret, t_printf_parse *parse_state,
-								const char *src);
+int				width_handler(t_printf_parse *parse_state, char **src);
 
 #endif

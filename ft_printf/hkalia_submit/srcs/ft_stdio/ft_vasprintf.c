@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 09:47:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/13 18:27:28 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check(const char *cur, int i)
 	return ((g_spec[i][j] == 0 ? 1 : 0));
 }
 
-void		print_struct(t_printf_parse *parse_state)
+int		print_struct(t_printf_parse *parse_state)
 {
 	if (parse_state->flag_minus)
 		write(1, "m1\n", 3);
@@ -66,6 +66,7 @@ void		print_struct(t_printf_parse *parse_state)
 	write(1, "\n", 1);
 	ft_putnbr(parse_state->int_len_mod);
 	write(1, "\n", 1);
+	return (1);
 }
 
 static int	dispatcher(char **ret, const char **fmt, va_list *ap)
@@ -76,20 +77,21 @@ static int	dispatcher(char **ret, const char **fmt, va_list *ap)
 
 	PRINTF_STR_GRD(*(++*fmt) == 0, ret, -1);
 	parse_state = (t_printf_parse){0, 0, 0, 0, 0, 0, 0, 0, 0};
-	i = 0;
-	while (i < PRINTF_SPEC_LEN)
+	while (**fmt)
 	{
-		if (check(*fmt, i))
+		i = 0;
+		while (i < PRINTF_SPEC_LEN)
 		{
-			if ((r = g_func_arr[i](ret, fmt, ap, &parse_state)) == -1)
-				return (-1);
-			if (r)
+			if (**fmt == g_spec[i][0] && check(*fmt, i))
 			{
-				print_struct(&parse_state);
-				return (1);
+				if ((r = g_func_arr[i](ret, fmt, ap, &parse_state)) == -1)
+					return (-1);
+				if (r)
+					return (/*print_struct(&parse_state)*/1);
 			}
+			++i;
 		}
-		++i;
+		++*fmt;
 	}
 	ft_strdel(ret);
 	return (-1);
@@ -97,7 +99,6 @@ static int	dispatcher(char **ret, const char **fmt, va_list *ap)
 
 static int	iterator(char **ret, const char *fmt, va_list *ap)
 {
-	int		i;
 	int		j;
 
 	while (*fmt)
@@ -105,13 +106,11 @@ static int	iterator(char **ret, const char *fmt, va_list *ap)
 		j = 0;
 		while (fmt[j] && fmt[j] != '%')
 			++j;
-		if (j)
-			if (!(*ret = ft_strextend(*ret, j)))
+		if (!(*ret = ft_strextend(*ret, j)))
 				return (-1);
-		i = ft_strlen_2(*ret);
-		if (*ret != 0)
-			while (*fmt && *fmt != '%')
-				(*ret)[i++] = *fmt++;
+		j = ft_strlen(*ret);
+		while (*fmt && *fmt != '%')
+				(*ret)[j++] = *fmt++;
 		if (*fmt && *fmt == '%')
 			if (dispatcher(ret, &fmt, ap) == -1)
 				return (-1);
