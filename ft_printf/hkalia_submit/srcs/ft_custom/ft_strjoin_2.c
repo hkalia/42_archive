@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_mod.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 13:12:15 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/14 11:42:50 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/14 11:46:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_stdio.h>
 #include <ft_custom.h>
 #include <ft_string.h>
-#include <ft_stdlib.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-int		ft_printf_mod(char **ret, const char **fmt,
-						va_list *ap, t_printf_parse *parse_state)
+char	*ft_strjoin_2(char *src1, char *src2)
 {
-	char	*new;
+	char	*ret;
 
-	(void)ap;
-	PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
-	new[0] = '%';
-	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
-	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
-	++*fmt;
-	return (1);
+	ret = 0;
+	if (src1 && src2)
+	{
+		if (!(ret = ft_strnew(ft_strlen(src1) + ft_strlen(src2))))
+			return (0);
+		ft_strcpy(ret, src1);
+		ft_strcat(ret, src2);
+		free(src1);
+		free(src2);
+	}
+	return (ret);
 }

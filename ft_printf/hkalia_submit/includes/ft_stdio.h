@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 18:09:00 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/14 15:26:22 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ typedef int	(*t_printf_func_ptr)(char **ret, const char **fmt,\
 								va_list *ap, t_printf_parse *parse_state);
 
 # define PRINTF_STR_GRD(a, b, c) if (a) {ft_strdel(b); return (c);}
+# define PRINTF_STR_GRD2(a, b, c, d...) if (a) {ft_strdel_2(b, d); return (c);}
 # define PRINTF_SPEC_LEN 37
+
+/*
+**	#define PRINTF_STRDEL(values...) ({ values *v = { values };
+**	ft_strdel_2(values, sizeof(v) / sizeof(*v)); })
+*/
 
 int				ft_putchar(int src);
 int				ft_printf(const char *fmt, ...);
@@ -97,5 +103,6 @@ int				ft_printf_cap_x(char **ret, const char **fmt,
 int				ft_printf_x(char **ret, const char **fmt,
 								va_list *ap, t_printf_parse *parse_state);
 int				width_handler(t_printf_parse *parse_state, char **src);
+int				dot_handler(t_printf_parse *parse_state, char **src);
 
 #endif

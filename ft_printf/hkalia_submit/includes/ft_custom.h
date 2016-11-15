@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 11:30:49 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/14 13:15:13 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char				*ft_strtrim(const char *src);
 char				**ft_strsplit(const char *src, char src_x);
 char				*ft_strextend(char *src, size_t len);
 size_t				ft_strlen_2(const char *src);
+char				*ft_strjoin_2(char *src1, char *src2);
+void				ft_strdel_2(int count, ...);
 
 /*
 **	TBL

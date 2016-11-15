@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 18:27:28 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/14 16:17:02 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check(const char *cur, int i)
 	return ((g_spec[i][j] == 0 ? 1 : 0));
 }
 
-int		print_struct(t_printf_parse *parse_state)
+int			print_struct(t_printf_parse *parse_state)
 {
 	if (parse_state->flag_minus)
 		write(1, "m1\n", 3);
@@ -107,10 +107,10 @@ static int	iterator(char **ret, const char *fmt, va_list *ap)
 		while (fmt[j] && fmt[j] != '%')
 			++j;
 		if (!(*ret = ft_strextend(*ret, j)))
-				return (-1);
+			return (-1);
 		j = ft_strlen(*ret);
 		while (*fmt && *fmt != '%')
-				(*ret)[j++] = *fmt++;
+			(*ret)[j++] = *fmt++;
 		if (*fmt && *fmt == '%')
 			if (dispatcher(ret, &fmt, ap) == -1)
 				return (-1);

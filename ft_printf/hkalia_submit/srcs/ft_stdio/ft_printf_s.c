@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 18:22:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/14 15:53:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,33 @@
 #include <wchar.h>
 #include <stdlib.h>
 
+static int	ft_printf_s_l(va_list *ap, char **new)
+{
+	wchar_t	*tmp;
+
+	PRINTF_STR_GRD(!(tmp = va_arg(*ap, wchar_t *)), 0, -1);
+	PRINTF_STR_GRD(ft_wcstombs(new, tmp) == -1, 0, -1);
+	return (1);
+}
+
 int		ft_printf_s(char **ret, const char **fmt,
 					va_list *ap, t_printf_parse *parse_state)
 {
 	char	*new;
 	char	*tmp;
 
-	(void)ap;
-	PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
-	new[0] = 's';
-	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
-	tmp = *ret;
-	if (!(*ret = ft_strjoin(*ret, new)))
+	if (parse_state->int_len_mod == 3)
 	{
-		ft_strdel(&new);
-		ft_strdel(ret);
-		return (-1);
+		PRINTF_STR_GRD(ft_printf_s_l(ap, &new) == -1, ret, -1);
 	}
-	free(new);
-	free(tmp);
+	else
+	{
+		PRINTF_STR_GRD(!(tmp = va_arg(*ap, char *)), ret, -1);
+		PRINTF_STR_GRD(!(new = ft_strdup(tmp)), ret, -1);
+	}
+	PRINTF_STR_GRD(dot_handler(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
 	++*fmt;
 	return (1);
 }
