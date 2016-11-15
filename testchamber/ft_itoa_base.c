@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 15:28:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/07 16:50:11 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/15 07:00:38 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ char	*ft_itoa_base(int value, int base)
 	ret[value_len] = (flg_neg) ? '-' : spec[value_cpy % base];
 	return (ret);
 }
-
+//
 // int		main(int argc, char **argv)
 // {
 // 	if (argc == 3)
 // 		printf("%s", ft_itoa_base(atoi(argv[1]), atoi(argv[2])));
 // 	return (0);
 // }
-
+//
 // int		main(void)
 // {
 // 	int		i;
@@ -82,3 +82,32 @@ char	*ft_itoa_base(int value, int base)
 // 	}
 // 	return (0);
 // }
+//
+// int		main(void)
+// {
+// 	int		i;
+// 	int		j;
+//
+// 	i = 0;
+// 	while (i < 17)
+// 	{
+// 		j = 0;
+// 		while (j < 17)
+// 		{
+// 			printf("%s\n", ft_itoa_base(j, i));
+// 			++j;
+// 		}
+// 		if (i == 10)
+// 		{
+// 			j = -j;
+// 			while (j)
+// 			{
+// 				printf("%s\n", ft_itoa_base(j, i));
+// 				++j;
+// 			}
+// 		}
+// 		++i;
+// 	}
+// 	return (0);
+// }
+//
