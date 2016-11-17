@@ -25,7 +25,7 @@ int		ft_printf_mod(char **ret, const char **fmt,
 	(void)ap;
 	PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
 	new[0] = '%';
-	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD(width_handler_s(parse_state, &new) == -1, ret, -1);
 	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
 	++*fmt;
 	return (1);

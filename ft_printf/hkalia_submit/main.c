@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 16:14:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/16 17:23:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@
 
 int		main(void)
 {
-	int		r;
+	int			r;
+	intmax_t	test;
 
+	test = -3;
 	setlocale(LC_ALL, "");
-	r = ft_printf("%100ls", L"𐀀𐀀𐀀");
+	r = ft_printf("%d", -3);
+	ft_putnbr(r);
 	write(1, "\n\n\n", 3);
-	r = printf("%100ls", L"𐀀𐀀𐀀");
+	r = printf("%d", -3);
+	ft_putnbr(r);
 	return (0);
 }

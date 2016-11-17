@@ -48,7 +48,7 @@ int			ft_printf_c(char **ret, const char **fmt,
 		PRINTF_STR_GRD(!(tmp = (unsigned char)va_arg(*ap, int)), ret, -1);
 		new[0] = tmp;
 	}
-	PRINTF_STR_GRD(width_handler(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD(width_handler_s(parse_state, &new) == -1, ret, -1);
 	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
 	++*fmt;
 	return (1);

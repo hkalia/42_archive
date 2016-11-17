@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 13:15:13 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/16 16:24:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <wchar.h>
+# include <stdlib.h>
 
 # define TBLGUARD(a, b, c) if(a) {ft_tbldel(b); return (c);}
 # define BUFF_SIZE 1
@@ -67,7 +68,8 @@ void				ft_tbldel(char **tbl);
 **	NBR
 */
 
-size_t				ft_nbrlen(ssize_t src);
+short				ft_nbrlen(intmax_t src);
+short				ft_nbrlen_base(uintmax_t src, short base);
 
 /*
 **	PUT
@@ -101,7 +103,8 @@ void				ft_lstaddend(t_list *lst, t_list *new);
 **	OTHER
 */
 
-char				*ft_itoa(int src);
+char				*ft_itoa(intmax_t src);
+char				*ft_itoa_base(uintmax_t src, short base, const char *spec);
 int					get_next_line(const int fd, char **line);
 int					ft_wcstombs(char **dst, const wint_t *src);
 

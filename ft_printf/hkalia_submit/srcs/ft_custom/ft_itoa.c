@@ -3,37 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:37:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 11:24:35 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/16 17:22:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
+#include <ft_stdlib.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
-char	*ft_itoa(int src)
+char	*ft_itoa(intmax_t src)
 {
-	int		nbr_len;
-	int		flg_neg;
-	long	src_cpy;
-	char	*dst;
+	short				src_len;
+	bool				flg_neg;
+	uintmax_t			src_cpy;
+	char				*ret;
 
+	src_len = ft_nbrlen(src);
+	if (!(ret = ft_calloc(src_len + 1, sizeof(char))))
+		return (0);
 	flg_neg = (src < 0) ? 1 : 0;
-	nbr_len = ft_nbrlen(src);
-	if (!(dst = (char *)malloc(sizeof(char) * (nbr_len + 1))))
-		return (NULL);
 	src_cpy = src;
-	src_cpy = (flg_neg) ? -src_cpy : src_cpy;
-	dst[nbr_len] = '\0';
-	nbr_len--;
-	while (nbr_len)
+	src_cpy = flg_neg ? -src_cpy : src_cpy;
+	while (--src_len)
 	{
-		dst[nbr_len] = src_cpy % 10 + '0';
+		ret[src_len] = src_cpy % 10 + '0';
 		src_cpy = src_cpy / 10;
-		nbr_len--;
 	}
-	dst[nbr_len] = (flg_neg) ? '-' : (src_cpy % 10 + '0');
-	return (dst);
+	ret[src_len] = flg_neg ? '-' : src_cpy % 10 + '0';
+	return (ret);
 }

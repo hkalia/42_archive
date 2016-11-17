@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 09:38:56 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 17:23:57 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/16 15:54:44 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/16 16:23:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_custom.h>
+#include <ft_stdlib.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
-short	ft_nbrlen(intmax_t src)
+char	*ft_itoa_base(uintmax_t src, short base, const char *spec)
 {
-	short	ret;
+	short				src_len;
+	char				*ret;
 
-	if (src == 0)
-		return (1);
-	ret = src < 0 ? 1 : 0;
-	while (src != 0)
+	if (base < 2)
+		return (0);
+	src_len = ft_nbrlen_base(src, base);
+	if (!(ret = ft_calloc(src_len + 1, sizeof(char))))
+		return (0);
+	while (--src_len)
 	{
-		src = src / 10;
-		++ret;
+		ret[src_len] = spec[src % base];
+		src = src / base;
 	}
+	ret[src_len] = spec[src % base];
 	return (ret);
 }

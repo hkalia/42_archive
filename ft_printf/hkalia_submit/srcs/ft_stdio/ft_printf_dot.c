@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:50:33 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 15:30:08 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/16 14:27:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define ATOI(a) ((a) - '0')
 
-int		dot_handler(t_printf_parse *parse_state, char **src)
+int		dot_handler_s(t_printf_parse *parse_state, char **src)
 {
 	int		i;
 	char	*tmp;

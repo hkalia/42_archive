@@ -1,78 +1,142 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-e1z1r2p15.42.us.org
+e1z1r6p42.42.us.org
 Darwin 15.6.0 x86_64
 $> date
-Tue Oct  4 11:52:24 PDT 2016
+Tue Nov 15 09:21:14 PST 2016
 $> gcc --version
-Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
+Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
 Apple LLVM version 7.3.0 (clang-703.0.31)
 Target: x86_64-apple-darwin15.6.0
 Thread model: posix
-InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 $> clang --version
 Apple LLVM version 7.3.0 (clang-703.0.31)
 Target: x86_64-apple-darwin15.6.0
 Thread model: posix
-InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
 = User files collection ========================================================
 Collecting user files from Vogsphere
-Repository URL: auto-exam/2016/c-exam-beginner/exam_20161004/hkalia
+Repository URL: auto-exam/2016/c-exam-beginner/exam_20161115/hkalia
 
 = Git history ==================================================================
-$> git -C /var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user log --pretty='%H - %an, %ad : %s'
-a1af73d758e50cd192af2fbc74456b2ae84be037 - Exam 42, Tue Oct 4 11:40:51 2016 -0700 : brainfuck too lazy
-80f9a8065e6c2cdbfae571a91391ea4c0acc9194 - Exam 42, Tue Oct 4 11:21:08 2016 -0700 : ft_list_foreach
-9df4b9e296a02f4fd190f2a6b8970e48fcecd8ee - Exam 42, Tue Oct 4 11:11:20 2016 -0700 : paramsum
-d312a637f89c111efd53330d125871fdd4e82ee9 - Exam 42, Tue Oct 4 10:37:09 2016 -0700 : print_hex
-9007aee47b0ee7c613917d123f60f2e912083c6f - Exam 42, Tue Oct 4 09:54:18 2016 -0700 : ft_atoi
-4900cd036ee70bd0ce239e93ce062d6a853b0fd6 - Exam 42, Tue Oct 4 09:25:13 2016 -0700 : rev_print
-c6d4fe4362341b0e6758048f09bf5f028a5ff759 - Exam 42, Tue Oct 4 09:13:01 2016 -0700 : ft_countdown
+$> git -C /var/folders/r0/jjq51kg101n_sstgnxh28dn40000gp/T/tmpikku55/user log --pretty='%H - %an, %ad : %s'
+4480cdb32ae6ff87f8e5b48f380f27b3d7fb8f40 - Exam 42, Tue Nov 15 09:20:39 2016 -0800 : ft_itoa_base
  
 = Collected files ==========================================
-$> ls -lAR /var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user
+$> ls -lAR /var/folders/r0/jjq51kg101n_sstgnxh28dn40000gp/T/tmpikku55/user
 total 8
--rw-r--r--  1 deepthought  deepthought  1735 Oct  4 11:52 __GIT_HISTORY
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 brainfuck
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 ft_atoi
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 ft_countdown
-drwxr-xr-x  4 deepthought  deepthought   136 Oct  4 11:52 ft_list_foreach
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 paramsum
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 print_hex
-drwxr-xr-x  3 deepthought  deepthought   102 Oct  4 11:52 rev_print
+-rw-r--r--  1 deepthought  deepthought  256 Nov 15 09:21 __GIT_HISTORY
+drwxr-xr-x  3 deepthought  deepthought  102 Nov 15 09:21 ft_itoa_base
 
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/brainfuck:
+/var/folders/r0/jjq51kg101n_sstgnxh28dn40000gp/T/tmpikku55/user/ft_itoa_base:
 total 8
--rw-r--r--  1 deepthought  deepthought  535 Oct  4 11:52 main.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_atoi:
-total 8
--rw-r--r--  1 deepthought  deepthought  425 Oct  4 11:52 ft_atoi.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_countdown:
-total 8
--rw-r--r--  1 deepthought  deepthought  249 Oct  4 11:52 ft_countdown.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/ft_list_foreach:
-total 16
--rw-r--r--  1 deepthought  deepthought  137 Oct  4 11:52 ft_list.h
--rw-r--r--  1 deepthought  deepthought  180 Oct  4 11:52 ft_list_foreach.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/paramsum:
-total 8
--rw-r--r--  1 deepthought  deepthought  378 Oct  4 11:52 paramsum.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/print_hex:
-total 8
--rw-r--r--  1 deepthought  deepthought  1340 Oct  4 11:52 print_hex.c
-
-/var/folders/3h/th2f7gcx0d19bb4sx6j5djmr0000gp/T/tmpPSEeSI/user/rev_print:
-total 8
--rw-r--r--  1 deepthought  deepthought  462 Oct  4 11:52 rev_print.c
+-rw-r--r--  1 deepthought  deepthought  816 Nov 15 09:21 ft_itoa_base.c
  
 = ft_itoa_base =================================================================
-Nothing turned in
-Grade: 0
+$> gcc -Wextra -Wall -Werror ft_itoa_base.c main.c -o user_exe 
 
-= Final grade: 0 ===============================================================
+= Test 1 ===================================================
+$> ./6qmgwhpg7v4p0zyfghrhz2ti 
+$> diff -U 3 user_output_test1 test1.output | cat -e
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./v21ttg6rtcpqgwu0p6dle08l "21" "2313" "12"
+$> diff -U 3 user_output_test2 test2.output | cat -e
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./tiydw01btwhg2t13w7wy0x33 "2147483647" "10"
+$> diff -U 3 user_output_test3 test3.output | cat -e
+
+Diff OK :D
+= Test 4 ===================================================
+$> ./42q7m21424x63ghpuu1f7xhm "-2147483648" "10"
+$> diff -U 3 user_output_test4 test4.output | cat -e
+
+Diff OK :D
+= Test 5 ===================================================
+$> ./7yygl4vp0v6ihm2ptixg85rz "0" "2"
+$> diff -U 3 user_output_test5 test5.output | cat -e
+
+Diff OK :D
+= Test 6 ===================================================
+$> ./p8y94fwfwnpfk36hn7hwv228 "--223" "10"
+$> diff -U 3 user_output_test6 test6.output | cat -e
+
+Diff OK :D
+= Test 7 ===================================================
+$> ./m3sqehkxa7p6nywssc2cdux6 "514994395" "12"
+$> diff -U 3 user_output_test7 test7.output | cat -e
+
+Diff OK :D
+= Test 8 ===================================================
+$> ./ibi45b8bx330ieyyn3go94mq "-174513225" "2"
+$> diff -U 3 user_output_test8 test8.output | cat -e
+
+Diff OK :D
+= Test 9 ===================================================
+$> ./je032s8oxl3vax2sarau39wq "805230081" "11"
+$> diff -U 3 user_output_test9 test9.output | cat -e
+
+Diff OK :D
+= Test 10 ==================================================
+$> ./pfblp22pp7q28w0xgc9mkxbv "1106944050" "8"
+$> diff -U 3 user_output_test10 test10.output | cat -e
+
+Diff OK :D
+= Test 11 ==================================================
+$> ./x9hsxgxdm6553yi7sslg5i4g "1310541980" "8"
+$> diff -U 3 user_output_test11 test11.output | cat -e
+
+Diff OK :D
+= Test 12 ==================================================
+$> ./yfw0ccomj21yc1avhw0flvgy "1157327757" "7"
+$> diff -U 3 user_output_test12 test12.output | cat -e
+
+Diff OK :D
+= Test 13 ==================================================
+$> ./s4weprdi0uj6l2fcdd9nqbf2 "140449160" "10"
+$> diff -U 3 user_output_test13 test13.output | cat -e
+
+Diff OK :D
+= Test 14 ==================================================
+$> ./1ltfneltnryp4k6s751gzv3x "385699153" "11"
+$> diff -U 3 user_output_test14 test14.output | cat -e
+
+Diff OK :D
+= Test 15 ==================================================
+$> ./y8jdty9j5hy8d18ftlr7113k "1625532061" "2"
+$> diff -U 3 user_output_test15 test15.output | cat -e
+
+Diff OK :D
+= Test 16 ==================================================
+$> ./wwivxx09r4wfec9wa7x8kl57 "455831512" "8"
+$> diff -U 3 user_output_test16 test16.output | cat -e
+
+Diff OK :D
+= Test 17 ==================================================
+$> ./a3as0zy4khiom80bqzcbp1cn "1481283166" "10"
+$> diff -U 3 user_output_test17 test17.output | cat -e
+
+Diff OK :D
+= Test 18 ==================================================
+$> ./6y8pb6fod88a795wvcohxg9l "557736892" "15"
+$> diff -U 3 user_output_test18 test18.output | cat -e
+
+Diff OK :D
+= Test 19 ==================================================
+$> ./irsy7jni5ehvqs46c37rqhkc "13942906" "14"
+$> diff -U 3 user_output_test19 test19.output | cat -e
+
+Diff OK :D
+= Test 20 ==================================================
+$> ./9w7chg3x1bn5jpha02e1pe8y "1235027949" "9"
+$> diff -U 3 user_output_test20 test20.output | cat -e
+
+Diff OK :D
+Grade: 1
+
+= Final grade: 1 ===============================================================
