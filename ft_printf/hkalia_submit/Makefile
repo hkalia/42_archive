@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/16 17:34:37 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/19 13:20:11 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS		+=	-Werror
 CFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
+LEAK		:=	alloc-wrap.c
 FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_striteri		ft_strmap		ft_strmapi		ft_strequ		\
 				ft_strnequ		ft_strsub		ft_strjoin		ft_strtrim		\
@@ -29,7 +30,9 @@ FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_tblnew		ft_tblnew_2		ft_tbldel		ft_memalloc		\
 				ft_memdel		ft_itoa			ft_nbrlen		ft_putnbr_base	\
 				ft_wcstombs		ft_strjoin_2	ft_strdel_2		ft_nbrlen_base	\
-				ft_itoa_base
+				ft_itoa_base	ft_strpush
+FT_ARR		:=	ft_arrnew		ft_arrinsertat	ft_arrinsertat_f				\
+				ft_arrinsertarrat_f				ft_arrdel
 FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 				ft_strcpy		ft_strncpy		ft_strcat		ft_strncat		\
 				ft_strlcat		ft_strchr		ft_strrchr		ft_strstr		\
@@ -51,7 +54,8 @@ FILES		:=	$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
 				$(addprefix ft_stdio/, $(FT_STDIO))		\
-				$(addprefix ft_stdlib/, $(FT_STDLIB))
+				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
+				$(addprefix ft_arr/, $(FT_ARR))
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
 
@@ -93,3 +97,11 @@ test: re
 	@$(CC) $(CFLAGS) $(MAIN) -L . $(subst .a,,$(subst lib,-l,$(NAME)))\
 	$(INC_DIR) -o test
 	@printf "\e[32mCompiling %s with %s... [DONE]\U1F44C\e[0m\n" $(MAIN) $(NAME)
+
+leak: re
+	@-rm -f $(OBJ)
+	@printf "\e[31mDeleting object files... [DONE]\U1F44C\e[0m\n"
+	@$(CC) $(CFLAGS) $(MAIN) $(LEAK) -L . $(subst .a,,$(subst lib,-l,$(NAME)))\
+	$(INC_DIR) -o test
+	@printf "\e[32mCompiling %s and %s with %s... [DONE]\U1F44C\e[0m\n" $(MAIN)\
+	 $(LEAK) $(NAME)

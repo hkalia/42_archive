@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 17:34:34 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/17 09:32:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	dispatcher(char **ret, const char **fmt, va_list *ap)
 				if ((r = g_func_arr[i](ret, fmt, ap, &parse_state)) == -1)
 					return (-1);
 				if (r)
-					return (print_struct(&parse_state));
+					return (/*print_struct(&parse_state)*/1);
 			}
 			++i;
 		}

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 17:34:03 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/17 15:26:15 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_printf_o(char **ret, const char **fmt,
 	else if (parse_state->int_len_mod == 4)
 		tmp = (unsigned long long)tmp;
 	PRINTF_STR_GRD(!(new = ft_itoa_base(tmp, 8, "01234567")), ret, -1);
-	PRINTF_STR_GRD(width_handler_s(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD(flag_handler_doxu(parse_state, &new) == -1, ret, -1);
 	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
 	++*fmt;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 14:25:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/17 15:41:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@
 
 #define ATOI(a) ((a) - '0')
 
-int		width_handler_s(t_printf_parse *parse_state, char **src)
+int		width_handler_cs(t_printf_parse *parse_state, char **src)
 {
 	int		src_len;
 	int		i;
 	char	*tmp;
 
-	if (src == 0 || *src == 0)
-		return (-1);
-	src_len = ft_strlen(*src);
+	src_len = ft_strlen_2(*src);
 	if (parse_state->int_width > src_len)
 	{
 		PRINTF_STR_GRD(!(tmp = ft_calloc(parse_state->int_width + 1,
@@ -34,11 +32,11 @@ int		width_handler_s(t_printf_parse *parse_state, char **src)
 		ft_memset(tmp, parse_state->flag_zero ? '0' : ' ',
 					parse_state->int_width);
 		i = -1;
-		if (parse_state->flag_minus)
+		if (parse_state->flag_minus && src)
 			while ((*src)[++i])
 				tmp[i] = (*src)[i];
-		else
-			while ((*src)[++i])
+		else if (src)
+			while (src && (*src)[++i])
 				tmp[parse_state->int_width - src_len--] = (*src)[i];
 		free(*src);
 		*src = tmp;

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 14:45:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/17 15:38:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_printf_c_l(va_list *ap, char **new)
 	wint_t	tmp;
 
 	PRINTF_STR_GRD(!(*new = ft_calloc(5, sizeof(char))), 0, -1);
-	PRINTF_STR_GRD(!(tmp = va_arg(*ap, wint_t)), new, -1);
+	tmp = va_arg(*ap, wint_t);
 	PRINTF_STR_GRD(ft_wctomb(*new, tmp) == -1, new, -1);
 	return (1);
 }
@@ -45,10 +45,10 @@ int			ft_printf_c(char **ret, const char **fmt,
 	else
 	{
 		PRINTF_STR_GRD(!(new = ft_calloc(2, sizeof(char))), ret, -1);
-		PRINTF_STR_GRD(!(tmp = (unsigned char)va_arg(*ap, int)), ret, -1);
+		tmp = (unsigned char)va_arg(*ap, int);
 		new[0] = tmp;
 	}
-	PRINTF_STR_GRD(width_handler_s(parse_state, &new) == -1, ret, -1);
+	PRINTF_STR_GRD(width_handler_cs(parse_state, &new) == -1, ret, -1);
 	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
 	++*fmt;
 	return (1);
