@@ -6,15 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 09:32:06 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/20 17:24:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+#include <ft_stdio.h>
+#include <ft_arr.h>
+#include <ft_string.h>
 
 static char	g_spec[PRINTF_SPEC_LEN][3] = {
 	{'-'}, {'+'}, {' '}, {'#'}, {'0'},
@@ -69,53 +67,59 @@ int			print_struct(t_printf_parse *parse_state)
 	return (1);
 }
 
-static int	dispatcher(char **ret, const char **fmt, va_list *ap)
+static int	dispatcher(t_arr *ret, t_arr *fmt, va_list *ap)
 {
 	t_printf_parse	parse_state;
-	int				i;
-	int				r;
+	size_t			i;
+	size_t			j;
 
-	PRINTF_STR_GRD(*(++*fmt) == 0, ret, -1);
 	parse_state = (t_printf_parse){0, 0, 0, 0, 0, 0, 0, 0, 0};
-	while (**fmt)
+	i = 0;
+	while (i < fmt->arr_len)
 	{
-		i = 0;
-		while (i < PRINTF_SPEC_LEN)
+		j = 0;
+		while (j < PRINTF_SPEC_LEN)
 		{
-			if (**fmt == g_spec[i][0] && check(*fmt, i))
+			if (fmt->arr[i] == g_spec[j][0] && check(fmt, j))
 			{
-				if ((r = g_func_arr[i](ret, fmt, ap, &parse_state)) == -1)
+				if ((r = g_func_arr[j](ret, fmt, ap, &parse_state)) == -1)
 					return (-1);
 				if (r)
 					return (/*print_struct(&parse_state)*/1);
 			}
-			++i;
+			++j;
 		}
-		++*fmt;
+		++i;
 	}
 	ft_strdel(ret);
 	return (-1);
 }
 
-static int	iterator(char **ret, const char *fmt, va_list *ap)
+static int	iterator(char **final, const char *format, va_list *ap)
 {
-	int		j;
+	t_arr	ret;
+	t_arr	fmt;
+	size_t	i;
 
-	while (*fmt)
+	FT_FREE_GRD(!ft_arrinit(&ret, ft_strlen(format)), 0, -1);
+	FT_FREE_GRD(!ft_arrinsertat(&fmt, 0, format, ft_strlen(format))
+				, ret.arr, -1);
+	i = 0;
+	while (i < fmt.arr_len)
 	{
-		j = 0;
-		while (fmt[j] && fmt[j] != '%')
-			++j;
-		if (!(*ret = ft_strextend(*ret, j)))
-			return (-1);
-		j = ft_strlen(*ret);
-		while (*fmt && *fmt != '%')
-			(*ret)[j++] = *fmt++;
-		if (*fmt && *fmt == '%')
-			if (dispatcher(ret, &fmt, ap) == -1)
-				return (-1);
+		i = 0;
+		while (i < fmt.arr_len && fmt.arr[i] != '%')
+			++i;
+		FT_FREE_GRD2(!ft_arrinsertat(&ret, ret.arr_len, fmt.arr, i), ret.arr
+					, fmt.arr, -1);
+		FT_FREE_GRD2(!ft_arrremoveat(&fmt, 0, i), ret.arr, fmt.arr, -1);
+		FT_FREE_GRD2(dispatcher(&ret, &fmt, ap) == -1, ret.arr, fmt.arr, -1);
 	}
-	return (ft_strlen(*ret));
+	FT_FREE_GRD2(!ft_arrinsertat(&ret, ret.arr_len, "", 1), ret.arr, fmt.arr
+				, -1);
+	free(fmt.arr);
+	*final = ret.arr;
+	return (ret.arr_len);
 }
 
 int			ft_vasprintf(char **ret, const char *fmt, va_list *ap)

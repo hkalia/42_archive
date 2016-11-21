@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/19 13:20:11 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/20 16:09:13 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,9 @@ FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_memdel		ft_itoa			ft_nbrlen		ft_putnbr_base	\
 				ft_wcstombs		ft_strjoin_2	ft_strdel_2		ft_nbrlen_base	\
 				ft_itoa_base	ft_strpush
-FT_ARR		:=	ft_arrnew		ft_arrinsertat	ft_arrinsertat_f				\
-				ft_arrinsertarrat_f				ft_arrdel
+FT_ARR		:=	ft_arrinit		ft_arrreset		ft_arrdup		ft_arrinsertat	\
+				ft_arrinsertat_f				ft_arrinsertarrat				\
+				ft_arrinsertarrat_f
 FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 				ft_strcpy		ft_strncpy		ft_strcat		ft_strncat		\
 				ft_strlcat		ft_strchr		ft_strrchr		ft_strstr		\

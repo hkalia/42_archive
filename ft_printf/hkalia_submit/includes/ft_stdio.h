@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 15:25:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/20 17:10:15 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,9 @@ typedef struct	s_printf_parse
 typedef int	(*t_printf_func_ptr)(char **ret, const char **fmt,\
 								va_list *ap, t_printf_parse *parse_state);
 
-# define PRINTF_STR_GRD(a, b, c) if (a) {ft_strdel(b); return (c);}
-# define PRINTF_STR_GRD2(a, b, c, d...) if (a) {ft_strdel_2(b, d); return (c);}
+# define FT_FREE_GRD(a, b, c) if (a) {free(b); return(c);}
+# define FT_FREE_GRD2(a, b, c, d) if (a) {free(b); free(c); return(d);}
 # define PRINTF_SPEC_LEN 37
-
-/*
-**	#define PRINTF_STRDEL(values...) ({ values *v = { values };
-**	ft_strdel_2(values, sizeof(v) / sizeof(*v)); })
-*/
 
 int				ft_putchar(int src);
 int				ft_printf(const char *fmt, ...);
