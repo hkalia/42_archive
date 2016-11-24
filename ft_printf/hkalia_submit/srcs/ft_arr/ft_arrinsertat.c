@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 12:00:58 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/20 16:52:23 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/21 15:04:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int8_t	case2(t_arr *dst, size_t i, const uint8_t *src_cpy
 	t_arr	tmp;
 	size_t	j;
 
-	FT_ARR_GRD(!ft_arrinit(&tmp, dst->arr_len - i), 0, 0);
+	FT_GRD(!ft_arrinit(&tmp, dst->arr_len - i), 0);
 	j = i;
 	while (j < dst->arr_len)
 		tmp.arr[tmp.arr_len++] = dst->arr[j++];
@@ -28,7 +28,8 @@ static int8_t	case2(t_arr *dst, size_t i, const uint8_t *src_cpy
 	j = 0;
 	while (j < tmp.arr_len)
 		dst->arr[i++] = tmp.arr[j++];
-	ft_arrreset(&tmp);
+	dst->arr_len = i;
+	ft_arrreset_f(&tmp);
 	return (1);
 }
 
@@ -41,10 +42,10 @@ static int8_t	case1(t_arr *dst, size_t i, const uint8_t *src_cpy
 
 	if (dst->arr_sze < i + src_len)
 	{
-		FT_ARR_GRD(!ft_arrinit(&tmp, i + src_len), 0, 0);
+		FT_GRD(!ft_arrinit(&tmp, i + src_len), 0);
 	}
 	else
-		FT_ARR_GRD(!ft_arrinit(&tmp, dst->arr_len + src_len), 0, 0);
+		FT_GRD(!ft_arrinit(&tmp, dst->arr_len + src_len), 0);
 	j = 0;
 	while (j < dst->arr_len && j < i)
 		tmp.arr[tmp.arr_len++] = dst->arr[j++];
@@ -55,8 +56,8 @@ static int8_t	case1(t_arr *dst, size_t i, const uint8_t *src_cpy
 		tmp.arr[tmp.arr_len++] = src_cpy[k++];
 	while (j < dst->arr_len)
 		tmp.arr[tmp.arr_len++] = dst->arr[j++];
-	ft_arrreset(dst);
-	FT_ARR_INIT(dst, tmp.arr_sze, tmp.arr_len, tmp.arr);
+	ft_arrreset_f(dst);
+	FT_ARR_INIT2(dst, tmp.arr_sze, tmp.arr_len, tmp.arr);
 	return (1);
 }
 
@@ -65,7 +66,7 @@ static int8_t	case0(t_arr *dst, size_t i, const uint8_t *src_cpy
 {
 	size_t	j;
 
-	FT_ARR_GRD(!ft_arrinit(dst, i + src_len), 0, 0);
+	FT_GRD(!ft_arrinit(dst, i + src_len), 0);
 	dst->arr_len = i;
 	j = 0;
 	while (j < src_len)
@@ -79,8 +80,8 @@ int8_t			ft_arrinsertat(t_arr *dst, size_t i, const void *src
 	const uint8_t	*src_cpy;
 	size_t			j;
 
-	FT_ARR_GRD(!dst, 0, 0);
-	FT_ARR_GRD(!src || src_len == 0, 0, 1);
+	FT_GRD(!dst, 0);
+	FT_GRD(!src || src_len == 0, 1);
 	src_cpy = src;
 	if (dst->arr_sze == 0 || dst->arr == 0)
 		return (case0(dst, i, src_cpy, src_len));

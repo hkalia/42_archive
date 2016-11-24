@@ -6,34 +6,40 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 15:57:06 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:34:21 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
+#include <ft_string.h>
 #include <ft_custom.h>
 #include <stdlib.h>
 
-int		ft_printf_d(char **ret, const char **fmt,
-					va_list *ap, t_printf_parse *parse_state)
+int8_t	ft_printf_d(t_arr *ret, const char **fmt,
+					va_list *ap, t_ft_printf *state)
 {
-	char		*new;
-	intmax_t	tmp;
+	char				*new;
+	intmax_t			tmp;
 
-	tmp = va_arg(*ap, intmax_t);
-	if (parse_state->int_len_mod == 0)
-		tmp = (int)tmp;
-	else if (parse_state->int_len_mod == 1)
-		tmp = (signed char)tmp;
-	else if (parse_state->int_len_mod == 2)
-		tmp = (short)tmp;
-	else if (parse_state->int_len_mod == 3)
-		tmp = (long)tmp;
-	else if (parse_state->int_len_mod == 4)
-		tmp = (long long)tmp;
-	PRINTF_STR_GRD(!(new = ft_itoa(tmp)), ret, -1);
-	PRINTF_STR_GRD(flag_handler_doxu(parse_state, &new) == -1, ret, -1);
-	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
+	tmp = 0;
+	if (state->int_len_mod == 0)
+		tmp = va_arg(*ap, int);
+	else if (state->int_len_mod == 1)
+		tmp = (signed char)va_arg(*ap, int);
+	else if (state->int_len_mod == 2)
+		tmp = (short)va_arg(*ap, int);
+	else if (state->int_len_mod == 3)
+		tmp = va_arg(*ap, long);
+	else if (state->int_len_mod == 4)
+		tmp = va_arg(*ap, long long);
+	else if (state->int_len_mod == 5)
+		tmp = va_arg(*ap, intmax_t);
+	else if (state->int_len_mod == 6)
+		tmp = va_arg(*ap, ssize_t);
+	FT_GRD1(!(new = ft_itoa(tmp)), free(ret->arr), -1);
+	FT_GRD2(!ft_arrinsertat(ret, ret->arr_len, new, ft_strlen(new)), free(new)
+			, free(ret->arr), -1);
+	free(new);
 	++*fmt;
 	return (1);
 }

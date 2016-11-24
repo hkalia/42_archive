@@ -6,14 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 15:34:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 10:44:19 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 09:15:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 
-int		ft_printf_flags(char **ret, const char **fmt,
-						va_list *ap, t_printf_parse *parse_state)
+int8_t	ft_printf_flags(t_arr *ret, const char **fmt,
+						va_list *ap, t_ft_printf *state)
 {
 	(void)ret;
 	(void)ap;
@@ -21,26 +21,15 @@ int		ft_printf_flags(char **ret, const char **fmt,
 			|| **fmt == '#' || **fmt == '0'))
 	{
 		if (**fmt == '-')
-		{
-			parse_state->flag_zero = 0;
-			parse_state->flag_minus = 1;
-		}
+			state->flag_minus = 1;
 		else if (**fmt == '+')
-		{
-			parse_state->flag_space = 0;
-			parse_state->flag_plus = 1;
-		}
-		else if (**fmt == ' ')
-		{
-			if (parse_state->flag_plus)
-				parse_state->flag_space = 0;
-			else
-				parse_state->flag_space = 1;
-		}
+			state->flag_plus = 1;
+		else if (**fmt == ' ' && !state->flag_plus)
+			state->flag_space = 1;
 		else if (**fmt == '#')
-			parse_state->flag_hash = 1;
+			state->flag_hash = 1;
 		else if (**fmt == '0')
-			parse_state->flag_zero = 1;
+			state->flag_zero = 1;
 		++*fmt;
 	}
 	return (0);

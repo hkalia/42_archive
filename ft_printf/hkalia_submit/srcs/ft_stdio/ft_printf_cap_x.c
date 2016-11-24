@@ -6,34 +6,41 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:38 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 15:26:30 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:37:40 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
-#include <ft_custom.h>
 #include <ft_string.h>
+#include <ft_custom.h>
+#include <stdlib.h>
 
-int		ft_printf_cap_x(char **ret, const char **fmt,
-						va_list *ap, t_printf_parse *parse_state)
+int8_t	ft_printf_cap_x(t_arr *ret, const char **fmt,
+						va_list *ap, t_ft_printf *state)
 {
 	char				*new;
 	uintmax_t			tmp;
 
-	tmp = va_arg(*ap, uintmax_t);
-	if (parse_state->int_len_mod == 0)
-		tmp = (unsigned int)tmp;
-	else if (parse_state->int_len_mod == 1)
-		tmp = (unsigned char)tmp;
-	else if (parse_state->int_len_mod == 2)
-		tmp = (unsigned short)tmp;
-	else if (parse_state->int_len_mod == 3)
-		tmp = (unsigned long)tmp;
-	else if (parse_state->int_len_mod == 4)
-		tmp = (unsigned long long)tmp;
-	PRINTF_STR_GRD(!(new = ft_itoa_base(tmp, 16, "0123456789ABCDEF")), ret, -1);
-	PRINTF_STR_GRD(flag_handler_doxu(parse_state, &new) == -1, ret, -1);
-	PRINTF_STR_GRD2(!(*ret = ft_strjoin_2(*ret, new)), 2, -1, ret, &new);
+	tmp = 0;
+	if (state->int_len_mod == 0)
+		tmp = va_arg(*ap, unsigned int);
+	else if (state->int_len_mod == 1)
+		tmp = (unsigned char)va_arg(*ap, unsigned int);
+	else if (state->int_len_mod == 2)
+		tmp = (unsigned short)va_arg(*ap, unsigned int);
+	else if (state->int_len_mod == 3)
+		tmp = va_arg(*ap, unsigned long);
+	else if (state->int_len_mod == 4)
+		tmp = va_arg(*ap, unsigned long long);
+	else if (state->int_len_mod == 5)
+		tmp = va_arg(*ap, uintmax_t);
+	else if (state->int_len_mod == 6)
+		tmp = va_arg(*ap, size_t);
+	FT_GRD1(!(new = ft_itoa_base(tmp, 16, "0123456789ABCDEF"))
+			, free(ret->arr), -1);
+	FT_GRD2(!ft_arrinsertat(ret, ret->arr_len, new, ft_strlen(new)), free(new)
+			, free(ret->arr), -1);
+	free(new);
 	++*fmt;
 	return (1);
 }

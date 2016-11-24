@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrinit.c                                       :+:      :+:    :+:   */
+/*   ft_arrreset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 15:02:18 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/21 11:39:49 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/21 09:59:28 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/21 10:00:10 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_arr.h>
-#include <ft_stdlib.h>
 
-int8_t	ft_arrinit(t_arr *src, size_t arr_sze)
+void	ft_arrreset(t_arr *src)
 {
-	FT_GRD(!src, 0);
-	src->arr_sze = arr_sze;
-	FT_GRD1(!(src->arr = ft_calloc(src->arr_sze, sizeof(uint8_t)))
-			, ft_arrreset(src), 0);
-	src->arr_len = 0;
-	return (1);
+	if (src)
+	{
+		src->arr_sze = 0;
+		src->arr_len = 0;
+		src->arr = 0;
+	}
 }

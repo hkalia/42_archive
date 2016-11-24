@@ -6,15 +6,15 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/10 14:55:43 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:26:47 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 
-int		ft_printf_cap_c(char **ret, const char **fmt,
-						va_list *ap, t_printf_parse *parse_state)
+int8_t	ft_printf_cap_c(t_arr *ret, const char **fmt,
+						va_list *ap, t_ft_printf *state)
 {
-	parse_state->int_len_mod = 3;
-	return (ft_printf_c(ret, fmt, ap, parse_state));
+	state->int_len_mod = 3;
+	return (ft_printf_c(ret, fmt, ap, state));
 }

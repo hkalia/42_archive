@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 17:02:28 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:03:48 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include <string.h>
 # include <wchar.h>
 # include <stdlib.h>
+
+# ifndef FT_GRD
+#  define FT_GRD(a, b) if (a) {return(b);}
+# endif
+
+# ifndef FT_GRD1
+#  define FT_GRD1(a, b, c) if (a) {b; return(c);}
+# endif
+
+# ifndef FT_GRD2
+#  define FT_GRD2(a, b, c, d) if (a) {b; c; return(d);}
+# endif
 
 # define TBLGUARD(a, b, c) if(a) {ft_tbldel(b); return (c);}
 # define BUFF_SIZE 1
