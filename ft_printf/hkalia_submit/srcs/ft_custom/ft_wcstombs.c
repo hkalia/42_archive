@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 11:27:08 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/23 11:05:10 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/24 16:34:37 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <ft_stdlib.h>
 #include <stdlib.h>
 
-int		ft_wcstombs(char **dst, const wint_t *src)
+int		ft_wcstombs(char **dst, const wchar_t *src)
 {
 	size_t	i;
 	size_t	j;

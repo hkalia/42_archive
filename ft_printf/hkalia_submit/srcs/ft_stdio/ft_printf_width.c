@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/23 11:25:30 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/24 15:47:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,23 @@
 #include <ft_stdlib.h>
 #include <unistd.h>
 
-// int		width_handler_cs(t_ft_printf *state, char **src)
-// {
-// 	int		src_len;
-// 	int		i;
-// 	char	*tmp;
-//
-// 	src_len = ft_strlen_2(*src);
-// 	if (state->int_width > src_len)
-// 	{
-// 		PRINTF_STR_GRD(!(tmp = ft_calloc(state->int_width + 1,
-// 						sizeof(char))), src, -1);
-// 		ft_memset(tmp, state->flag_zero ? '0' : ' ',
-// 					state->int_width);
-// 		i = -1;
-// 		if (state->flag_minus && src)
-// 			while ((*src)[++i])
-// 				tmp[i] = (*src)[i];
-// 		else if (src)
-// 			while (src && (*src)[++i])
-// 				tmp[state->int_width - src_len--] = (*src)[i];
-// 		free(*src);
-// 		*src = tmp;
-// 		return (0);
-// 	}
-// 	return (0);
-// }
+int8_t	width_handler(t_ft_printf *state, t_arr *new)
+{
+	char	*tmp;
+	int		diff;
+
+	if (state->int_width > (int)new->arr_len)
+	{
+		diff = state->int_width - (int)new->arr_len;
+		FT_GRD(!(tmp = (char *)malloc(sizeof(char) * diff)), 0);
+		ft_memset(tmp, state->flag_zero ? '0' : ' ', diff);
+		FT_GRD1(!ft_arrinsertat(new, state->flag_minus ? new->arr_len : 0, tmp
+			, diff), free(tmp), 0);
+		free(tmp);
+		return (1);
+	}
+	return (1);
+}
 
 int8_t	ft_printf_width(t_arr *ret, const char **fmt,
 						va_list *ap, t_ft_printf *state)

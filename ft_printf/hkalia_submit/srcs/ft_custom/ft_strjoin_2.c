@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 11:42:50 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/17 15:35:04 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/24 16:47:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strjoin_2(char *src1, char *src2)
 	size_t	i;
 	size_t	j;
 
-	if (!(ret = ft_calloc(ft_strlen_2(src1) + ft_strlen_2(src2) + 1, sizeof(char))))
+	if (!(ret = ft_calloc(ft_strlen_2(src1) + ft_strlen_2(src2) + 1
+		, sizeof(char))))
 		return (0);
 	i = 0;
 	j = 0;

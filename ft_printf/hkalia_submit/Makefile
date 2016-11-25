@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/23 11:48:22 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/24 16:47:49 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS		+=	-Werror
 #CFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
-LEAK		:=	alloc-wrap.c
+LEAK		:=	alloc_wrap.c
 #FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_striteri		ft_strmap		ft_strmapi		ft_strequ		\
 				ft_strnequ		ft_strsub		ft_strjoin		ft_strtrim		\
@@ -30,7 +30,7 @@ LEAK		:=	alloc-wrap.c
 				ft_tblnew		ft_tblnew_2		ft_tbldel		ft_memalloc		\
 				ft_memdel		ft_itoa			ft_nbrlen		ft_putnbr_base	\
 				ft_wcstombs		ft_strjoin_2	ft_strdel_2		ft_nbrlen_base	\
-				ft_itoa_base	ft_strpush
+				ft_itoa_base
 FT_ARR		:=	ft_arrinit		ft_arrdup		ft_arrinsertat					\
 				ft_arrinsertarrat				ft_arrreset		ft_arrreset_f	\
 				ft_arrremoveat	ft_arrtostr
@@ -57,7 +57,7 @@ FILES		:=	$(addprefix ft_arr/, $(FT_ARR))			\
 				ft_string/ft_strchr ft_string/ft_strdup ft_string/ft_bzero		\
 				ft_custom/ft_itoa ft_custom/ft_itoa_base ft_custom/ft_wcstombs	\
 				ft_stdlib/ft_wctomb ft_custom/ft_nbrlen							\
-				ft_custom/ft_nbrlen_base#	\
+				ft_custom/ft_nbrlen_base ft_string/ft_memset#	\
 				$(addprefix ft_custom/, $(FT_CUSTOM))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
