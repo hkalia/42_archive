@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/24 16:49:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/26 17:28:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int8_t	ft_printf_c_l(va_list *ap, t_arr *new)
 	return (1);
 }
 
-int8_t			ft_printf_c(t_arr *ret, const char **fmt,
-					va_list *ap, t_ft_printf *state)
+int8_t			ft_printf_c(t_arr *ret, const char **fmt
+							, va_list *ap, t_ft_printf *state)
 {
 	unsigned char	tmp;
 	t_arr			new;

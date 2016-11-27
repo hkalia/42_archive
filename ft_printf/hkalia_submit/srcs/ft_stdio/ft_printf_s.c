@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/24 16:40:59 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/26 17:17:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ static int8_t	ft_printf_s_l(va_list *ap, t_arr *new)
 	return (1);
 }
 
+static int8_t	null_handler(t_arr *ret, const char **fmt)
+{
+	FT_GRD1(!ft_arrinsertat(ret, ret->arr_len, "(null)", 6)
+			, free(ret->arr), -1);
+	++*fmt;
+	return (1);
+}
+
 int8_t			ft_printf_s(t_arr *ret, const char **fmt,
 						va_list *ap, t_ft_printf *state)
 {
@@ -39,10 +47,14 @@ int8_t			ft_printf_s(t_arr *ret, const char **fmt,
 	}
 	else
 	{
-		tmp = va_arg(*ap, char *);
+		if ((tmp = va_arg(*ap, char *)) == 0)
+			return (null_handler(ret, fmt));
 		FT_GRD1(!ft_arrinsertat(&new, 0, tmp, ft_strlen(tmp)), free(ret->arr)
 				, -1);
 	}
+	if (state->flag_dot && new.arr_len > (size_t)state->int_dot)
+		FT_GRD2(!ft_arrremoveat(&new, (size_t)state->int_dot, new.arr_len
+				- state->int_dot), free(new.arr), free(ret->arr), -1);
 	FT_GRD2(!width_handler(state, &new), free(new.arr), free(ret->arr), -1);
 	FT_GRD2(!ft_arrinsertarrat(ret, ret->arr_len, &new), free(new.arr)
 			, free(ret->arr), -1);

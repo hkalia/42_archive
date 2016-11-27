@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/24 16:47:49 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/26 16:30:30 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS		+=	-Werror
 SRC_DIR		:=	srcs
 MAIN		:=	main.c
 LEAK		:=	alloc_wrap.c
-#FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
+FT_CUSTOM	:=	ft_strnew		ft_strdel		ft_strclr		ft_striter		\
 				ft_striteri		ft_strmap		ft_strmapi		ft_strequ		\
 				ft_strnequ		ft_strsub		ft_strjoin		ft_strtrim		\
 				ft_strsplit		ft_strextend	ft_strlen_2		ft_putstr		\
@@ -34,13 +34,13 @@ LEAK		:=	alloc_wrap.c
 FT_ARR		:=	ft_arrinit		ft_arrdup		ft_arrinsertat					\
 				ft_arrinsertarrat				ft_arrreset		ft_arrreset_f	\
 				ft_arrremoveat	ft_arrtostr
-#FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
+FT_STRING	:=	ft_strlen		ft_strnlen		ft_strdup		ft_strndup		\
 				ft_strcpy		ft_strncpy		ft_strcat		ft_strncat		\
 				ft_strlcat		ft_strchr		ft_strrchr		ft_strstr		\
 				ft_strnstr		ft_strcmp		ft_strncmp		ft_memset		\
 				ft_memcpy		ft_memchr		ft_memccpy		ft_memmove		\
 				ft_memcmp		ft_bzero
-#FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
+FT_CTYPE	:=	ft_isalpha		ft_isdigit		ft_isalnum		ft_isascii		\
 				ft_isprint		ft_isupper		ft_islower		ft_isblank		\
 				ft_toupper		ft_tolower
 FT_STDIO	:=	ft_putchar		ft_vasprintf	ft_printf		ft_printf_flags	\
@@ -50,15 +50,10 @@ FT_STDIO	:=	ft_putchar		ft_vasprintf	ft_printf		ft_printf_flags	\
 				ft_printf_x		ft_printf_cap_x	ft_printf_cap_d	ft_printf_cap_o	\
 				ft_printf_cap_u	ft_printf_cap_c	ft_printf_c		ft_printf_cap_s	\
 				ft_printf_s		ft_printf_p		ft_printf_mod
-#FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs			ft_wctomb
+FT_STDLIB	:=	ft_atoi			ft_calloc		ft_abs			ft_wctomb
 FILES		:=	$(addprefix ft_arr/, $(FT_ARR))			\
-				$(addprefix ft_stdio/, $(FT_STDIO))		\
-				ft_custom/ft_putnbr ft_string/ft_strlen ft_stdlib/ft_calloc		\
-				ft_string/ft_strchr ft_string/ft_strdup ft_string/ft_bzero		\
-				ft_custom/ft_itoa ft_custom/ft_itoa_base ft_custom/ft_wcstombs	\
-				ft_stdlib/ft_wctomb ft_custom/ft_nbrlen							\
-				ft_custom/ft_nbrlen_base ft_string/ft_memset#	\
 				$(addprefix ft_custom/, $(FT_CUSTOM))	\
+				$(addprefix ft_stdio/, $(FT_STDIO))		\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\

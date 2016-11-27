@@ -14,7 +14,7 @@
 #include <ft_arr.h>
 #include <ft_string.h>
 #include <unistd.h>
-void	ft_putnbr(int nbr);
+void			ft_putnbr(int nbr);
 static char		g_spec[FT_PRINTF_LEN1][FT_PRINTF_LEN2] = {
 	{'-'}, {'+'}, {' '}, {'#'}
 	, {'0'}, {'*'}, {'1'}, {'2'}
@@ -65,7 +65,6 @@ static int8_t	dispatcher(t_arr *ret, const char **fmt, va_list *ap)
 			if (check(*fmt, g_spec[i]))
 			{
 				FT_GRD((r = (*g_funcs[i])(ret, fmt, ap, &state)) == -1, -1);
-				ft_putnbr(state.int_len_mod);
 				if (r > 0)
 					return (r);
 			}
@@ -80,6 +79,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 {
 	t_arr	ret;
 	size_t	i;
+	int8_t	r;
 
 	ret = (t_arr){0, 0, 0};
 	FT_GRD(!ft_arrinit(&ret, ft_strlen(fmt)), -1);
@@ -92,13 +92,13 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 		fmt += i;
 		if (fmt[0] == '%')
 		{
-			FT_GRD((i = dispatcher(&ret, &fmt, ap)) == -1, -1);
-			if (i == 2)
+			FT_GRD((r = dispatcher(&ret, &fmt, ap)) == -1, -1);
+			if (r == 2)
 				break ;
 		}
 	}
 	FT_GRD1(!(*final = ft_arrtostr(&ret)), free(ret.arr), -1);
-	return (ret.arr_len);
+	return ((int)ret.arr_len);
 }
 
 int				ft_vasprintf(char **ret, const char *fmt, va_list *ap)
@@ -109,7 +109,7 @@ int				ft_vasprintf(char **ret, const char *fmt, va_list *ap)
 		return (0);
 	*ret = 0;
 	if (ft_strchr(fmt, '%') == 0)
-		return (((*ret = ft_strdup(fmt)) ? ft_strlen(fmt) : -1));
+		return ((*ret = ft_strdup(fmt)) ? (int)ft_strlen(fmt) : -1);
 	r = iterator(ret, fmt, ap);
 	return (r);
 }
