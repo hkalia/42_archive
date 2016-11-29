@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/24 17:18:13 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 14:16:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <ft_arr.h>
 #include <ft_string.h>
 #include <unistd.h>
-void			ft_putnbr(int nbr);
+
 static char		g_spec[FT_PRINTF_LEN1][FT_PRINTF_LEN2] = {
 	{'-'}, {'+'}, {' '}, {'#'}
 	, {'0'}, {'*'}, {'1'}, {'2'}
@@ -56,7 +56,7 @@ static int8_t	dispatcher(t_arr *ret, const char **fmt, va_list *ap)
 	size_t		i;
 	int8_t		r;
 
-	state = (t_ft_printf){0, 0, 0, 0, 0, 0, 0, 0, 0};
+	ft_bzero(&state, sizeof(t_ft_printf));
 	while (++*fmt)
 	{
 		i = 0;
@@ -88,7 +88,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 		i = 0;
 		while (fmt[i] && fmt[i] != '%')
 			++i;
-		FT_GRD(!ft_arrinsertat(&ret, ret.arr_len, fmt, i), -1);
+		FT_GRD(!ft_arrinsertat(&ret, ret.len, fmt, i), -1);
 		fmt += i;
 		if (fmt[0] == '%')
 		{
@@ -98,7 +98,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 		}
 	}
 	FT_GRD1(!(*final = ft_arrtostr(&ret)), free(ret.arr), -1);
-	return ((int)ret.arr_len);
+	return ((int)ret.len);
 }
 
 int				ft_vasprintf(char **ret, const char *fmt, va_list *ap)

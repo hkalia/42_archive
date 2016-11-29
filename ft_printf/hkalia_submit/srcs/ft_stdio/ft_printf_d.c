@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:41 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/26 17:24:09 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 15:54:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <ft_string.h>
 #include <ft_custom.h>
 #include <stdlib.h>
+
+int8_t			flg_handler_d(t_ft_printf *state, t_arr *new)
+{
+	bool	flg_neg;
+
+	if (!(flg_neg = new->arr[0] == '-' ? 1 : 0)
+		&& (state->flg_plus || state->flg_space))
+		FT_GRD(!ft_arrinsertat(new, 0, state->flg_plus ? "+" : " ", 1), 0);
+	return (1);
+}
 
 static intmax_t	get_signed_input(va_list *ap, t_ft_printf *state)
 {
@@ -41,14 +51,14 @@ int8_t			ft_printf_d(t_arr *ret, const char **fmt
 	t_arr		new;
 	intmax_t	tmp;
 
-	FT_GRD1(state->flag_hash, free(ret->arr), -1);
-	new = (t_arr){0, 0, 0};
+	FT_GRD1(state->flg_hash, free(ret->arr), -1);
+	ft_bzero(&new, sizeof(t_arr));
 	tmp = get_signed_input(ap, state);
 	FT_GRD1(!(new.arr = (uint8_t *)ft_itoa(tmp)), free(ret->arr), -1);
-	new.arr_len = ft_strlen((char *)new.arr);
-	new.arr_sze = new.arr_len + 1;
-	FT_GRD2(!width_handler(state, &new), free(new.arr), free(ret->arr), -1);
-	FT_GRD2(!ft_arrinsertarrat(ret, ret->arr_len, &new), free(new.arr)
+	new.len = ft_strlen((char *)new.arr);
+	new.sze = new.len + 1;
+	FT_GRD2(!flg_handler_d(state, &new), free(new.arr), free(ret->arr), -1);
+	FT_GRD2(!ft_arrinsertarrat(ret, ret->len, &new), free(new.arr)
 			, free(ret->arr), -1);
 	free(new.arr);
 	++*fmt;

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/26 17:21:55 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 16:02:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,15 @@
 # include <stdlib.h>
 # include "ft_arr.h"
 
-/*
-**	if you add stuff to this struct, make sure to go to the dispatcher function
-**	and initialize it to it's default value.
-*/
-
 typedef struct	s_ft_printf
 {
-	bool		flag_minus;
-	bool		flag_plus;
-	bool		flag_space;
-	bool		flag_hash;
-	bool		flag_zero;
+	bool		flg_minus;
+	bool		flg_plus;
+	bool		flg_space;
+	bool		flg_hash;
+	bool		flg_zero;
 	int			int_width;
-	bool		flag_dot;
+	bool		flg_dot;
 	int			int_dot;
 	int			int_len_mod;
 }				t_ft_printf;
@@ -49,7 +44,7 @@ typedef struct	s_ft_printf
 # endif
 
 # define FT_PRINTF_LEN1 37
-# define FT_PRINTF_LEN2	3
+# define FT_PRINTF_LEN2 3
 
 int				ft_putchar(int src);
 int				ft_printf(const char *fmt, ...);
@@ -107,7 +102,7 @@ int8_t			ft_printf_p(t_arr *ret, const char **fmt,
 							va_list *ap, t_ft_printf *state);
 int8_t			ft_printf_mod(t_arr *ret, const char **fmt,
 								va_list *ap, t_ft_printf *state);
-int8_t			width_handler(t_ft_printf *state, t_arr *new);
+int8_t			width_handler_cs(t_ft_printf *state, t_arr *new);
 uintmax_t		get_input(va_list *ap, t_ft_printf *state);
 
 #endif

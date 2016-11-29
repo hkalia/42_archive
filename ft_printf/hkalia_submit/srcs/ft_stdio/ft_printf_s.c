@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/26 17:17:04 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 16:04:08 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int8_t	ft_printf_s_l(va_list *ap, t_arr *new)
 
 static int8_t	null_handler(t_arr *ret, const char **fmt)
 {
-	FT_GRD1(!ft_arrinsertat(ret, ret->arr_len, "(null)", 6)
+	FT_GRD1(!ft_arrinsertat(ret, ret->len, "(null)", 6)
 			, free(ret->arr), -1);
 	++*fmt;
 	return (1);
@@ -40,7 +40,7 @@ int8_t			ft_printf_s(t_arr *ret, const char **fmt,
 	t_arr	new;
 	char	*tmp;
 
-	new = (t_arr){0, 0, 0};
+	ft_bzero(&new, sizeof(t_arr));
 	if (state->int_len_mod == 3)
 	{
 		FT_GRD1(ft_printf_s_l(ap, &new) == -1, free(ret->arr), -1);
@@ -52,11 +52,11 @@ int8_t			ft_printf_s(t_arr *ret, const char **fmt,
 		FT_GRD1(!ft_arrinsertat(&new, 0, tmp, ft_strlen(tmp)), free(ret->arr)
 				, -1);
 	}
-	if (state->flag_dot && new.arr_len > (size_t)state->int_dot)
-		FT_GRD2(!ft_arrremoveat(&new, (size_t)state->int_dot, new.arr_len
+	if (state->flg_dot && new.len > (size_t)state->int_dot)
+		FT_GRD2(!ft_arrremoveat(&new, (size_t)state->int_dot, new.len
 				- state->int_dot), free(new.arr), free(ret->arr), -1);
-	FT_GRD2(!width_handler(state, &new), free(new.arr), free(ret->arr), -1);
-	FT_GRD2(!ft_arrinsertarrat(ret, ret->arr_len, &new), free(new.arr)
+	FT_GRD2(!width_handler_cs(state, &new), free(new.arr), free(ret->arr), -1);
+	FT_GRD2(!ft_arrinsertarrat(ret, ret->len, &new), free(new.arr)
 			, free(ret->arr), -1);
 	free(new.arr);
 	++*fmt;

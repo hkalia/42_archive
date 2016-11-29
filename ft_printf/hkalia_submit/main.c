@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/26 17:31:08 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 16:44:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 int		main(void)
 {
-	ft_printf("%#x", 42);
+	setlocale(LC_ALL, "");
+//	ft_printf("%S", L"Á±≥");
+	printf("%S", L"Á±≥");
 	return (0);
 }

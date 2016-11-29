@@ -13,12 +13,12 @@
 #include <ft_arr.h>
 #include <ft_stdlib.h>
 
-int8_t	ft_arrinit(t_arr *src, size_t arr_sze)
+int8_t	ft_arrinit(t_arr *src, size_t sze)
 {
 	FT_GRD(!src, 0);
-	src->arr_sze = arr_sze;
-	FT_GRD1(!(src->arr = ft_calloc(src->arr_sze, sizeof(uint8_t)))
+	src->sze = sze;
+	FT_GRD1(!(src->arr = ft_calloc(src->sze, sizeof(uint8_t)))
 			, ft_arrreset(src), 0);
-	src->arr_len = 0;
+	src->len = 0;
 	return (1);
 }

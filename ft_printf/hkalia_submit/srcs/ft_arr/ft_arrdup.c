@@ -17,14 +17,14 @@ int8_t	ft_arrdup(t_arr *dst, const t_arr *src)
 	size_t	i;
 
 	FT_GRD(!dst || !src, 0);
-	FT_GRD(src->arr_sze == 0 || src->arr == 0, 0);
-	FT_GRD(!ft_arrinit(dst, src->arr_sze), 0);
+	FT_GRD(src->sze == 0 || src->arr == 0, 0);
+	FT_GRD(!ft_arrinit(dst, src->sze), 0);
 	i = 0;
-	while (i < src->arr_len)
+	while (i < src->len)
 	{
 		dst->arr[i] = src->arr[i];
 		++i;
 	}
-	dst->arr_len = src->arr_len;
+	dst->len = src->len;
 	return (1);
 }

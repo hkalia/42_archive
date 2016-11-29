@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/11/26 16:30:30 by hkalia           ###   ########.fr        #
+#    Updated: 2016/11/28 16:35:10 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SHELL		:=	/bin/zsh
 CC 			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
+#CFLAGS		+=	-g
 #CFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 MAIN		:=	main.c

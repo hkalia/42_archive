@@ -12,17 +12,17 @@
 
 #include <ft_arr.h>
 
-int8_t	ft_arrrealloc(t_arr *src, size_t arr_sze)
+int8_t	ft_arrrealloc(t_arr *src, size_t sze)
 {
 	t_arr	tmp;
 	size_t	j;
 
 	FT_GRD(!src, 0);
-	FT_GRD(!ft_arrinit(&tmp, arr_sze), 0);
+	FT_GRD(!ft_arrinit(&tmp, sze), 0);
 	j = 0;
-	while (j < src->arr_sze)
-		tmp.arr[tmp.arr_len++] = src->arr[j++];
+	while (j < src->sze)
+		tmp.arr[tmp.len++] = src->arr[j++];
 	ft_arrreset_f(src);
-	FT_ARR_INIT2(src, tmp.arr_sze, tmp.arr_len, tmp.arr);
+	FT_ARR_INIT2(src, tmp.sze, tmp.len, tmp.arr);
 	return (1);
 }

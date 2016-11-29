@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/24 15:47:24 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 16:02:29 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,17 @@
 #include <ft_stdlib.h>
 #include <unistd.h>
 
-int8_t	width_handler(t_ft_printf *state, t_arr *new)
+int8_t	width_handler_cs(t_ft_printf *state, t_arr *new)
 {
 	char	*tmp;
 	int		diff;
 
-	if (state->int_width > (int)new->arr_len)
+	if ((diff = state->int_width - (int)new->len) > 0)
 	{
-		diff = state->int_width - (int)new->arr_len;
 		FT_GRD(!(tmp = (char *)malloc(sizeof(char) * diff)), 0);
-		ft_memset(tmp, state->flag_zero ? '0' : ' ', diff);
-		FT_GRD1(!ft_arrinsertat(new, state->flag_minus ? new->arr_len : 0, tmp
-			, diff), free(tmp), 0);
+		ft_memset(tmp, state->flg_zero ? '0' : ' ', diff);
+		FT_GRD1(!ft_arrinsertat(new, state->flg_minus ? new->len : 0, tmp, diff)
+				, free(tmp), 0);
 		free(tmp);
 		return (1);
 	}
@@ -43,7 +42,7 @@ int8_t	ft_printf_width(t_arr *ret, const char **fmt,
 		++*fmt;
 		if (state->int_width < 0)
 		{
-			state->flag_minus = 1;
+			state->flg_minus = 1;
 			state->int_width = -(state->int_width);
 		}
 	}

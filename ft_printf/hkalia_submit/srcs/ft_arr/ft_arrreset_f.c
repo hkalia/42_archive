@@ -17,8 +17,8 @@ void	ft_arrreset_f(t_arr *src)
 {
 	if (src)
 	{
-		src->arr_sze = 0;
-		src->arr_len = 0;
+		src->sze = 0;
+		src->len = 0;
 		free(src->arr);
 		src->arr = 0;
 	}

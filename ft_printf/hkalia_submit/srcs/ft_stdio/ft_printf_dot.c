@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:50:33 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/24 16:46:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/28 15:20:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int8_t	ft_printf_dot(t_arr *ret, const char **fmt,
 {
 	(void)ret;
 	++*fmt;
-	state->flag_dot = 1;
+	state->flg_dot = 1;
 	if (**fmt == '*')
 	{
 		state->int_dot = va_arg(*ap, int);
@@ -27,7 +27,7 @@ int8_t	ft_printf_dot(t_arr *ret, const char **fmt,
 		if (state->int_dot < 0)
 		{
 			state->int_dot = 0;
-			state->flag_dot = 0;
+			state->flg_dot = 0;
 		}
 	}
 	else
