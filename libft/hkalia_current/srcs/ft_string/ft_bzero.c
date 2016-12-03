@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:37:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:25:00 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:43 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/03 09:52:21 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
+#include <ft_string.h>
+#include <stdint.h>
 
-int	ft_isprint(int src)
+void	ft_bzero(void *src, size_t len)
 {
-	return (src >= 32 && src <= 126 ? 1 : 0);
+	unsigned char	*src_cpy;
+
+	src_cpy = (unsigned char *)src;
+	while (len--)
+		*src_cpy++ = 0;
 }

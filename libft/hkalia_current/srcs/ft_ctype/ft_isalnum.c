@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:40:59 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:47 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:54:34 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
-#include <unistd.h>
+#include <ft_ctype.h>
 
-int	ft_putchar(int src)
+int	ft_isalnum(int src)
 {
-	return (write(1, &src, 1));
+	return ((src >= '0' && src <= '9') || (src >= 'A' && src <= 'Z')
+			|| (src >= 'a' && src <= 'z') ? 1 : 0);
 }

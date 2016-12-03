@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 09:02:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:36:25 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:40:35 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:42:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
+#include <ft_ctype.h>
 
-int	ft_isupper(int src)
+int	ft_toupper(int src)
 {
-	return (src >= 'A' && src <= 'Z' ? 1 : 0);
+	return (src >= 'a' && src <= 'z' ? src - 32 : src);
 }

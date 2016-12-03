@@ -6,15 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/03 08:44:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STDLIB_H
 # define FT_STDLIB_H
 
-# include <string.h>
-# include <wchar.h>
+# include <stddef.h>
 
 int		ft_abs(int src);
 int		ft_atoi(const char *src);

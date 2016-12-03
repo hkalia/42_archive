@@ -6,20 +6,21 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:15 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/03 11:52:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/03 08:45:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdlib.h>
+#include <ft_ctype.h>
+#include <stdint.h>
 
-int		ft_atoi(const char *src)
+int	ft_atoi(const char *src)
 {
 	int					i;
-	int					flg_neg;
+	int8_t				flg_neg;
 	unsigned long long	ret;
 
-	while (*src == ' ' || *src == '\f' || *src == '\t' || *src == '\n'
-			|| *src == '\r' || *src == '\v')
+	while (ISSPACE(*src))
 		src++;
 	flg_neg = (*src == '-' ? -1 : 1);
 	src = (*src == '-' || *src == '+') ? src + 1 : src;
