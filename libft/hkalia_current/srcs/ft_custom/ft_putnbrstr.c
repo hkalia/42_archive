@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_putnbrstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/14 14:43:55 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/01 16:14:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_custom.h>
+#include <unistd.h>
 
-# include <string.h>
-# include <wchar.h>
+void	ft_putnbrstr(int *src, int stop)
+{
+	size_t	i;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	i = 0;
+	while (src[i] != stop)
+	{
+		ft_putnbr(src[i]);
+		write(1, "\n", 1);
+		i++;
+	}
+}

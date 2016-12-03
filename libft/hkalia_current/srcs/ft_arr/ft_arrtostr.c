@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_arrtostr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/21 17:35:47 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/21 18:09:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_arr.h>
 
-# include <string.h>
-# include <wchar.h>
-
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+char	*ft_arrtostr(t_arr *src)
+{
+	FT_GRD(!src, 0);
+	if (src->len != src->sze)
+		if (src->arr[src->len] == 0)
+			return ((char *)src->arr);
+	FT_GRD(!ft_arrinsertat(src, src->len, "", 1), 0);
+	--src->len;
+	return ((char *)src->arr);
+}

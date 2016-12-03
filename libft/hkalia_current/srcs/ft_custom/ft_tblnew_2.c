@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_tblnew_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/14 12:28:10 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/03 15:44:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_custom.h>
+#include <stdlib.h>
 
-# include <string.h>
-# include <wchar.h>
+char	**ft_tblnew_2(int len, int str_len)
+{
+	int		i;
+	char	**new;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	if (!(new = (char **)malloc(sizeof(char *) * (len + 1))))
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		if (!(new[i] = ft_strnew(str_len)))
+		{
+			ft_tbldel(new);
+			return (0);
+		}
+		i++;
+	}
+	new[i] = 0;
+	return (new);
+}

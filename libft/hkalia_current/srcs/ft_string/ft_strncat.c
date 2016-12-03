@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:39:57 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/13 12:40:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_string.h>
 
-# include <string.h>
-# include <wchar.h>
+char	*ft_strncat(char *dst, const char *src, size_t len)
+{
+	size_t	i;
+	size_t	dst_len;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	i = 0;
+	dst_len = ft_strlen(dst);
+	while (src[i] && i < len)
+	{
+		dst[dst_len + i] = src[i];
+		++i;
+	}
+	dst[dst_len + i] = '\0';
+	return (dst);
+}

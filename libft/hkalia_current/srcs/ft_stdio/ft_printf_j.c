@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_printf_j.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/08 14:11:13 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/23 09:26:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_stdio.h>
 
-# include <string.h>
-# include <wchar.h>
-
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+int8_t	ft_printf_j(t_arr *ret, const char **fmt,
+					va_list *ap, t_ft_printf *state)
+{
+	(void)fmt;
+	(void)ap;
+	FT_GRD1(state->int_len_mod != 0, free(ret->arr), -1);
+	state->int_len_mod = 5;
+	++*fmt;
+	return (0);
+}

@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_arrdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/20 14:41:42 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/21 11:36:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_arr.h>
 
-# include <string.h>
-# include <wchar.h>
+int8_t	ft_arrdup(t_arr *dst, const t_arr *src)
+{
+	size_t	i;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	FT_GRD(!dst || !src, 0);
+	FT_GRD(src->sze == 0 || src->arr == 0, 0);
+	FT_GRD(!ft_arrinit(dst, src->sze), 0);
+	i = 0;
+	while (i < src->len)
+	{
+		dst->arr[i] = src->arr[i];
+		++i;
+	}
+	dst->len = src->len;
+	return (1);
+}

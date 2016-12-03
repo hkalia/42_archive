@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_printf_cap_o.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/09 13:02:29 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/23 11:40:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_stdio.h>
+#include <ft_custom.h>
+#include <ft_string.h>
 
-# include <string.h>
-# include <wchar.h>
-
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+int8_t	ft_printf_cap_o(t_arr *ret, const char **fmt,
+						va_list *ap, t_ft_printf *state)
+{
+	state->int_len_mod = 3;
+	return (ft_printf_o(ret, fmt, ap, state));
+}

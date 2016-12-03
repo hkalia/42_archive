@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_strdel_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/14 11:53:20 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/14 12:30:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_custom.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
-# include <string.h>
-# include <wchar.h>
+void	ft_strdel_2(int count, ...)
+{
+	va_list	ap;
+	char	**src;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	va_start(ap, count);
+	while ((src = va_arg(ap, char **)) && count--)
+	{
+		if (src != 0 && *src != 0)
+		{
+			free(*src);
+			*src = NULL;
+		}
+	}
+}

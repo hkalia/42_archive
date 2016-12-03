@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_custom.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:14:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/27 13:14:15 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:03:48 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,23 @@
 # define FT_CUSTOM_H
 
 # include <string.h>
+# include <wchar.h>
+# include <stdlib.h>
+
+# ifndef FT_GRD
+#  define FT_GRD(a, b) if (a) {return(b);}
+# endif
+
+# ifndef FT_GRD1
+#  define FT_GRD1(a, b, c) if (a) {b; return(c);}
+# endif
+
+# ifndef FT_GRD2
+#  define FT_GRD2(a, b, c, d) if (a) {b; c; return(d);}
+# endif
 
 # define TBLGUARD(a, b, c) if(a) {ft_tbldel(b); return (c);}
+# define BUFF_SIZE 1
 
 typedef struct		s_list
 {
@@ -49,27 +64,30 @@ char				*ft_strjoin(const char *src1, const char *src2);
 char				*ft_strtrim(const char *src);
 char				**ft_strsplit(const char *src, char src_x);
 char				*ft_strextend(char *src, size_t len);
-size_t				ft_strlen2(const char *src);
+size_t				ft_strlen_2(const char *src);
+char				*ft_strjoin_2(char *src1, char *src2);
+void				ft_strdel_2(int count, ...);
+char				*ft_strpush(char *dst, char *src);
 
 /*
 **	TBL
 */
 
 char				**ft_tblnew(int len);
-char				**ft_tblnew2(int len, int str_len);
+char				**ft_tblnew_2(int len, int str_len);
 void				ft_tbldel(char **tbl);
 
 /*
 **	NBR
 */
 
-size_t				ft_nbrlen(ssize_t src);
+short				ft_nbrlen(intmax_t src);
+short				ft_nbrlen_base(uintmax_t src, short base);
 
 /*
 **	PUT
 */
 
-void				ft_putchar(char src);
 void				ft_putstr(const char *src);
 void				ft_putendl(const char *src);
 void				ft_putnbr(int src);
@@ -77,6 +95,7 @@ void				ft_putchar_fd(char src, int fd);
 void				ft_putstr_fd(const char *src, int fd);
 void				ft_putendl_fd(const char *src, int fd);
 void				ft_putnbr_fd(int src, int fd);
+void				ft_putnbr_base(long long src, int base);
 void				ft_puttbl(char **tbl);
 void				ft_putlststr(t_list *elem);
 void				ft_putnbrstr(int *src, int stop);
@@ -97,6 +116,9 @@ void				ft_lstaddend(t_list *lst, t_list *new);
 **	OTHER
 */
 
-char				*ft_itoa(int src);
+char				*ft_itoa(intmax_t src);
+char				*ft_itoa_base(uintmax_t src, short base, const char *spec);
+int					get_next_line(const int fd, char **line);
+int					ft_wcstombs(char **dst, const wint_t *src);
 
 #endif

@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stdlib.h                                        :+:      :+:    :+:   */
+/*   ft_strextend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/13 10:54:11 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:29:38 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/08 15:34:12 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STDLIB_H
-# define FT_STDLIB_H
+#include <ft_custom.h>
+#include <ft_string.h>
 
-# include <string.h>
-# include <wchar.h>
+char	*ft_strextend(char *src, size_t len)
+{
+	char	*ret;
 
-int		ft_abs(int src);
-int		ft_atoi(const char *src);
-void	*ft_calloc(size_t count, size_t size);
-int		ft_wctomb(char *s, wchar_t wchar);
-
-#endif
+	if (src != 0 && *src != '\0')
+	{
+		if (!(ret = ft_strnew(ft_strlen(src) + len)))
+		{
+			ft_strdel(&src);
+			return (0);
+		}
+		ft_strcpy(ret, src);
+		ft_strdel(&src);
+	}
+	else if (!(ret = ft_strnew(len)))
+		return (0);
+	return (ret);
+}
