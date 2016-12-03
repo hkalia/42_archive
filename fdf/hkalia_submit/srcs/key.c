@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 11:48:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/28 18:50:49 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/01 17:05:38 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/01 17:18:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <strings.h>
-#include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
-#include <stdio.h>
-#include <limits.h>
+#include <fdf.h>
 
-/*
-**	0x10000
-*/
-
-int		main(void)
+int		key_press(int keycode, void *param)
 {
-	int		r;
+	t_mlx	*mlx;
 
+	mlx = (t_mlx *)param;
+	printf("\e[32mKey Press: Keycode:%d\e[0m\n", keycode);
+	return (0);
+}
 
-	setlocale(LC_ALL, "");
-	r = printf("%S\n", L"Á±≥");
-	ft_putnbr(r);
-	r = printf("%S\n", L"Á±≥");
-	ft_putnbr(r);
+int		key_release(int keycode, void *param)
+{
+	t_mlx	*mlx;
 
+	mlx = (t_mlx *)param;
+	printf("\e[32mKey Release: Keycode:%d\e[0m\n", keycode);
+	FT_GRD2(keycode == 53, mlx_destroy_window(mlx->mlx, mlx->win), exit(0), 0);
 	return (0);
 }
