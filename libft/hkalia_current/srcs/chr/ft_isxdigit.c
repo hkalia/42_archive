@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_isxdigit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:36:54 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:01:42 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/02 17:36:59 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:40:47 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isascii(int src)
+int	ft_isxdigit(int src)
 {
-	if (src >= 0 && src <= 127)
-		return (1);
-	return (0);
+	return ((src >= 48 && src <= 57) || (src >= 65 && src <= 70)
+			|| (src >= 97 && src <= 102) ? 1 : 0);
 }

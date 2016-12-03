@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/01 17:38:08 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/02 16:52:57 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:34:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
-#include <unistd.h>
+#include <libft.h>
+#include <stdio.h>
+#include <ctype.h>
 
-int		ft_putchar(int src)
+int		main(void)
 {
-	return (write(1, &src, 1));
+	printf("%d %d %d %d %d %d\n", '\t', '\n', '\v', '\f', '\r', ' ');
+	return 0;
 }

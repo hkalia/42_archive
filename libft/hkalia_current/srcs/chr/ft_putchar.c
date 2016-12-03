@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:40:32 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/22 15:40:33 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:40:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
+#include <unistd.h>
 
-int		ft_tolower(int src)
+int	ft_putchar(int src)
 {
-	if (src >= 'A' && src <= 'Z')
-		return (src + 32);
-	return (src);
+	return (write(1, &src, 1));
 }

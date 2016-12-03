@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_isgraph.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:37:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/22 15:37:03 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:58 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:21:11 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isprint(int src)
+int	ft_isgraph(int src)
 {
-	if (src > 31 && src < 127)
-		return (1);
-	return (0);
+	return (src >= 33 && src <= 126 ? 1 : 0);
 }

@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 09:02:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:03:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:36:25 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isupper(int src)
+int	ft_isupper(int src)
 {
-	if (src >= 'A' && src <= 'Z')
-		return (1);
-	return (0);
+	return (src >= 'A' && src <= 'Z' ? 1 : 0);
 }

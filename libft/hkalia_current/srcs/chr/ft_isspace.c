@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:38:08 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 10:11:37 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/02 17:31:40 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:35:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
-#include <unistd.h>
+#include <chr.h>
 
-void	ft_putchar_fd(char src, int fd)
+int	ft_isspace(int src)
 {
-	write(fd, &src, 1);
+	return ((src >= 9 && src <= 13) || (src == 32) ? 1 : 0);
 }

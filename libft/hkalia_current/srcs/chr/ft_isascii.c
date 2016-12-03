@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:36:58 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:01:40 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:54 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:17:55 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isdigit(int src)
+int	ft_isascii(int src)
 {
-	if (src >= '0' && src <= '9')
-		return (1);
-	return (0);
+	return (src >= 0 && src <= 127 ? 1 : 0);
 }

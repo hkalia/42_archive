@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:40:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/22 15:40:46 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:47 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:54:34 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_toupper(int src)
+int	ft_isalnum(int src)
 {
-	if (src >= 'a' && src <= 'z')
-		return (src - 32);
-	return (src);
+	return ((src >= '0' && src <= '9') || (src >= 'A' && src <= 'Z')
+			|| (src >= 'a' && src <= 'z') ? 1 : 0);
 }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:52:12 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:38:08 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:51:22 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <chr.h>
+#include <unistd.h>
 
-# include "chr.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
-# include "ft_arr.h"
-
-#endif
+int	ft_putchar_fd(int src, int fd)
+{
+	return (write(fd, &src, 1));
+}

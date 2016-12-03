@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isblank.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:52:12 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/29 16:49:16 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:18:19 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <chr.h>
 
-# include "chr.h"
-# include "ft_stdio.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
-# include "ft_arr.h"
-
-#endif
+int	ft_isblank(int src)
+{
+	return (src == ' ' || src == '\t' ? 1 : 0);
+}

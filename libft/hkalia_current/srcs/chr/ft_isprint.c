@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:36:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:01:46 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:01 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:25:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isalnum(int src)
+int	ft_isprint(int src)
 {
-	if ((src >= '0' && src <= '9') || (src >= 'A' && src <= 'Z')
-			|| (src >= 'a' && src <= 'z'))
-		return (1);
-	return (0);
+	return (src >= 32 && src <= 126 ? 1 : 0);
 }

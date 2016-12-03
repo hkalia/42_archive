@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 08:58:40 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:01:37 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:24:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_islower(int src)
+int	ft_islower(int src)
 {
-	if (src >= 'a' && src <= 'z')
-		return (1);
-	return (0);
+	return (src >= 'a' && src <= 'z' ? 1 : 0);
 }

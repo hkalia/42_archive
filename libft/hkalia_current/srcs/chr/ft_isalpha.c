@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isblank.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 16:49:16 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 16:53:17 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:51 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:15:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <chr.h>
 
-int		ft_isblank(int src)
+int	ft_isalpha(int src)
 {
-	if (src == ' ' || src == '\t')
-		return (1);
-	return (0);
+	return ((src >= 'A' && src <= 'Z') || (src >= 'a' && src <= 'z') ? 1 : 0);
 }
