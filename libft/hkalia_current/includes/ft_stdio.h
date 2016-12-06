@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/28 16:02:35 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/03 09:05:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdbool.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include "ft_arr.h"
 
 typedef struct	s_ft_printf
 {
@@ -46,6 +45,7 @@ typedef struct	s_ft_printf
 # define FT_PRINTF_LEN1 37
 # define FT_PRINTF_LEN2 3
 
+int				ft_putchar_fd(int src, int fd);
 int				ft_putchar(int src);
 int				ft_printf(const char *fmt, ...);
 int				ft_vasprintf(char **ret, const char *fmt, va_list *ap);

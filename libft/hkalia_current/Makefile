@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
+#    Updated: 2016/12/03 09:29:20 by hkalia           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		:=	libft.a
 SHELL		:=	/bin/zsh
 
@@ -12,28 +24,35 @@ OBJ_DIR		:=	build
 TEST		:=	test.c
 
 ARR			:=
-CHR			:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl \
- 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct \
-				ft_isspace ft_isupper ft_isxdigit ft_putchar_fd ft_putchar \
-				ft_tolower ft_toupper 
+FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
+				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
+				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
+FT_STDIO	:=
+FT_STDLIB	:=	ft_abs ft_atoi ft_calloc ft_wctomb
+FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
+				ft_memmove ft_memset ft_strcat ft_strchr ft_strcmp			\
+				ft_strcpy ft_strdup ft_strlcat ft_strlen ft_strncat			\
+				ft_strncmp ft_strncpy ft_strndup ft_strnlen ft_strnstr		\
+				ft_strrchr ft_strstr
 GNL			:=
 LST			:=
 MEM			:=
 NBR			:=
-PRINTF		:=
 STR			:=
 TBL			:=
 WCHR		:=
-FILES		:=	$(addprefix arr/, $(ARR))	\
-				$(addprefix chr/, $(CHR))	\
-				$(addprefix gnl/, $(GNL))	\
-				$(addprefix lst/, $(LST))	\
-				$(addprefix mem/, $(MEM))	\
-				$(addprefix nbr/, $(NBR))	\
-				$(addprefix printf/, $(PRINTF))	\
-				$(addprefix str/, $(STR))	\
-				$(addprefix tbl/, $(TBL))	\
-				$(addprefix wchr/, $(WCHR))	\
+FILES		:=	$(addprefix arr/, $(ARR))		\
+				$(addprefix ft_ctype/, $(FT_CTYPE))	\
+				$(addprefix ft_stdio/, $(FT_STDIO))	\
+				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
+				$(addprefix ft_string/, $(FT_STRING))	\
+				$(addprefix gnl/, $(GNL))		\
+				$(addprefix lst/, $(LST))		\
+				$(addprefix mem/, $(MEM))		\
+				$(addprefix nbr/, $(NBR))		\
+				$(addprefix str/, $(STR))		\
+				$(addprefix tbl/, $(TBL))		\
+				$(addprefix wchr/, $(WCHR))		\
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 13:59:52 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/05 14:09:54 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:38:08 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:51:22 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_stdlib.h>
+#include <ft_ctype.h>
+#include <unistd.h>
 
-int		ft_abs(int src)
+int	ft_putchar_fd(int src, int fd)
 {
-	return (src < 0 ? -src : src);
+	return (write(fd, &src, 1));
 }

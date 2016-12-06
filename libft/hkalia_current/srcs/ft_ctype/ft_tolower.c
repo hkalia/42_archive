@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:36:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:15:35 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:40:32 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:42:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
+#include <ft_ctype.h>
 
-int	ft_isalpha(int src)
+int	ft_tolower(int src)
 {
-	return ((src >= 'A' && src <= 'Z') || (src >= 'a' && src <= 'z') ? 1 : 0);
+	return (src >= 'A' && src <= 'Z' ? src + 32 : src);
 }

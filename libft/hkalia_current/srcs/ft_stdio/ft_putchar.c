@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_islower.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 08:58:40 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:24:06 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:40:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
+#include <ft_ctype.h>
+#include <unistd.h>
 
-int	ft_islower(int src)
+int	ft_putchar(int src)
 {
-	return (src >= 'a' && src <= 'z' ? 1 : 0);
+	return (write(1, &src, 1));
 }

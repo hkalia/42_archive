@@ -6,14 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 14:49:31 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/14 11:35:53 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/03 08:48:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdlib.h>
 #include <ft_string.h>
 
-static void	line_saver(char *s, wchar_t wchar)
+static inline void	line_saver(char *s, wchar_t wchar)
 {
 	s[0] = (unsigned char)(((wchar >> 18)) | 0xF0);
 	s[1] = (unsigned char)(((wchar >> 12) & 0x3F) | 0x80);
@@ -21,7 +21,7 @@ static void	line_saver(char *s, wchar_t wchar)
 	s[3] = (unsigned char)((wchar & 0x3F) | 0x80);
 }
 
-int			ft_wctomb(char *s, wchar_t wchar)
+int					ft_wctomb(char *s, wchar_t wchar)
 {
 	if (s == 0)
 		return (0);

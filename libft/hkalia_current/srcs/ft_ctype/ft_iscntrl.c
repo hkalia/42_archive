@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_iscntrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/22 15:40:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:42:39 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:36:47 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/02 17:14:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <chr.h>
+#include <ft_ctype.h>
 
-int	ft_toupper(int src)
+int	ft_iscntrl(int src)
 {
-	return (src >= 'a' && src <= 'z' ? src - 32 : src);
+	return ((src >= 0 && src <= 37) || (src == 127) ? 1 : 0);
 }
