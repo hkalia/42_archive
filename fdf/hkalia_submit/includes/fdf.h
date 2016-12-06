@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/01 17:38:24 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/05 13:23:18 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,11 @@
 # include <stdbool.h>
 # include <stdint.h>
 
-# ifndef FT_GRD
-#  define FT_GRD(a, b) if (a) {return(b);}
-# endif
-
-# ifndef FT_GRD1
-#  define FT_GRD1(a, b, c) if (a) {b; return(c);}
-# endif
-
-# ifndef FT_GRD2
-#  define FT_GRD2(a, b, c, d) if (a) {b; c; return(d);}
+# ifndef GRDS
+#  define GRD(a, b) do{if(a){return(b);}}while(0)
+#  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
+#  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
+#  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
 typedef struct	s_xy
@@ -39,6 +34,13 @@ typedef struct	s_xy
 	int			y;
 }				t_xy;
 
+typedef struct	s_xyz
+{
+	int			x;
+	int			y;
+	int			z;
+}				t_xyz;
+
 typedef struct	s_xyxy
 {
 	int			x0;
@@ -46,14 +48,6 @@ typedef struct	s_xyxy
 	int			x1;
 	int			y1;
 }				t_xyxy;
-
-typedef struct	s_xyzc
-{
-	int			x;
-	int			y;
-	int			z;
-	int			color;
-}				t_xyzc;
 
 typedef struct	s_click
 {
@@ -64,20 +58,38 @@ typedef struct	s_click
 typedef struct	s_mouse
 {
 	bool		flg;
-	t_click		press;
-	t_click		release;
+	t_click		p;
+	t_click		r;
 	t_xy		pos;
 }				t_mouse;
 
+typedef struct	s_img
+{
+	void		*id;
+	char		*img;
+	int			bpp;
+	int			ln;
+	int			end;
+}				t_img;
+
+typedef struct	s_win
+{
+	void		*id;
+	t_xy		max;
+}				t_win;
+
 typedef struct	s_mlx
 {
-	void		*mlx;
-	void		*win;
-	t_xy		max;
+	void		*id;
+	t_win		win;
+	t_img		img;
 	t_mouse		mouse;
 }				t_mlx;
 
-void			draw_line(t_mlx *mlx, int color, t_xyxy src);
+void			img_new(t_mlx *mlx);
+void			pixel(t_mlx *mlx, int color, t_xy src);
+void			line(t_mlx *mlx, int color, t_xyxy src);
+void			square(t_mlx *mlx, int color, t_xyxy src);
 int				key_press(int keycode, void *param);
 int				key_release(int keycode, void *param);
 int				mouse_press(int button, int x, int y, void *param);
