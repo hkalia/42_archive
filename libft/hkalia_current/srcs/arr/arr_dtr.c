@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   arr_dtr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 16:52:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/06 11:52:08 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/06 12:04:56 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/06 12:15:36 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdio.h>
+#include <arr.h>
+#include <stdlib.h>
+#include <ft_string.h>
 
-int		main(void)
+void	arr_dtr(t_arr *src)
 {
-	t_arr	nums;
-	int		i;
-	int		*p;
+	size_t	i;
 
-	arr_init(nums, {sizeof(int),NULL,NULL,NULL});
-	i = 0;
-	while (i < 10)
+	if (src->cap > 0)
 	{
-		arr_push_back(nums, &i);
-		++i;
+		if (src->inf.dtr)
+		{
+			i = 0;
+			while (i < src->len)
+			{
+				src->inf.dtr(src->arr + (src->inf.elm * i));
+				++i;
+			}
+		}
+		free(src->arr);
 	}
-	p = (int*)arr_front(nums);
-	while (p != NULL)
-	{
-		printf("%d\n", *p);
-		p = (int *)arr_next(nums, p);
-	}
-	arr_free(nums);
-	return 0;
+	ft_memset(src, 0, sizeof(t_arr));
 }
