@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/03 09:29:20 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/06 10:28:13 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,9 @@ SHELL		:=	/bin/zsh
 CC 			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
-#CFLAGS		+=	-g
-#CFLAGS		+=	-fsanitize=address
+LDFLAGS		+=	-fsanitize=address -L . $(subst .a,,$(subst lib,-l,$(NAME)))
 
 SRC_DIR		:=	srcs
-OBJ_DIR		:=	build
 TEST		:=	test.c
 
 ARR			:=
@@ -97,5 +95,5 @@ test: re
 	@rm -f $(OBJ)
 	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
 	@printf "\e[32mCompiling %s with %s... \e[0m" $(TEST) $(NAME)
-	@$(CC) $(CFLAGS) $(TEST) -L . $(subst .a,,$(subst lib,-l,$(NAME))) -o test
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(TEST) -o test
 	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
