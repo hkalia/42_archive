@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/01 11:55:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:54:12 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
+#include <tbl.h>
 #include <stdlib.h>
 
 static size_t	ft_nbr_wrd_in_str(const char *src, char src_x)

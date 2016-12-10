@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/10 15:20:25 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/10 15:53:23 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,14 @@ FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_strrchr ft_strstr
 GNL			:=
 LST			:=	ft_lstadd ft_lstaddend ft_lstdel ft_lstdelone ft_lstiter	\
-				*ft_lstmap *ft_lstnew
-MEM			:=
-NBR			:=
-STR			:=
+				ft_lstmap ft_lstnew
+MEM			:=	ft_memalloc ft_memdel ft_reallocf
+NBR			:=	ft_nbrlen_base ft_nbrlen ft_putnbr_base ft_putnbr_fd		\
+				ft_putnbr
+STR			:=	ft_strnew ft_strdel ft_strclr ft_striter ft_striteri		\
+				ft_strmap ft_strmapi ft_strequ ft_strnequ ft_strsub		\
+				ft_strjoin ft_strtrim ft_strsplit ft_strextend			\
+				ft_strlen_2 ft_strjoin_2 ft_strdel_2 ft_strpush
 TBL			:=
 WCHR		:=
 FILES		:=	$(addprefix arr/, $(ARR))		\

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:24:31 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 15:25:23 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:45:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <lst.h>
 
 void	ft_lstaddend(t_list *lst, t_list *new)
 {

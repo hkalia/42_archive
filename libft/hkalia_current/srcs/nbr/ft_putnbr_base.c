@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 13:07:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/07 13:08:12 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:48:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <nbr.h>
 #include <unistd.h>
 
 void	ft_putnbr_base(long long src, int base)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
 #include <stdlib.h>
 
 char	*ft_strmap(const char *src, char (*f)(char))

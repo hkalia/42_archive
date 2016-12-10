@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
 
 int		ft_strequ(const char *src1, const char *src2)
 {

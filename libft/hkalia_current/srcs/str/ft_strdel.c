@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
 #include <stdlib.h>
 
 void	ft_strdel(char **src)

@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 09:38:56 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 17:23:57 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:48:31 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <nbr.h>
 
 short	ft_nbrlen(intmax_t src)
 {

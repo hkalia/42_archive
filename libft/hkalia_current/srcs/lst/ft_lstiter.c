@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:37:24 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 14:10:58 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:45:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <lst.h>
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {

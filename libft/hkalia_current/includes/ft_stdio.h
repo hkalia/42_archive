@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/03 09:05:33 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:52:16 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <arr.h>
 
 typedef struct	s_ft_printf
 {
@@ -30,16 +31,11 @@ typedef struct	s_ft_printf
 	int			int_len_mod;
 }				t_ft_printf;
 
-# ifndef FT_GRD
-#  define FT_GRD(a, b) if (a) {return(b);}
-# endif
-
-# ifndef FT_GRD1
-#  define FT_GRD1(a, b, c) if (a) {b; return(c);}
-# endif
-
-# ifndef FT_GRD2
-#  define FT_GRD2(a, b, c, d) if (a) {b; c; return(d);}
+# ifndef GRDS
+#  define GRD(a, b) do{if(a){return(b);}}while(0)
+#  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
+#  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
+#  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
 # define FT_PRINTF_LEN1 37

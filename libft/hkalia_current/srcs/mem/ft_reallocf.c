@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 14:44:19 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 15:07:40 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:47:14 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_stdlib.h>
+#include <mem.h>
 #include <ft_string.h>
 #include <str.h>
 #include <stdlib.h>

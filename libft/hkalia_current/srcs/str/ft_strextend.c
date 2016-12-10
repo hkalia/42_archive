@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
 #include <ft_string.h>
 
 char	*ft_strextend(char *src, size_t len)

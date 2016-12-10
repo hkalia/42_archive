@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <str.h>
 #include <unistd.h>
 
 void	ft_putendl(const char *src)

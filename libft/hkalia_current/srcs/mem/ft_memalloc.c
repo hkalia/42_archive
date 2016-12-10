@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:37:32 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 13:38:50 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:46:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <mem.h>
 #include <stdlib.h>
 
 void	*ft_memalloc(size_t len)

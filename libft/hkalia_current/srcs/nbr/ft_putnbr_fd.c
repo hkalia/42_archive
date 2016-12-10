@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 11:42:09 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:50:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <nbr.h>
+#include <ft_stdio.h>
 #include <unistd.h>
 
 void	ft_putnbr_fd(int src, int fd)

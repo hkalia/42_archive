@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <hkalia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:07 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/01 16:35:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:49:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <nbr.h>
 #include <unistd.h>
 
 static void	print_char(char src)
