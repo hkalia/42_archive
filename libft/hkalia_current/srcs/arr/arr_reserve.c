@@ -6,11 +6,12 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 12:17:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/06 12:21:49 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/10 15:05:34 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arr.h>
+#include <ft_stdlib.h>
 
 #define utarray_reserve(a,by) do {                                            \
   if (((a)->i+(by)) > (a)->n) {                                               \
@@ -26,13 +27,14 @@ int8_t	arr_reserve(t_arr *src, size_t sze)
 {
 	char	*tmp;
 
+	GRD(src == 0, -1);
 	if (src->len + sze > src->cap)
 	{
 		while (src->len + sze > src->cap)
-			src->len = src->len ? 2 * src->len : 8;
-	    utarray_tmp=(char*)realloc(src->d, src->n*src->icd.sz);                   \
-	    if (utarray_tmp == NULL) oom();                                           \
-	    (a)->d=utarray_tmp;                                                       \
+			src->cap = 2 * src->cap;
+		GRD((tmp = (char*)ft_reallocf(src->arr, src->cap * src->inf.elm)) == 0
+			, -1);
+		src->arr = tmp;
 	}
 	return (0);
 }
