@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puttbl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:21:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/06 18:23:01 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:10:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <tbl.h>
+#include <str.h>
 
 void	ft_puttbl(char **tbl)
 {

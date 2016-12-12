@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:38:12 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/06 18:20:48 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:58:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <str.h>
+#include <ft_stdio.h>
 #include <unistd.h>
 
 void	ft_putendl(const char *src)

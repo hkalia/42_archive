@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 14:44:19 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 15:47:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:08:28 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*ft_reallocf(void *src, size_t src_sze, size_t sze)
 {
 	void	*ret;
 
-	if (src == 0 || src_sze == 0)
+	GRD(sze == 0, 0);
+	if (src == 0)
 		GRD((ret = malloc(sze)) == 0, 0);
 	else if (src_sze < sze)
 	{

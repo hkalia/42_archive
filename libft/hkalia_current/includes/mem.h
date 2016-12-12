@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:21:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 15:47:58 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 12:13:25 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
-#include <stddef.h>
+# include <stddef.h>
 
 void	*ft_memalloc(size_t len);
 void	ft_memdel(void **src);

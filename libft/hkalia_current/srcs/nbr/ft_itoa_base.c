@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 15:54:44 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/16 16:23:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:57:05 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <str.h>
+#include <nbr.h>
 #include <ft_stdlib.h>
 #include <stdbool.h>
 #include <stdlib.h>

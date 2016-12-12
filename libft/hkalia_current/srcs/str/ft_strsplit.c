@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 15:54:12 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:14:28 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			**ft_strsplit(const char *src, char src_x)
 		if (*src != src_x && flwrd == 0)
 		{
 			flwrd = 1;
-			TBLGUARD((!(table[i] = ft_wrddup(src, src_x))), table, 0);
+			GRD1(!(table[i] = ft_wrddup(src, src_x)), ft_tbldel(table), 0);
 			++i;
 		}
 		src++;

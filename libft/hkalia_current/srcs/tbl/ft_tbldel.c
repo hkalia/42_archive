@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tbldel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:49:29 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/30 15:51:43 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:10:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <tbl.h>
 #include <stdlib.h>
 
 void	ft_tbldel(char **tbl)

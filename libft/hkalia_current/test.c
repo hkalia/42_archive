@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:52:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/06 11:52:08 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 12:13:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,10 @@
 
 int		main(void)
 {
-	t_arr	nums;
-	int		i;
-	int		*p;
+	char	*s;
 
-	arr_init(nums, {sizeof(int),NULL,NULL,NULL});
-	i = 0;
-	while (i < 10)
-	{
-		arr_push_back(nums, &i);
-		++i;
-	}
-	p = (int*)arr_front(nums);
-	while (p != NULL)
-	{
-		printf("%d\n", *p);
-		p = (int *)arr_next(nums, p);
-	}
-	arr_free(nums);
-	return 0;
+	s = ft_strdup("test");
+	printf("%s\n", s);
+	s = ft_reallocf(s, 5, 10);
+	return (0);
 }

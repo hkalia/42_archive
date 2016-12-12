@@ -6,14 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:09:38 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 15:18:10 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 12:13:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LST_H
 # define LST_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 typedef struct		s_list
 {

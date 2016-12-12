@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:37:59 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/02 17:40:59 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:29:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ctype.h>
+#include <ft_stdio.h>
 #include <unistd.h>
 
 int	ft_putchar(int src)

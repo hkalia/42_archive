@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/10 15:53:23 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/12 12:01:13 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SHELL		:=	/bin/zsh
 CC 			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
-LDFLAGS		+=	-fsanitize=address -L . $(subst .a,,$(subst lib,-l,$(NAME)))
+LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
+#LDFLAGS		+=	-fsanitize=address
 
 SRC_DIR		:=	srcs
 TEST		:=	test.c
@@ -25,24 +26,24 @@ ARR			:=
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
-FT_STDIO	:=
+FT_STDIO	:=	ft_putchar_fd ft_putchar
 FT_STDLIB	:=	ft_abs ft_atoi ft_calloc ft_wctomb
 FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_memmove ft_memset ft_strcat ft_strchr ft_strcmp			\
 				ft_strcpy ft_strdup ft_strlcat ft_strlen ft_strncat			\
 				ft_strncmp ft_strncpy ft_strndup ft_strnlen ft_strnstr		\
 				ft_strrchr ft_strstr
-GNL			:=
 LST			:=	ft_lstadd ft_lstaddend ft_lstdel ft_lstdelone ft_lstiter	\
 				ft_lstmap ft_lstnew
 MEM			:=	ft_memalloc ft_memdel ft_reallocf
-NBR			:=	ft_nbrlen_base ft_nbrlen ft_putnbr_base ft_putnbr_fd		\
-				ft_putnbr
-STR			:=	ft_strnew ft_strdel ft_strclr ft_striter ft_striteri		\
-				ft_strmap ft_strmapi ft_strequ ft_strnequ ft_strsub		\
-				ft_strjoin ft_strtrim ft_strsplit ft_strextend			\
-				ft_strlen_2 ft_strjoin_2 ft_strdel_2 ft_strpush
-TBL			:=
+NBR			:=	ft_itoa_base ft_itoa ft_nbrlen_base ft_nbrlen				\
+				ft_putnbr_base ft_putnbr_fd ft_putnbr
+STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
+				ft_strdel_2 ft_strdel ft_strequ ft_strextend ft_striter		\
+				ft_striteri ft_strjoin_2 ft_strjoin ft_strlen_2 ft_strmap	\
+				ft_strmapi ft_strnequ ft_strnew ft_strsplit ft_strsub		\
+				ft_strtrim
+TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
 WCHR		:=
 FILES		:=	$(addprefix arr/, $(ARR))		\
 				$(addprefix ft_ctype/, $(FT_CTYPE))	\

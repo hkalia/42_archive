@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tblnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:02:21 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 15:02:24 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 11:11:29 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_custom.h>
+#include <tbl.h>
 #include <stdlib.h>
 
 char	**ft_tblnew(int len)
