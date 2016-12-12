@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:52:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/12 12:13:59 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/12 13:00:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 int		main(void)
 {
-	char	*s;
+	t_arr strs;
 
-	s = ft_strdup("test");
-	printf("%s\n", s);
-	s = ft_reallocf(s, 5, 10);
-	return (0);
+	arr_init(&strs, 0, 10);
+	arr_append(&strs, "H");
+	arr_append(&strs, "e");
+	printf("%s\n", strs.arr);
+	arr_dtr(&strs);
+	return 0;
 }

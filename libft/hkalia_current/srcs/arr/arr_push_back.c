@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reallocf.c                                      :+:      :+:    :+:   */
+/*   arr_push_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/10 14:44:19 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/12 12:23:10 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/06 12:17:14 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/12 13:43:21 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mem.h>
+#include <arr.h>
 #include <ft_string.h>
-#include <str.h>
-#include <stdlib.h>
 
-void	*ft_reallocf(void *src, size_t src_sze, size_t sze)
+int8_t	arr_push_back(t_arr *dst, void *elm)
 {
-	void	*ret;
-
-	GRD(sze == 0, 0);
-	if (src == 0)
-		GRD((ret = malloc(sze)) == 0, 0);
-	else if (src_sze < sze)
-	{
-		GRD((ret = malloc(sze)) == 0, 0);
-		ft_memcpy(ret, src, src_sze);
-		free(src);
-		src = 0;
-	}
+	GRD(dst == 0, -1);
+	GRD(arr_reserve(dst, 1) == -1, -1);
+	if (dst->inf.cpy != 0)
+		GRD(dst->inf.cpy(dst->arr + dst->inf.elm * dst->len++, elm) == -1, -1);
 	else
-		ret = src;
-	return (ret);
+		ft_memcpy(dst->arr + dst->inf.elm * dst->len++, elm, dst->inf.elm);
+	return (0);
 }

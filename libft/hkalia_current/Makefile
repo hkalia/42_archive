@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/12 12:01:13 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/12 12:59:35 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ CC 			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
 LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
-#LDFLAGS		+=	-fsanitize=address
+LDFLAGS		+=	-fsanitize=address
 
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-ARR			:=
+ARR			:=	arr_append arr_dtr arr_init arr_reserve
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
