@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:21:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/12 12:13:25 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/13 14:02:07 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # endif
 
 # include <stddef.h>
+# include <stdint.h>
 
 void	*ft_memalloc(size_t len);
 void	ft_memdel(void **src);
+void	*ft_realloc(void *src, size_t src_sze, size_t sze);
 void	*ft_reallocf(void *src, size_t src_sze, size_t sze);
 
 #endif

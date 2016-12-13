@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr_reserve.c                                      :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 12:17:14 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/13 13:15:42 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/13 13:42:20 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/13 14:12:26 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <arr.h>
 #include <mem.h>
+#include <ft_string.h>
+#include <stdlib.h>
 
-int8_t	arr_reserve(t_arr *src, size_t sze)
+void	*ft_realloc(void *src, size_t src_sze, size_t sze)
 {
-	GRD(src == 0, -1);
-	if (src->len + sze > src->cap)
+	void	*ret;
+
+	GRD(src == 0 && sze == 0, 0);
+	if (src == 0 && sze != 0)
 	{
-		if (src->cap == 0)
-			src->cap = sze;
-		while (src->len + sze > src->cap)
-			src->cap = 2 * src->cap;
-		GRD((src->arr = ft_reallocf(src->arr, src->len
-			, src->cap)) == 0, -1);
+		GRD((ret = malloc(sze)) == 0, 0);
+		return (ret);
 	}
-	return (0);
+	GRD(sze == 0, 0);
+	GRD(src_sze == sze, src);
+	GRD((ret = malloc(sze)) == 0, 0);
+	ft_memcpy(ret, src, src_sze > sze ? sze : src_sze);
+	return (ret);
 }

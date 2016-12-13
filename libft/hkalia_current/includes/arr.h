@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:03:28 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/12 13:56:26 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/13 14:19:58 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,13 @@
 
 typedef struct	s_arr
 {
-	size_t		elt;
 	size_t		len;
 	size_t		cap;
 	uint8_t		*arr;
 }				t_arr;
 
+int8_t	arr_init(t_arr *src, size_t cap);
 void	arr_dtr(t_arr *src);
-int8_t	arr_init(t_arr *src, size_t elt, size_t cap);
-int8_t	arr_push_back(t_arr *dst, void *elm);
 int8_t	arr_reserve(t_arr *src, size_t sze);
-int8_t	arr_resize(t_arr *src, size_t sze);
 
 #endif
