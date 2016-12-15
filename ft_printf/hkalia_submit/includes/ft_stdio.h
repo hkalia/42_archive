@@ -6,17 +6,25 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/28 16:02:35 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/15 15:04:54 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STDIO_H
 # define FT_STDIO_H
 
+# include <stddef.h>
+# include <stdint.h>
 # include <stdbool.h>
 # include <stdarg.h>
-# include <stdlib.h>
-# include "ft_arr.h"
+# include "arr.h"
+
+# ifndef GRDS
+#  define GRD(a, b) do{if(a){return(b);}}while(0)
+#  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
+#  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
+#  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
+# endif
 
 typedef struct	s_ft_printf
 {
@@ -31,23 +39,8 @@ typedef struct	s_ft_printf
 	int			int_len_mod;
 }				t_ft_printf;
 
-# ifndef FT_GRD
-#  define FT_GRD(a, b) if (a) {return(b);}
-# endif
-
-# ifndef FT_GRD1
-#  define FT_GRD1(a, b, c) if (a) {b; return(c);}
-# endif
-
-# ifndef FT_GRD2
-#  define FT_GRD2(a, b, c, d) if (a) {b; c; return(d);}
-# endif
-
-# define FT_PRINTF_LEN1 37
-# define FT_PRINTF_LEN2 3
-
-int				ft_putchar(int src);
 int				ft_printf(const char *fmt, ...);
+int				ft_putchar(int src);
 int				ft_vasprintf(char **ret, const char *fmt, va_list *ap);
 
 /*

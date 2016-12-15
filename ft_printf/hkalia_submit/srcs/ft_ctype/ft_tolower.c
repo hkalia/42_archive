@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:32 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/22 15:40:33 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:42:04 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ctype.h>
 
-int		ft_tolower(int src)
+int	ft_tolower(int src)
 {
-	if (src >= 'A' && src <= 'Z')
-		return (src + 32);
-	return (src);
+	return (src >= 'A' && src <= 'Z' ? src + 32 : src);
 }

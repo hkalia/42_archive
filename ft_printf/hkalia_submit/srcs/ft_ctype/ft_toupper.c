@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/22 15:40:46 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:42:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ctype.h>
 
-int		ft_toupper(int src)
+int	ft_toupper(int src)
 {
-	if (src >= 'a' && src <= 'z')
-		return (src - 32);
-	return (src);
+	return (src >= 'a' && src <= 'z' ? src - 32 : src);
 }

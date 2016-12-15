@@ -6,11 +6,11 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/14 20:06:35 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/15 15:24:16 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libft.a
+NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 
 CC 			:=	gcc
@@ -25,10 +25,17 @@ TEST		:=	test.c
 
 ARR			:=	arr_dtr arr_init arr_insertat arr_removeat arr_reserve		\
 				arr_tostr
+CHR			:=	ft_putchar_fd
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
-FT_STDIO	:=	ft_putchar_fd ft_putchar
+FT_STDIO	:=	ft_printf ft_putchar ft_vasprintf ft_printf_flags			\
+				ft_printf_width ft_printf_dot ft_printf_hh ft_printf_h		\
+				ft_printf_l ft_printf_ll ft_printf_j ft_printf_z			\
+				ft_printf_d ft_printf_i ft_printf_o ft_printf_u ft_printf_x	\
+				ft_printf_cap_x ft_printf_cap_d ft_printf_cap_o				\
+				ft_printf_cap_u ft_printf_cap_c ft_printf_c ft_printf_cap_s	\
+				ft_printf_s ft_printf_p ft_printf_mod
 FT_STDLIB	:=	ft_abs ft_atoi ft_calloc ft_wctomb
 FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_memmove ft_memset ft_strcat ft_strchr ft_strcmp			\
@@ -46,17 +53,18 @@ STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
 				ft_strmapi ft_strnequ ft_strnew ft_strsplit ft_strsub		\
 				ft_strtrim
 TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
-FILES		:=	$(addprefix arr/, $(ARR))		\
-				$(addprefix ft_ctype/, $(FT_CTYPE))	\
-				$(addprefix ft_stdio/, $(FT_STDIO))	\
+FILES		:=	$(addprefix arr/, $(ARR))				\
+				$(addprefix chr/, $(CHR))				\
+				$(addprefix ft_ctype/, $(FT_CTYPE))		\
+				$(addprefix ft_stdio/, $(FT_STDIO))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
-				$(addprefix gnl/, $(GNL))		\
-				$(addprefix lst/, $(LST))		\
-				$(addprefix mem/, $(MEM))		\
-				$(addprefix nbr/, $(NBR))		\
-				$(addprefix str/, $(STR))		\
-				$(addprefix tbl/, $(TBL))		\
+				$(addprefix gnl/, $(GNL))				\
+				$(addprefix lst/, $(LST))				\
+				$(addprefix mem/, $(MEM))				\
+				$(addprefix nbr/, $(NBR))				\
+				$(addprefix str/, $(STR))				\
+				$(addprefix tbl/, $(TBL))				\
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

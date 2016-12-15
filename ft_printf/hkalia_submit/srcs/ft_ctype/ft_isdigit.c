@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:36:58 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 09:01:40 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:19:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ctype.h>
 
-int		ft_isdigit(int src)
+int	ft_isdigit(int src)
 {
-	if (src >= '0' && src <= '9')
-		return (1);
-	return (0);
+	return (src >= '0' && src <= '9' ? 1 : 0);
 }

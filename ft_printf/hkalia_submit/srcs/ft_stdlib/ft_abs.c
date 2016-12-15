@@ -6,13 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 13:59:52 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/05 14:09:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/03 07:49:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdlib.h>
 
-int		ft_abs(int src)
+int	ft_abs(int src)
 {
 	return (src < 0 ? -src : src);
 }
