@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/14 20:02:22 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/14 20:06:35 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ SHELL		:=	/bin/zsh
 CC 			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
-CFLAGS		+=	-fsanitize=address
+#CFLAGS		+=	-fsanitize=address
 LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
-LDFLAGS		+=	-fsanitize=address
+#LDFLAGS		+=	-fsanitize=address
 
 SRC_DIR		:=	srcs
 TEST		:=	test.c

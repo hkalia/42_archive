@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:03:28 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/14 19:50:48 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/14 20:08:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stddef.h>
 # include <stdint.h>
 
-
 typedef struct	s_arr
 {
 	size_t		len;
@@ -31,11 +30,11 @@ typedef struct	s_arr
 	uint8_t		*arr;
 }				t_arr;
 
-void	arr_dtr(t_arr *src);
-int8_t	arr_init(t_arr *src, size_t cap);
-int8_t	arr_insertat(t_arr *dst, size_t i, void *src, size_t src_len);
-int8_t	arr_removeat(t_arr *src, size_t i, size_t len);
-int8_t	arr_reserve(t_arr *src, size_t sze);
-char	*arr_tostr(t_arr *src);
+void			arr_dtr(t_arr *src);
+int8_t			arr_init(t_arr *src, size_t cap);
+int8_t			arr_insertat(t_arr *dst, size_t i, void *src, size_t src_len);
+int8_t			arr_removeat(t_arr *src, size_t i, size_t len);
+int8_t			arr_reserve(t_arr *src, size_t sze);
+char			*arr_tostr(t_arr *src);
 
 #endif
