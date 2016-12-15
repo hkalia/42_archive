@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/14 19:39:20 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/14 20:02:22 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LDFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-ARR			:=	arr_dtr arr_init arr_insertat arr_removeat arr_reserve
+ARR			:=	arr_dtr arr_init arr_insertat arr_removeat arr_reserve		\
+				arr_tostr
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
@@ -45,7 +46,6 @@ STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
 				ft_strmapi ft_strnequ ft_strnew ft_strsplit ft_strsub		\
 				ft_strtrim
 TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
-WCHR		:=
 FILES		:=	$(addprefix arr/, $(ARR))		\
 				$(addprefix ft_ctype/, $(FT_CTYPE))	\
 				$(addprefix ft_stdio/, $(FT_STDIO))	\
@@ -57,7 +57,6 @@ FILES		:=	$(addprefix arr/, $(ARR))		\
 				$(addprefix nbr/, $(NBR))		\
 				$(addprefix str/, $(STR))		\
 				$(addprefix tbl/, $(TBL))		\
-				$(addprefix wchr/, $(WCHR))		\
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
