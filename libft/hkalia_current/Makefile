@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/13 14:07:01 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/14 17:07:12 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LDFLAGS		+=	-fsanitize=address
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-ARR			:=	arr_dtr arr_init
+ARR			:=	arr_dtr arr_init arr_insertat arr_reserve
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
