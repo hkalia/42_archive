@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/05 13:23:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/18 10:11:14 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ typedef struct	s_mlx
 	t_mouse		mouse;
 }				t_mlx;
 
-void			img_new(t_mlx *mlx);
-void			pixel(t_mlx *mlx, int color, t_xy src);
-void			line(t_mlx *mlx, int color, t_xyxy src);
-void			square(t_mlx *mlx, int color, t_xyxy src);
+t_img			img_new(t_mlx *mlx);
+void			pixel(t_mlx *mlx, t_img *img, int color, t_xy src);
+void			line(t_mlx *mlx, t_img *img, int color, t_xyxy src);
+void			square(t_mlx *mlx, t_img *img, int color, t_xyxy src);
 int				key_press(int keycode, void *param);
 int				key_release(int keycode, void *param);
 int				mouse_press(int button, int x, int y, void *param);
