@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:04:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/17 16:50:47 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int8_t			ft_printf_p(t_arr *ret, const char **fmt,
 							va_list *ap, t_ft_printf *state);
 int8_t			ft_printf_mod(t_arr *ret, const char **fmt,
 								va_list *ap, t_ft_printf *state);
-int8_t			width_handler_cs(t_ft_printf *state, t_arr *new);
+int8_t			width_handler_csp(t_ft_printf *state, t_arr *new);
 uintmax_t		get_input(va_list *ap, t_ft_printf *state);
 
 #endif

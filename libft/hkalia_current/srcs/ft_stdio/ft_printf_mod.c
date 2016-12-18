@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:20:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/17 16:52:23 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int8_t	ft_printf_mod(t_arr *ret, const char **fmt,
 	(void)state;
 	ft_bzero(&new, sizeof(t_arr));
 	GRD1(arr_insertat(&new, 0, "%", 1) == -1, free(ret->arr), -1);
-	GRD2(width_handler_cs(state, &new) == 0, free(new.arr), free(ret->arr), -1);
+	GRD2(width_handler_csp(state, &new) == -1, free(new.arr), free(ret->arr)
+		, -1);
 	GRD2(arr_insertat(ret, ret->len, new.arr, new.len) == -1, free(new.arr)
 			, free(ret->arr), -1);
 	free(new.arr);

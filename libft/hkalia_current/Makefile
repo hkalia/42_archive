@@ -6,16 +6,16 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/15 15:24:16 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/17 16:21:53 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 
-CC 			:=	gcc
+CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
-CFLAGS		+=	-Werror
+#CFLAGS		+=	-Werror
 #CFLAGS		+=	-fsanitize=address
 LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
 #LDFLAGS		+=	-fsanitize=address

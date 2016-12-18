@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:05:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/17 16:50:16 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int8_t	width_handler_cs(t_ft_printf *state, t_arr *new)
+int8_t	width_handler_csp(t_ft_printf *state, t_arr *new)
 {
 	char	*tmp;
 	int		diff;
 
-	if ((diff = state->int_width - (int)new->len) > 0)
+	if ((diff = state->int_width - new->len) > 0)
 	{
-		GRD(!(tmp = (char *)malloc(sizeof(char) * diff)), 0);
+		GRD((tmp = (char *)malloc(sizeof(char) * diff)) == 0, -1);
 		ft_memset(tmp, state->flg_zero ? '0' : ' ', diff);
 		GRD1(arr_insertat(new, state->flg_minus ? new->len : 0, tmp, diff) == -1
-				, free(tmp), 0);
+				, free(tmp), -1);
 		free(tmp);
-		return (1);
+		return (0);
 	}
-	return (1);
+	return (0);
 }
 
 int8_t	ft_printf_width(t_arr *ret, const char **fmt,
