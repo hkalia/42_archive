@@ -6,15 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:20 by hkalia            #+#    #+#             */
-/*   Updated: 2016/11/23 11:26:47 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/18 16:35:38 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 
-int8_t	ft_printf_cap_c(t_arr *ret, const char **fmt,
-						va_list *ap, t_ft_printf *state)
+int8_t	ft_printf_cap_c(t_ft_printf *s)
 {
-	state->int_len_mod = 3;
-	return (ft_printf_c(ret, fmt, ap, state));
+	s->int_len_mod = 3;
+	return (ft_printf_c(s));
 }
