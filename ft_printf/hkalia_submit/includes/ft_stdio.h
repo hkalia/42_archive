@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:04:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:59:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,16 @@
 #  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
+/*
+**	if you add to the below struct, please be sure to update the dispatcher
+*/
+
 typedef struct	s_ft_printf
 {
+	t_arr		ret;
+	const char	*fmt;
+	va_list		*ap;
+	t_arr		new;
 	bool		flg_minus;
 	bool		flg_plus;
 	bool		flg_space;
@@ -47,55 +55,31 @@ int				ft_vasprintf(char **ret, const char *fmt, va_list *ap);
 **	PART OF PRINTF
 */
 
-int8_t			ft_printf_flags(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_width(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_dot(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_hh(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_h(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_l(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_ll(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_j(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_z(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_d(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_i(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_o(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_u(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_x(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_x(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_d(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_o(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_u(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_c(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_c(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_cap_s(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_s(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_p(t_arr *ret, const char **fmt,
-							va_list *ap, t_ft_printf *state);
-int8_t			ft_printf_mod(t_arr *ret, const char **fmt,
-								va_list *ap, t_ft_printf *state);
-int8_t			width_handler_cs(t_ft_printf *state, t_arr *new);
-uintmax_t		get_input(va_list *ap, t_ft_printf *state);
+int8_t			ft_printf_flags(t_ft_printf *s);
+int8_t			ft_printf_width(t_ft_printf *s);
+int8_t			ft_printf_dot(t_ft_printf *s);
+int8_t			ft_printf_hh(t_ft_printf *s);
+int8_t			ft_printf_h(t_ft_printf *s);
+int8_t			ft_printf_l(t_ft_printf *s);
+int8_t			ft_printf_ll(t_ft_printf *s);
+int8_t			ft_printf_j(t_ft_printf *s);
+int8_t			ft_printf_z(t_ft_printf *s);
+int8_t			ft_printf_d(t_ft_printf *s);
+int8_t			ft_printf_o(t_ft_printf *s);
+int8_t			ft_printf_u(t_ft_printf *s);
+int8_t			ft_printf_x(t_ft_printf *s);
+int8_t			ft_printf_cap_x(t_ft_printf *s);
+int8_t			ft_printf_cap_d(t_ft_printf *s);
+int8_t			ft_printf_cap_o(t_ft_printf *s);
+int8_t			ft_printf_cap_u(t_ft_printf *s);
+int8_t			ft_printf_cap_c(t_ft_printf *s);
+int8_t			ft_printf_c(t_ft_printf *s);
+int8_t			ft_printf_cap_s(t_ft_printf *s);
+int8_t			ft_printf_s(t_ft_printf *s);
+int8_t			ft_printf_p(t_ft_printf *s);
+int8_t			ft_printf_mod(t_ft_printf *s);
+int8_t			width_handler(t_ft_printf *s);
+int8_t			dot_handler_ux(t_ft_printf *s);
+uintmax_t		get_input(t_ft_printf *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:40:01 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:20:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 12:32:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 #include <ft_string.h>
 #include <stdlib.h>
 
-int8_t	ft_printf_mod(t_arr *ret, const char **fmt,
-						va_list *ap, t_ft_printf *state)
+int8_t	ft_printf_mod(t_ft_printf *s)
 {
-	t_arr	new;
-
-	(void)ap;
-	(void)state;
-	ft_bzero(&new, sizeof(t_arr));
-	GRD1(arr_insertat(&new, 0, "%", 1) == -1, free(ret->arr), -1);
-	GRD2(width_handler_cs(state, &new) == 0, free(new.arr), free(ret->arr), -1);
-	GRD2(arr_insertat(ret, ret->len, new.arr, new.len) == -1, free(new.arr)
-			, free(ret->arr), -1);
-	free(new.arr);
-	++*fmt;
+	GRD1(arr_insertat(&s->new, 0, "%", 1) == -1, free(s->ret.arr), -1);
+	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
+		, free(s->new.arr), free(s->ret.arr), -1);
+	arr_dtr(&s->new);
+	++s->fmt;
 	return (1);
 }

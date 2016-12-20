@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:14:08 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:13:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,34 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-static int8_t	ft_printf_c_l(va_list *ap, t_arr *new)
+static int8_t	ft_printf_c_l(t_ft_printf *s)
 {
-	GRD(ft_wctomb((char *)new->arr, va_arg(*ap, wint_t)) == -1, -1);
-	if ((new->len = ft_strlen((char *)new->arr)) == 0)
-		new->len = 1;
-	return (1);
+	size_t	i;
+
+	GRD((i = ft_wctomb((char *)s->new.arr, va_arg(*s->ap, wint_t))) == -1, -1);
+	if ((s->new.len = i) == 0)
+		s->new.len = 1;
+	return (0);
 }
 
-int8_t			ft_printf_c(t_arr *ret, const char **fmt
-							, va_list *ap, t_ft_printf *state)
+int8_t			ft_printf_c(t_ft_printf *s)
 {
 	unsigned char	tmp;
-	t_arr			new;
 
-	GRD1(state->flg_plus || state->flg_hash || state->flg_zero
-			|| !(state->int_len_mod == 0 || state->int_len_mod == 3)
-			, free(ret->arr), -1);
-	ft_bzero(&new, sizeof(t_arr));
-	GRD1(arr_init(&new, 5) == -1, free(ret->arr), -1);
-	if (state->int_len_mod == 3)
-	{
-		GRD2(ft_printf_c_l(ap, &new) == -1, free(new.arr), free(ret->arr)
-				, -1);
-	}
+	GRD1(!(s->int_len_mod == 0 || s->int_len_mod == 3), free(s->ret.arr), -1);
+	GRD1(arr_init(&s->new, 5) == -1, free(s->ret.arr), -1);
+	if (s->int_len_mod == 3)
+		GRD2(ft_printf_c_l(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
 	else
 	{
-		tmp = (unsigned char)va_arg(*ap, int);
-		GRD2(arr_insertat(&new, 0, &tmp, 1) == -1, free(new.arr), free(ret->arr)
-				, -1);
+		tmp = (unsigned char)va_arg(*s->ap, int);
+		GRD2(arr_insertat(&s->new, 0, &tmp, 1) == -1, free(s->new.arr)
+			, free(s->ret.arr), -1);
 	}
-	GRD2(width_handler_cs(state, &new) == 0, free(new.arr), free(ret->arr), -1);
-	GRD2(arr_insertat(ret, ret->len, new.arr, new.len) == -1, free(new.arr)
-			, free(ret->arr), -1);
-	free(new.arr);
-	++*fmt;
+	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
+		, free(s->new.arr), free(s->ret.arr), -1);
+	arr_dtr(&s->new);
+	++s->fmt;
 	return (1);
 }

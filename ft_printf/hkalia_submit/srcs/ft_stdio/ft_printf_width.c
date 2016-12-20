@@ -6,52 +6,50 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:05:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:55:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 #include <ft_string.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-int8_t	width_handler_cs(t_ft_printf *state, t_arr *new)
+int8_t	width_handler(t_ft_printf *s)
 {
 	char	*tmp;
 	int		diff;
 
-	if ((diff = state->int_width - (int)new->len) > 0)
+	if ((diff = s->int_width - s->new.len) > 0)
 	{
-		GRD(!(tmp = (char *)malloc(sizeof(char) * diff)), 0);
-		ft_memset(tmp, state->flg_zero ? '0' : ' ', diff);
-		GRD1(arr_insertat(new, state->flg_minus ? new->len : 0, tmp, diff) == -1
-				, free(tmp), 0);
+		GRD((tmp = (char *)malloc(sizeof(char) * diff)) == 0, -1);
+		ft_memset(tmp, s->flg_zero ? '0' : ' ', diff);
+		GRD1(arr_insertat(&s->new, s->flg_minus ? s->new.len : 0
+			, tmp, diff) == -1, free(tmp), -1);
 		free(tmp);
-		return (1);
+		return (0);
 	}
-	return (1);
+	return (0);
 }
 
-int8_t	ft_printf_width(t_arr *ret, const char **fmt,
-						va_list *ap, t_ft_printf *state)
+int8_t	ft_printf_width(t_ft_printf *s)
 {
-	(void)ret;
-	if (**fmt == '*')
+	s->int_width = 0;
+	if (*s->fmt == '*')
 	{
-		state->int_width = va_arg(*ap, int);
-		++*fmt;
-		if (state->int_width < 0)
+		s->int_width = va_arg(*s->ap, int);
+		++s->fmt;
+		if (s->int_width < 0)
 		{
-			state->flg_minus = 1;
-			state->int_width = -(state->int_width);
+			s->flg_minus = 1;
+			s->int_width = -(s->int_width);
 		}
 	}
 	else
 	{
-		while (**fmt >= '0' && **fmt <= '9')
+		while (*s->fmt >= '0' && *s->fmt <= '9')
 		{
-			state->int_width = 10 * state->int_width + ((**fmt) - '0');
-			++*fmt;
+			s->int_width = 10 * s->int_width + ((*s->fmt) - '0');
+			++s->fmt;
 		}
 	}
 	return (0);
