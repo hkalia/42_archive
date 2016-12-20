@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/19 15:55:50 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/20 14:13:39 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,27 +87,27 @@ $(OBJ): %.o: %.c
 	@$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
 
 $(NAME): $(OBJ)
-	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\U1F44C\n\e[0m" $(MAX) $(MAX)
+	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\n\e[0m" $(MAX) $(MAX)
 	@printf "\e[32mLinking and indexing... \e[0m"
 	@ar rcs $(NAME) $(OBJ)
-	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
+	@printf "\e[32m[DONE]\e[0m\n"
 
 clean:
 	@printf "\e[31mDeleting object files... \e[0m"
 	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
+	@printf "\e[32m[DONE]\e[0m\n"
 
 fclean: clean
 	@printf "\e[31mDeleting %s... \e[0m" $(NAME)
 	@rm -f $(NAME)
-	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
+	@printf "\e[32m[DONE]\e[0m\n"
 
 re: fclean all
 
 test: re
 	@printf "\e[31mDeleting object files... \e[0m"
 	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
+	@printf "\e[32m[DONE]\e[0m\n"
 	@printf "\e[32mCompiling %s with %s... \e[0m" $(TEST) $(NAME)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(TEST) -o test
-	@printf "\e[32m[DONE]\U1F44C\e[0m\n"
+	@printf "\e[32m[DONE]\e[0m\n"
