@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 16:48:42 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:18:07 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@
 
 static int8_t	null_handler(t_ft_printf *s)
 {
-	if (s->int_width > 0)
-	{
-		GRD2(width_handler_csp(s) == -1, free(s->new.arr), free(s->ret.arr)
-			, -1);
-		GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-			, free(s->new.arr), free(s->ret.arr), -1);
-		arr_dtr(&s->new);
-	}
-	else
-		GRD1(arr_insertat(&s->ret, s->ret.len, "(null)", 6) == -1
+	if (s->flg_zero == 0)
+		GRD1(arr_insertat(&s->new, s->new.len, "(null)", 6) == -1
 			, free(s->ret.arr), -1);
+	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr)
+		, -1);
+	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
+		, free(s->new.arr), free(s->ret.arr), -1);
+	arr_dtr(&s->new);
 	++s->fmt;
 	return (1);
 }
@@ -76,7 +73,7 @@ int8_t			ft_printf_s(t_ft_printf *s)
 	if (s->flg_dot && s->new.len > (size_t)s->int_dot)
 		GRD2(arr_removeat(&s->new, s->int_dot, s->new.len - s->int_dot) == -1
 			, free(s->new.arr), free(s->ret.arr), -1);
-	GRD2(width_handler_csp(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
 		, free(s->new.arr), free(s->ret.arr), -1);
 	arr_dtr(&s->new);

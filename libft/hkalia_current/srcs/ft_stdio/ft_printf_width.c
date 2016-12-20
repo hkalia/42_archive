@@ -6,16 +6,15 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 16:02:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:55:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 #include <ft_string.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-int8_t	width_handler_csp(t_ft_printf *s)
+int8_t	width_handler(t_ft_printf *s)
 {
 	char	*tmp;
 	int		diff;
@@ -34,6 +33,7 @@ int8_t	width_handler_csp(t_ft_printf *s)
 
 int8_t	ft_printf_width(t_ft_printf *s)
 {
+	s->int_width = 0;
 	if (*s->fmt == '*')
 	{
 		s->int_width = va_arg(*s->ap, int);

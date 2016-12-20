@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 17:45:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 15:04:36 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,32 @@
 #include <nbr.h>
 #include <unistd.h>
 
-#define LEN1 37
+#define LEN1 38
 #define LEN2 3
 
 static char		g_spec[LEN1][LEN2] = {
 	{"-"}, {"+"}, {" "}, {"#"}
 	, {"0"}, {"*"}, {"1"}, {"2"}
 	, {"3"}, {"4"}, {"5"}, {"6"}
-	, {"7"}, {"8"}, {"9"}, {"."}
-	, {"hh"}, {"h"}, {"l"}, {"ll"}
-	, {"j"}, {"z"}, {"d"}, {"i"}
-	, {"o"}, {"u"}, {"x"}, {"X"}
-	, {"D"}, {"O"}, {"U"}, {"C"}
-	, {"c"}, {"S"}, {"s"}, {"p"}, {"%"}};
+	, {"7"}, {"8"}, {"9"}, {"*"}
+	, {"."}, {"hh"}, {"h"}, {"l"}
+	, {"ll"}, {"j"}, {"z"}, {"d"}
+	, {"i"}, {"o"}, {"u"}, {"x"}
+	, {"X"}, {"D"}, {"O"}, {"U"}
+	, {"C"}, {"c"}, {"S"}, {"s"}
+	, {"p"}, {"%"}};
 
 static int8_t	(*g_funcs[LEN1]) (t_ft_printf *s) = {
 	ft_printf_flags, ft_printf_flags, ft_printf_flags, ft_printf_flags
 	, ft_printf_flags, ft_printf_width, ft_printf_width, ft_printf_width
 	, ft_printf_width, ft_printf_width, ft_printf_width, ft_printf_width
-	, ft_printf_width, ft_printf_width, ft_printf_width, ft_printf_dot
-	, ft_printf_hh, ft_printf_h, ft_printf_l, ft_printf_ll
-	, ft_printf_j, ft_printf_z, ft_printf_d, ft_printf_d
-	, ft_printf_o, ft_printf_u, ft_printf_x, ft_printf_cap_x
-	, ft_printf_cap_d, ft_printf_cap_o, ft_printf_cap_u, ft_printf_cap_c
-	, ft_printf_c, ft_printf_cap_s, ft_printf_s, ft_printf_p, ft_printf_mod};
+	, ft_printf_width, ft_printf_width, ft_printf_width, ft_printf_width
+	, ft_printf_dot, ft_printf_hh, ft_printf_h, ft_printf_l
+	, ft_printf_ll, ft_printf_j, ft_printf_z, ft_printf_d
+	, ft_printf_d, ft_printf_o, ft_printf_u, ft_printf_x
+	, ft_printf_cap_x, ft_printf_cap_d, ft_printf_cap_o, ft_printf_cap_u
+	, ft_printf_cap_c, ft_printf_c, ft_printf_cap_s, ft_printf_s
+	, ft_printf_p, ft_printf_mod};
 
 static bool		check(const char *fmt, char *spec)
 {
@@ -72,7 +74,7 @@ static int8_t	dispatcher(t_ft_printf *s)
 		++i;
 	}
 	GRD1(arr_insertat(&s->new, 0, s->fmt, 1) == -1, free(s->ret.arr), -1);
-	GRD2(width_handler_csp(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
 		, free(s->new.arr), free(s->ret.arr), -1);
 	arr_dtr(&s->new);
@@ -86,7 +88,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 	size_t		i;
 
 	ft_bzero(&s, sizeof(t_ft_printf));
-	GRD(arr_init(&s.ret, ft_strlen(fmt) + 1) == -1, -1);
+	GRD(arr_init(&s.ret, ft_strlen(fmt) + 10) == -1, -1);
 	s.fmt = fmt;
 	s.ap = ap;
 	while (*s.fmt)

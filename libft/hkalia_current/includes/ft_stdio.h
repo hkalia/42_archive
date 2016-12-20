@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 17:23:49 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 13:59:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int8_t			ft_printf_cap_s(t_ft_printf *s);
 int8_t			ft_printf_s(t_ft_printf *s);
 int8_t			ft_printf_p(t_ft_printf *s);
 int8_t			ft_printf_mod(t_ft_printf *s);
-int8_t			width_handler_csp(t_ft_printf *s);
+int8_t			width_handler(t_ft_printf *s);
+int8_t			dot_handler_ux(t_ft_printf *s);
 uintmax_t		get_input(t_ft_printf *s);
 
 #endif
