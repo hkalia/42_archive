@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:56 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 14:45:36 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/19 16:17:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,26 @@
 #include <nbr.h>
 #include <stdlib.h>
 
-int8_t	ft_printf_x(t_ft_printf *s)
+static int8_t	width_handler_x(t_ft_printf *s)
+{
+	char	*tmp;
+	int		diff;
+	int8_t	flg;
+
+	if ((diff = s->int_width - s->new.len) > 0)
+	{
+		flg = s->flg_zero == 1 && s->flg_hash == 1 ? 2 : 0;
+		GRD((tmp = (char *)malloc(sizeof(char) * diff)) == 0, -1);
+		ft_memset(tmp, s->flg_zero ? '0' : ' ', diff);
+		GRD1(arr_insertat(&s->new, s->flg_minus ? s->new.len : 0 + flg
+			, tmp, diff) == -1, free(tmp), -1);
+		free(tmp);
+		return (0);
+	}
+	return (0);
+}
+
+int8_t			ft_printf_x(t_ft_printf *s)
 {
 	uintmax_t	tmp;
 
@@ -28,7 +47,7 @@ int8_t	ft_printf_x(t_ft_printf *s)
 	if (s->flg_hash == 1 && tmp != 0)
 		GRD2(arr_insertat(&s->new, 0, "0x", 2) == -1, free(s->new.arr)
 			, free(s->ret.arr), -1);
-	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(width_handler_x(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
 		, free(s->new.arr), free(s->ret.arr), -1);
 	arr_dtr(&s->new);
