@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/07 13:07:35 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/10 15:48:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <nbr.h>
+#include <unistd.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+void	ft_putnbr_base(long long src, int base)
+{
+	char const	*spec = "0123456789abcdef";
+	long long	conv_nbr[64];
+	int			i;
+
+	if (src < 0)
 	{
-		printf("output: %s\n", line);
-		free(line);
+		write(1, "-", 1);
+		src = -src;
+	}
+	i = 0;
+	while (src != 0)
+	{
+		conv_nbr[i] = src % base;
+		src = src / base;
 		++i;
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	--i;
+	while (i >= 0)
+	{
+		write(1, &(spec[conv_nbr[i]]), 1);
+		--i;
+	}
 }

@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   chr.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/12/15 14:27:31 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/15 14:27:52 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#ifndef CHR_H
+# define CHR_H
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
-	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
-	}
-	if (fd != 0)
-		close(fd);
-	return (0);
-}
+int	ft_putchar_fd(int src, int fd);
+
+#endif

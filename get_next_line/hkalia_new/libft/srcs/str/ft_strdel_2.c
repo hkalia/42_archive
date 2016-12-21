@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strdel_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/14 11:53:20 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/14 12:30:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <str.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+void	ft_strdel_2(int count, ...)
+{
+	va_list	ap;
+	char	**src;
+
+	va_start(ap, count);
+	while ((src = va_arg(ap, char **)) && count--)
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		if (src != 0 && *src != 0)
+		{
+			free(*src);
+			*src = NULL;
+		}
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
 }

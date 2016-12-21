@@ -6,18 +6,18 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/21 08:43:01 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/21 09:31:19 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	libftprintf.a
+NAME		:=	libft.a
 SHELL		:=	/bin/zsh
 
 CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
-CFLAGS		+=	-Werror -g
+CFLAGS		+=	-Werror
 #CFLAGS		+=	-fsanitize=address
-LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME))) -g
+LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
 #LDFLAGS		+=	-fsanitize=address
 
 SRC_DIR		:=	srcs
@@ -42,7 +42,6 @@ FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_strcpy ft_strdup ft_strlcat ft_strlen ft_strncat			\
 				ft_strncmp ft_strncpy ft_strndup ft_strnlen ft_strnstr		\
 				ft_strrchr ft_strstr
-GNL			:=	gnl
 LST			:=	ft_lstadd ft_lstaddend ft_lstdel ft_lstdelone ft_lstiter	\
 				ft_lstmap ft_lstnew
 MEM			:=	ft_memalloc ft_memdel ft_realloc ft_reallocf
@@ -60,7 +59,6 @@ FILES		:=	$(addprefix arr/, $(ARR))				\
 				$(addprefix ft_stdio/, $(FT_STDIO))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
-				$(addprefix gnl/, $(GNL))				\
 				$(addprefix lst/, $(LST))				\
 				$(addprefix mem/, $(MEM))				\
 				$(addprefix nbr/, $(NBR))				\

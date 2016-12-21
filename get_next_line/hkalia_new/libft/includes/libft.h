@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/20 15:15:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#ifndef LIBFT_H
+# define LIBFT_H
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
-	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
-	}
-	if (fd != 0)
-		close(fd);
-	return (0);
-}
+# include "arr.h"
+# include "ft_ctype.h"
+# include "ft_stdio.h"
+# include "ft_stdlib.h"
+# include "ft_string.h"
+# include "gnl.h"
+# include "lst.h"
+# include "mem.h"
+# include "nbr.h"
+# include "str.h"
+# include "tbl.h"
+
+#endif

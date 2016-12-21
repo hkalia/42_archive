@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:39:54 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/03 15:46:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <str.h>
+#include <stdlib.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
+char	*ft_strmapi(const char *src, char (*f)(unsigned int, char))
+{
+	char			*new;
+	size_t			src_len;
+	unsigned int	i;
+
 	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+	if ((src_len = ft_strlen_2(src)) == 0)
+		return (0);
+	if (!(new = (char *)malloc(sizeof(char) * (src_len + 1))))
+		return (NULL);
+	while (i < src_len)
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		new[i] = src[i];
+		i++;
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	new[i] = '\0';
+	i = 0;
+	while (new[i])
+	{
+		new[i] = f(i, new[i]);
+		i++;
+	}
+	return (new);
 }

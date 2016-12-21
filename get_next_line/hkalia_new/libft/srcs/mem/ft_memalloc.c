@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:37:32 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/14 20:15:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <mem.h>
+#include <stdlib.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
-	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
-	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+void	*ft_memalloc(size_t len)
+{
+	unsigned char	*new_cpy;
+	void			*new;
+
+	GRD(len == 0, 0);
+	GRD((new = malloc(len)) == 0, 0);
+	new_cpy = (unsigned char *)new;
+	while (len--)
+		*new_cpy++ = 0;
+	return (new);
 }

@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_tblnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/14 15:02:21 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/12 11:11:29 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <tbl.h>
+#include <stdlib.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
+char	**ft_tblnew(int len)
+{
+	int		i;
+	char	**new;
+
+	if (!(new = (char **)malloc(sizeof(char *) * (len + 1))))
+		return (0);
 	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+	while (i <= len)
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		new[i] = 0;
+		i++;
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	return (new);
 }

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/09/22 15:39:10 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/15 15:21:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <nbr.h>
+#include <chr.h>
+#include <unistd.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+void	ft_putnbr_fd(int src, int fd)
+{
+	long	src_cpy;
+
+	src_cpy = src;
+	if (src_cpy < 0)
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		ft_putchar_fd('-', fd);
+		src_cpy = -src_cpy;
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	if (src_cpy > 9)
+	{
+		ft_putnbr_fd(src_cpy / 10, fd);
+		ft_putnbr_fd(src_cpy % 10, fd);
+	}
+	else
+		ft_putchar_fd(src_cpy + '0', fd);
 }

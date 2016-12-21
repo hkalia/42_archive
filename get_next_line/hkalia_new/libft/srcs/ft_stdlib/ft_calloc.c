@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/27 10:31:20 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/10 15:02:43 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <ft_stdlib.h>
+#include <ft_string.h>
+#include <stdlib.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ret;
+
+	if (count == 0 || size == 0)
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		count = 1;
+		size = 1;
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	GRD((ret = malloc(count * size)) == 0, 0);
+	ft_bzero(ret, count * size);
+	return (ret);
 }

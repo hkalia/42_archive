@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strlen_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:37:03 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/03 15:44:06 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <str.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
+size_t	ft_strlen_2(const char *src)
+{
+	const char	*src_cpy;
+
+	src_cpy = src;
+	if (src_cpy == 0)
+		return (0);
 	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
-	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
-	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+		while (*src_cpy)
+			++src_cpy;
+	return (src_cpy - src);
 }

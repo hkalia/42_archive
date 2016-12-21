@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strextend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 15:02:27 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:11:22 by hkalia           ###   ########.fr       */
+/*   Created: 2016/10/26 15:29:38 by hkalia            #+#    #+#             */
+/*   Updated: 2016/11/08 15:34:12 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <fcntl.h>
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
-	char	*line;
+#include <str.h>
+#include <ft_string.h>
 
-	if (argc > 1)
-		GRD((fd = open(argv[1], O_RDONLY)) == -1, -1);
-	else
-		fd = 0;
-	i = 0;
-	while (gnl(fd, &line) == 1 && i < 10)
+char	*ft_strextend(char *src, size_t len)
+{
+	char	*ret;
+
+	if (src != 0 && *src != '\0')
 	{
-		printf("output: %s\n", line);
-		free(line);
-		++i;
+		if (!(ret = ft_strnew(ft_strlen(src) + len)))
+		{
+			ft_strdel(&src);
+			return (0);
+		}
+		ft_strcpy(ret, src);
+		ft_strdel(&src);
 	}
-	if (fd != 0)
-		close(fd);
-	return (0);
+	else if (!(ret = ft_strnew(len)))
+		return (0);
+	return (ret);
 }
