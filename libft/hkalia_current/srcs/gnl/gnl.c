@@ -6,13 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:14:06 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 09:16:07 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/21 10:50:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <gnl.h>
-#include <stdio.h>
-static void		del(t_arr *s)
+#include "gnl.h"
+
+static void	del(t_arr *s)
 {
 	size_t	i;
 
@@ -25,12 +25,27 @@ static void		del(t_arr *s)
 	}
 }
 
-int				gnl(const int fd, char **line)
+static int	final_line(const int fd, char **line, t_arr *s)
+{
+	GRD1((*line = ft_calloc(s[fd].len + 1, sizeof(char))) == 0, del(s), -1);
+	ft_memcpy(*line, s[fd].arr, s[fd].len);
+	s[fd].len = 0;
+	return (1);
+}
+
+static int	assign_line(const int fd, char **line, t_arr *s, size_t src_len)
+{
+	GRD1((*line = ft_calloc(src_len + 1, sizeof(char))) == 0, del(s), -1);
+	ft_memcpy(*line, s[fd].arr, src_len);
+	arr_removeat(&s[fd], 0, src_len + 1);
+	return (1);
+}
+
+int			gnl(const int fd, char **line)
 {
 	static t_arr	s[GNL_MAX_FD] = {{0, 0, 0}};
 	char			buf[GNL_BUFF_SIZE];
 	uint8_t			*tmp;
-	ptrdiff_t		diff;
 	ssize_t			r;
 
 	if (fd < 0 || fd > GNL_MAX_FD || line == 0 || GNL_BUFF_SIZE == 0)
@@ -39,29 +54,15 @@ int				gnl(const int fd, char **line)
 		GRD1(arr_init(&s[fd], GNL_BUFF_SIZE) == -1, del(s), -1);
 	while ((r = read(fd, buf, GNL_BUFF_SIZE)) != 0)
 	{
-		printf("while\n");
 		GRD1(r == -1, del(s), -1);
 		GRD1(arr_insertat(&s[fd], s[fd].len, buf, r) == -1, del(s), -1);
 		if ((tmp = ft_memchr(s[fd].arr, '\n', s[fd].len)) != 0)
-		{
-			printf("whileif\n");
-			diff = tmp - s[fd].arr;
-			GRD1((*line = ft_calloc(diff + 1, sizeof(char))) == 0
-				, del(s), -1);
-			ft_memcpy(*line, s[fd].arr, diff);
-			arr_removeat(&s[fd], 0, diff + 1);
-			return (1);
-		}
+			return (assign_line(fd, line, s, tmp - s[fd].arr));
 	}
 	if ((tmp = ft_memchr(s[fd].arr, '\n', s[fd].len)) != 0)
-	{
-		printf("lastif\n");
-		diff = tmp - s[fd].arr;
-		GRD1((*line = ft_calloc(diff + 1, sizeof(char))) == 0
-			, del(s), -1);
-		ft_memcpy(*line, s[fd].arr, diff);
-		arr_removeat(&s[fd], 0, diff + 1);
-		return (1);
-	}
+		return (assign_line(fd, line, s, tmp - s[fd].arr));
+	else if (s[fd].len > 0)
+		return (final_line(fd, line, s));
+	arr_dtr(&s[fd]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:40:59 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/20 16:36:44 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/21 10:51:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # define GNL_BUFF_SIZE 20
 # define GNL_MAX_FD 4864
 
-# include "arr.h"
-# include "ft_stdlib.h"
-# include "ft_string.h"
+# include <arr.h>
+# include <ft_stdlib.h>
+# include <ft_string.h>
 # include <stdlib.h>
 # include <unistd.h>
 
