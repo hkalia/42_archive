@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/20 14:34:09 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/21 11:31:23 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FDF_H
 
 # include <mlx.h>
+# include <libft.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -81,6 +83,7 @@ typedef struct	s_win
 typedef struct	s_mlx
 {
 	void		*id;
+	t_arr		src;
 	t_win		win;
 	t_img		img;
 	t_mouse		mouse;

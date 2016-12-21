@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/20 14:47:45 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/21 11:10:56 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,15 @@ SHELL		:=	/bin/zsh
 CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
-#CFLAGS		+=	-g
+CFLAGS		+=	-I libft/includes
+CFLAGS		+=	-I minilibx
 #CFLAGS		+=	-fsanitize=address
-#LDFLAGS		+=	-fsanitize=address
+LDFLAGS		+=	-L libft/ -lft
 LDFLAGS		+=	-L minilibx -lmlx -framework OpenGL -framework AppKit
+#LDFLAGS		+=	-fsanitize=address
+
 MINILIBX	:=	minilibx/libmlx.a
+LIBFT		:=	libft/libft.a
 
 SRC_DIR		:=	srcs
 
@@ -44,11 +48,14 @@ all: $(NAME)
 $(MINILIBX):
 	make -C minilibx/
 
+$(LIBFT):
+	make -C libft/
+
 $(OBJ): %.o: %.c
 	@printf "\r\e[31mCompiling...(%d/%d)\e[0m" $(COUNTER) $(MAX)
 	@$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
 
-$(NAME): $(MINILIBX) $(OBJ)
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJ)
 	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\n\e[0m" $(MAX) $(MAX)
 	@printf "\e[32mLinking... \e[0m"
 	@$(CC) -o $(NAME) $(LDFLAGS) $(OBJ)
@@ -65,11 +72,6 @@ fclean: clean
 	@printf "\e[32m[DONE]\e[0m\n"
 
 re: fclean all
-
-test: re
-	@printf "\e[31mDeleting object files... \e[0m"
-	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\e[0m\n"
 
 norm:
 	@norminette includes srcs
