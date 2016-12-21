@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:30:35 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 10:09:57 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:24:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static uint32_t	endian_change(uint32_t value)
 	return (result);
 }
 
-void			pixel(t_mlx *mlx, t_img *img, int color, t_xy src)
+void			pixel(t_mlx *mlx, int color, t_ixy src)
 {
 	int	*i;
 
 	if (src.x >= mlx->win.max.x || src.y >= mlx->win.max.y || src.x < 0
 		|| src.y < 0)
 		return ;
-	i = (int *)&img->img[src.x * img->bpp + src.y * img->ln];
-	*i = img->end ? endian_change(color) : color;
+	i = (int *)&mlx->img.img[src.x * mlx->img.bpp + src.y * mlx->img.ln];
+	*i = mlx->img.end ? endian_change(color) : color;
 }

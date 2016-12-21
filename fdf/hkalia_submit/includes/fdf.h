@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:08:34 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 10:11:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:34:09 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,31 @@
 #  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
-typedef struct	s_xy
+typedef struct	s_ixy
 {
 	int			x;
 	int			y;
-}				t_xy;
+}				t_ixy;
 
-typedef struct	s_xyz
+typedef struct	s_ixyz
 {
 	int			x;
 	int			y;
 	int			z;
-}				t_xyz;
+}				t_ixyz;
 
-typedef struct	s_xyxy
+typedef struct	s_ixyxy
 {
 	int			x0;
 	int			y0;
 	int			x1;
 	int			y1;
-}				t_xyxy;
+}				t_ixyxy;
 
 typedef struct	s_click
 {
 	int			btn;
-	t_xy		pos;
+	t_ixy		pos;
 }				t_click;
 
 typedef struct	s_mouse
@@ -60,7 +60,7 @@ typedef struct	s_mouse
 	bool		flg;
 	t_click		p;
 	t_click		r;
-	t_xy		pos;
+	t_ixy		pos;
 }				t_mouse;
 
 typedef struct	s_img
@@ -75,7 +75,7 @@ typedef struct	s_img
 typedef struct	s_win
 {
 	void		*id;
-	t_xy		max;
+	t_ixy		max;
 }				t_win;
 
 typedef struct	s_mlx
@@ -86,10 +86,9 @@ typedef struct	s_mlx
 	t_mouse		mouse;
 }				t_mlx;
 
-t_img			img_new(t_mlx *mlx);
-void			pixel(t_mlx *mlx, t_img *img, int color, t_xy src);
-void			line(t_mlx *mlx, t_img *img, int color, t_xyxy src);
-void			square(t_mlx *mlx, t_img *img, int color, t_xyxy src);
+void			pixel(t_mlx *mlx, int color, t_ixy src);
+void			line(t_mlx *mlx, int color, t_ixyxy src);
+void			square(t_mlx *mlx, int color, t_ixyxy src);
 int				key_press(int keycode, void *param);
 int				key_release(int keycode, void *param);
 int				mouse_press(int button, int x, int y, void *param);

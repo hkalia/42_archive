@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 16:49:38 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 10:23:11 by hkalia           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:29:48 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		mouse_motion(int x, int y, void *param)
 	{
 		memset(mlx->img.img, 0, (mlx->win.max.x - 1) * mlx->img.bpp
 				+ (mlx->win.max.y - 1) * mlx->img.ln);
-		square(mlx, &mlx->img, 0x00FF0000, (t_xyxy){mlx->mouse.p.pos.x
+		square(mlx, 0x00FF0000, (t_ixyxy){mlx->mouse.p.pos.x
 								, mlx->mouse.p.pos.y, x, y});
 		mlx_put_image_to_window(mlx->id, mlx->win.id, mlx->img.id, 0, 0);
 	}
