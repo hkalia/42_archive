@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/20 14:13:39 by hkalia           ###   ########.fr        #
+#    Updated: 2016/12/24 13:19:43 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME		:=	libftprintf.a
 SHELL		:=	/bin/zsh
 
 CC			:=	gcc
-CFLAGS		+=	-Wall -Wextra -I includes
+CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
+CFLAGS		+=	-I includes
 #CFLAGS		+=	-fsanitize=address
 LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
-#LDFLAGS		+=	-fsanitize=address -g
+#LDFLAGS		+=	-fsanitize=address
 
-SRC_DIR		:=	srcs
-TEST		:=	test.c
+TEST		:=
 
 ARR			:=	arr_dtr arr_init arr_insertat arr_removeat arr_reserve		\
 				arr_tostr
@@ -29,13 +29,14 @@ CHR			:=	ft_putchar_fd
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
-FT_STDIO	:=	ft_printf ft_putchar ft_vasprintf ft_printf_flags			\
-				ft_printf_width ft_printf_dot ft_printf_hh ft_printf_h		\
-				ft_printf_l ft_printf_ll ft_printf_j ft_printf_z			\
-				ft_printf_d ft_printf_o ft_printf_u ft_printf_x	\
-				ft_printf_cap_x ft_printf_cap_d ft_printf_cap_o				\
-				ft_printf_cap_u ft_printf_cap_c ft_printf_c ft_printf_cap_s	\
-				ft_printf_s ft_printf_p ft_printf_mod
+FT_STDIO	:=	ft_printf ft_dprintf ft_asprintf ft_vprintf ft_vdprintf		\
+				ft_vasprintf ft_putchar ft_printf_flags ft_printf_width		\
+				ft_printf_dot ft_printf_hh ft_printf_h ft_printf_l			\
+				ft_printf_ll ft_printf_j ft_printf_z ft_printf_d			\
+				ft_printf_o ft_printf_u ft_printf_x ft_printf_cap_x			\
+				ft_printf_cap_d ft_printf_cap_o ft_printf_cap_u				\
+				ft_printf_cap_c ft_printf_c ft_printf_cap_s ft_printf_s		\
+				ft_printf_p ft_printf_mod
 FT_STDLIB	:=	ft_abs ft_atoi ft_calloc ft_wctomb
 FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_memmove ft_memset ft_strcat ft_strchr ft_strcmp			\
@@ -66,7 +67,7 @@ FILES		:=	$(addprefix arr/, $(ARR))				\
 				$(addprefix str/, $(STR))				\
 				$(addprefix tbl/, $(TBL))				\
 
-SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
+SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
 
 # MATH
@@ -84,7 +85,7 @@ all: $(NAME)
 
 $(OBJ): %.o: %.c
 	@printf "\r\e[31mCompiling...(%d/%d)\e[0m" $(COUNTER) $(MAX)
-	@$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\n\e[0m" $(MAX) $(MAX)
