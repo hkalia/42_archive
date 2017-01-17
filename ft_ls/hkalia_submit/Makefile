@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2016/12/23 15:30:58 by hkalia           ###   ########.fr        #
+#    Updated: 2017/01/14 10:26:10 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
 CFLAGS		+=	-I includes -I libft/includes
-#CFLAGS		+=	-fsanitize=address
+CFLAGS		+=	-fsanitize=address
 LDFLAGS		+=	-L libft/ -lft
-#LDFLAGS		+=	-fsanitize=address
+LDFLAGS		+=	-fsanitize=address
 
 LIBFT		:=	libft/libft.a
 
 FILES		:=	main
+#FILES		+=	alloc_wrap
 SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
 
@@ -64,3 +65,8 @@ fclean: clean
 	@printf "\e[32m[DONE]\e[0m\n"
 
 re: fclean all
+
+habib: re
+	@printf "\e[31mDeleting object files... \e[0m"
+	@rm -f $(OBJ)
+	@printf "\e[32m[DONE]\e[0m\n"

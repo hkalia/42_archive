@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:25:15 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/23 15:43:08 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/14 09:58:45 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <time.h>
+
+uint8_t	 g_ft_ls_flgs = 0;
 
 #endif

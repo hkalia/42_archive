@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:03:28 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 14:41:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/15 13:18:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct	s_arr
 {
+	size_t		elm;
 	size_t		len;
 	size_t		cap;
 	uint8_t		*arr;
