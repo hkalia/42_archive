@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/17 14:42:32 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/18 13:37:11 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int		dirent_cmpr(const void *a, const void *b)
 {
-	if (g_ft_ls_flgs & 0x8)
-	{
-		
-	}
 	return (ft_strcmp((*(struct dirent **)a)->d_name
 			, (*(struct dirent **)b)->d_name));
 }
@@ -35,8 +31,13 @@ int8_t	printer(char *path)
 	i = 0;
 	while ((dp = readdir(dirp)) != 0)
 	{
-		GRD2(arr_insertat(&dp_arr, i * sizeof(dp), &dp, sizeof(dp)) == -1
-			, closedir(dirp), arr_dtr(&dp_arr), -1);
+		if (g_ft_ls_flgs & 0x4)
+			GRD2(arr_insertat(&dp_arr, i * sizeof(dp), &dp, sizeof(dp)) == -1
+				, closedir(dirp), arr_dtr(&dp_arr), -1);
+		else
+		{
+			if (dp->d_name[0] )
+		}
 		++i;
 	}
 	qsort(dp_arr.arr, dp_arr.len / sizeof(struct dirent *)

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:52:30 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 15:04:36 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:44:35 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ static int8_t	dispatcher(t_ft_printf *s)
 		}
 		++i;
 	}
-	GRD1(arr_insertat(&s->new, 0, s->fmt, 1) == -1, free(s->ret.arr), -1);
-	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD1(arr_init(&s->new, 1, 1) == -1, arr_dtr(&s->ret), -1);
+	GRD1(arr_insertat(&s->new, 0, s->fmt, 1) == -1, arr_dtr(&s->ret), -1);
+	GRD2(width_handler(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-		, free(s->new.arr), free(s->ret.arr), -1);
+		, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	arr_dtr(&s->new);
 	++s->fmt;
 	return (1);
@@ -88,7 +89,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 	size_t		i;
 
 	ft_bzero(&s, sizeof(t_ft_printf));
-	GRD(arr_init(&s.ret, ft_strlen(fmt) + 10) == -1, -1);
+	GRD(arr_init(&s.ret, ft_strlen(fmt) + 10, sizeof(char)) == -1, -1);
 	s.fmt = fmt;
 	s.ap = ap;
 	while (*s.fmt)
@@ -105,7 +106,7 @@ static int		iterator(char **final, const char *fmt, va_list *ap)
 			GRD(dispatcher(&s) == -1, -1);
 		}
 	}
-	GRD1((*final = arr_tostr(&s.ret)) == 0, free(s.ret.arr), -1);
+	GRD1((*final = arr_tostr(&s.ret)) == 0, arr_dtr(&s.ret), -1);
 	return ((int)s.ret.len);
 }
 

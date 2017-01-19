@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 13:18:07 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:33:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 #include <stdlib.h>
 #include <wchar.h>
 
+#define LINE_SAVER arr_dtr(&s->new);++s->fmt
+
 static int8_t	null_handler(t_ft_printf *s)
 {
 	if (s->flg_zero == 0)
 		GRD1(arr_insertat(&s->new, s->new.len, "(null)", 6) == -1
-			, free(s->ret.arr), -1);
-	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr)
+			, arr_dtr(&s->ret), -1);
+	GRD2(width_handler(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret)
 		, -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-		, free(s->new.arr), free(s->ret.arr), -1);
+		, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	arr_dtr(&s->new);
 	++s->fmt;
 	return (1);
@@ -59,24 +61,25 @@ int8_t			ft_printf_s(t_ft_printf *s)
 	wchar_t	*tmp;
 	char	*tmp1;
 
+	GRD1(arr_init(&s->new, 10, 1) == -1, arr_dtr(&s->ret), -1);
 	if (s->int_len_mod == 3)
 	{
 		GRD((tmp = va_arg(*s->ap, wchar_t *)) == 0, null_handler(s));
-		GRD1(ft_printf_s_l(tmp, &s->new) == -1, free(s->ret.arr), -1);
+		GRD2(ft_printf_s_l(tmp, &s->new) == -1, arr_dtr(&s->new)
+			, arr_dtr(&s->ret), -1);
 	}
 	else
 	{
 		GRD((tmp1 = va_arg(*s->ap, char *)) == 0, null_handler(s));
-		GRD1(arr_insertat(&s->new, 0, tmp1, ft_strlen(tmp1)) == -1
-			, free(s->ret.arr), -1);
+		GRD2(arr_insertat(&s->new, 0, tmp1, ft_strlen(tmp1)) == -1
+			, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	}
 	if (s->flg_dot && s->new.len > (size_t)s->int_dot)
 		GRD2(arr_removeat(&s->new, s->int_dot, s->new.len - s->int_dot) == -1
-			, free(s->new.arr), free(s->ret.arr), -1);
-	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+			, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
+	GRD2(width_handler(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-		, free(s->new.arr), free(s->ret.arr), -1);
-	arr_dtr(&s->new);
-	++s->fmt;
+		, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
+	LINE_SAVER;
 	return (1);
 }

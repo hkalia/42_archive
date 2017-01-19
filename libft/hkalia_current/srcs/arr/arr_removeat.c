@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:21:18 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/14 19:38:28 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 13:25:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int8_t	arr_removeat(t_arr *src, size_t i, size_t len)
 {
 	GRD(src == 0 || i + len > src->len, -1);
-	ft_memmove(&src->arr[i], &src->arr[i + len], src->len - len - i);
+	ft_memmove(ARR_INDEX(src, i), ARR_INDEX(src, i + len)
+				, (src->len - len - i) * src->elm);
 	src->len -= len;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:47 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 16:03:32 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:19:49 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int8_t	dot_handler_o(t_ft_printf *s)
 	char	*tmp;
 	int		diff;
 
-	if (s->flg_dot == 1 && s->int_dot == 0 && s->new.arr[0] == '0')
+	if (s->flg_dot == 1 && s->int_dot == 0 && ((char *)s->new.arr)[0] == '0')
 	{
 		if (s->flg_hash == 0)
 			GRD(arr_removeat(&s->new, 0, s->new.len) == -1, -1);
@@ -63,17 +63,18 @@ int8_t			ft_printf_o(t_ft_printf *s)
 	uintmax_t	tmp;
 
 	tmp = get_input(s);
-	GRD1((s->new.arr = (uint8_t *)ft_itoa_base(tmp, 8, "01234567")) == 0
-			, free(s->ret.arr), -1);
+	GRD1((s->new.arr = ft_itoa_base(tmp, 8, "01234567")) == 0
+			, arr_dtr(&s->ret), -1);
+	s->new.elm = 1;
 	s->new.len = ft_strlen((char *)s->new.arr);
 	s->new.cap = s->new.len + 1;
-	if (s->flg_hash == 1 && s->new.arr[0] != '0')
-		GRD2(arr_insertat(&s->new, 0, "0", 1) == -1, free(s->new.arr)
-			, free(s->ret.arr), -1);
-	GRD2(dot_handler_o(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
-	GRD2(width_handler(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	if (s->flg_hash == 1 && ((char *)s->new.arr)[0] != '0')
+		GRD2(arr_insertat(&s->new, 0, "0", 1) == -1, arr_dtr(&s->new)
+			, arr_dtr(&s->ret), -1);
+	GRD2(dot_handler_o(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
+	GRD2(width_handler(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-		, free(s->new.arr), free(s->ret.arr), -1);
+		, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	arr_dtr(&s->new);
 	++s->fmt;
 	return (1);

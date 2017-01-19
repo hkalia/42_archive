@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:33:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 13:55:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:05:20 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int8_t	width_handler(t_ft_printf *s)
 		GRD1(arr_insertat(&s->new, s->flg_minus ? s->new.len : 0
 			, tmp, diff) == -1, free(tmp), -1);
 		free(tmp);
-		return (0);
 	}
 	return (0);
 }

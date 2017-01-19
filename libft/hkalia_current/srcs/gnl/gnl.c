@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 13:14:06 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/21 10:50:17 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:54:28 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ static int	assign_line(const int fd, char **line, t_arr *s, size_t src_len)
 
 int			gnl(const int fd, char **line)
 {
-	static t_arr	s[GNL_MAX_FD] = {{0, 0, 0}};
+	static t_arr	s[GNL_MAX_FD] = {{0, 1, 0, 0}};
 	char			buf[GNL_BUFF_SIZE];
-	uint8_t			*tmp;
+	char			*tmp;
 	ssize_t			r;
 
 	if (fd < 0 || fd > GNL_MAX_FD || line == 0 || GNL_BUFF_SIZE == 0)
 		return (-1);
 	if (s[fd].cap == 0)
-		GRD1(arr_init(&s[fd], GNL_BUFF_SIZE) == -1, del(s), -1);
+		GRD1(arr_init(&s[fd], GNL_BUFF_SIZE, sizeof(char)) == -1, del(s), -1);
 	while ((r = read(fd, buf, GNL_BUFF_SIZE)) != 0)
 	{
 		GRD1(r == -1, del(s), -1);
 		GRD1(arr_insertat(&s[fd], s[fd].len, buf, r) == -1, del(s), -1);
 		if ((tmp = ft_memchr(s[fd].arr, '\n', s[fd].len)) != 0)
-			return (assign_line(fd, line, s, tmp - s[fd].arr));
+			return (assign_line(fd, line, s, tmp - (char *)s[fd].arr));
 	}
 	if ((tmp = ft_memchr(s[fd].arr, '\n', s[fd].len)) != 0)
-		return (assign_line(fd, line, s, tmp - s[fd].arr));
+		return (assign_line(fd, line, s, tmp - (char *)s[fd].arr));
 	else if (s[fd].len > 0)
 		return (final_line(fd, line, s));
 	arr_dtr(&s[fd]);
