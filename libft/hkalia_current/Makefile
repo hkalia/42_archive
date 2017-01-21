@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/19 14:58:15 by hkalia           ###   ########.fr        #
+#    Updated: 2017/01/21 14:49:20 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-ARR			:=	arr_dtr arr_init arr_insertat arr_removeat arr_reserve		\
-				arr_tostr
+ARR			:=	arr_dtr arr_init arr_insertat arr_qsort_r arr_qsort			\
+				arr_swap arr_removeat arr_reserve arr_tostr
 CHR			:=	ft_putchar_fd
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\

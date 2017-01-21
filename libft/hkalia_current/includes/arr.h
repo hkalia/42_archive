@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:03:28 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/19 14:36:44 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/21 14:48:19 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdint.h>
 
 # define ARR_GROW_FACTOR 2
-# define ARR_INDEX(a, b) (((uint8_t *)(a)->arr) + ((b) * (a)->elm))
+# define ARR_INDEX(a, b) ((void *)(((uint8_t *)(a)->arr) + ((b) * (a)->elm)))
 
 typedef struct	s_arr
 {
@@ -40,6 +40,11 @@ int8_t			arr_reserve(t_arr *src, size_t sze);
 int8_t			arr_insertat(t_arr *dst, size_t i, const void *src
 							, size_t src_len);
 int8_t			arr_removeat(t_arr *src, size_t i, size_t len);
+void			arr_swap(t_arr *src, size_t i, size_t j);
+void			arr_qsort(t_arr *src, int (*cmp)(const void *, const void *
+							, size_t));
+void			arr_qsort_r(t_arr *src, void *thunk, int (*cmp)(const void *
+							, const void *, size_t, void *));
 char			*arr_tostr(t_arr *src);
 
 #endif

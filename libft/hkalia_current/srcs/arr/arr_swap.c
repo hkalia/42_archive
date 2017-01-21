@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   arr_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/21 14:48:59 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/21 14:49:05 by hkalia           ###   ########.fr       */
+/*   Created: 2017/01/21 12:45:27 by hkalia            #+#    #+#             */
+/*   Updated: 2017/01/21 14:40:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mem.h>
-#include <stdlib.h>
+#include <arr.h>
 
-void	*ft_memalloc(size_t len)
+void	arr_swap(t_arr *src, size_t i, size_t j)
 {
-	unsigned char	*new_cpy;
-	void			*new;
+	uint8_t	tmp;
+	uint8_t	*a;
+	uint8_t	*b;
+	size_t	cpyidx;
 
-	GRD(len == 0, 0);
-	GRD((new = malloc(len)) == 0, 0);
-	new_cpy = (unsigned char *)new;
-	while (len--)
-		*new_cpy++ = 0;
-	return (new);
+	if (i > src->len || j > src->len || i == j)
+		return ;
+	a = ARR_INDEX(src, i);
+	b = ARR_INDEX(src, j);
+	cpyidx = 0;
+	while (cpyidx < src->elm)
+	{
+		tmp = a[cpyidx];
+		a[cpyidx] = b[cpyidx];
+		b[cpyidx] = tmp;
+		cpyidx++;
+	}
 }
