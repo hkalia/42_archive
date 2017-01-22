@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/21 16:18:35 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/21 17:50:10 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,88 @@ int		time_compare(const void *a, const void *b, size_t elm, void *thunk)
 	return (b_t - a_t);
 }
 
+int8_t	lhandler(char *path, t_arr *dp_arr)
+{
+	char		*tmp;
+	struct stat	tmp_s;
+	size_t		i;
+
+	i = 0;
+	while (i < dp_arr->len)
+	{
+		asprintf(&tmp, "%s/%s", path
+				, (*(struct dirent **)ARR_INDEX(dp_arr, i))->d_name);
+		lstat(tmp, &tmp_s);
+		if (S_ISBLK(tmp_s.st_mode) != 0)
+			printf("b");
+		else if (S_ISCHR(tmp_s.st_mode) != 0)
+			printf("c");
+		else if (S_ISDIR(tmp_s.st_mode) != 0)
+			printf("d");
+		else if (S_ISLNK(tmp_s.st_mode) != 0)
+			printf("l");
+		else if (S_ISSOCK(tmp_s.st_mode) != 0)
+			printf("s");
+		else if (S_ISFIFO(tmp_s.st_mode) != 0)
+			printf("p");
+		else if (S_ISREG(tmp_s.st_mode) != 0)
+			printf("-");
+		printf("%c", tmp_s.st_mode & S_IRUSR ? 'r' : '-');
+		printf("%c", tmp_s.st_mode & S_IWUSR ? 'w' : '-');
+		if (tmp_s.st_mode & S_IXUSR)
+		{
+			if (tmp_s.st_mode & S_ISUID)
+				printf("s");
+			else
+				printf("x");
+		}
+		else
+		{
+			if (tmp_s.st_mode & S_ISUID)
+				printf("S");
+			else
+				printf("-");
+		}
+		printf("%c", tmp_s.st_mode & S_IRGRP ? 'r' : '-');
+		printf("%c", tmp_s.st_mode & S_IWGRP ? 'w' : '-');
+		if (tmp_s.st_mode & S_IXGRP)
+		{
+			if (tmp_s.st_mode & S_ISGID)
+				printf("s");
+			else
+				printf("x");
+		}
+		else
+		{
+			if (tmp_s.st_mode & S_ISGID)
+				printf("S");
+			else
+				printf("-");
+		}
+		printf("%c", tmp_s.st_mode & S_IROTH ? 'r' : '-');
+		printf("%c", tmp_s.st_mode & S_IWOTH ? 'w' : '-');
+		if (tmp_s.st_mode & S_IXOTH)
+		{
+			if (tmp_s.st_mode & S_ISVTX)
+				printf("t");
+			else
+				printf("x");
+		}
+		else
+		{
+			if (tmp_s.st_mode & S_ISVTX)
+				printf("T");
+			else
+				printf("-");
+		}
+		printf(" %s\n", (*(struct dirent **)ARR_INDEX(dp_arr, i))->d_name);
+		free(tmp);
+		++i;
+	}
+
+	return (0);
+}
+
 int8_t	printer(char *path)
 {
 	DIR				*dirp;
@@ -67,11 +149,16 @@ int8_t	printer(char *path)
 		arr_qsort(&dp_arr, compare);
 	if (g_ft_ls_flgs & 0x8)
 		arr_reverse(&dp_arr);
-	i = 0;
-	while (i < dp_arr.len)
+	if (g_ft_ls_flgs & 0x1)
+		lhandler(path, &dp_arr);
+	else
 	{
-		printf("%s\n", (*(struct dirent **)ARR_INDEX(&dp_arr, i))->d_name);
-		++i;
+		i = 0;
+		while (i < dp_arr.len)
+		{
+			printf("%s\n", (*(struct dirent **)ARR_INDEX(&dp_arr, i))->d_name);
+			++i;
+		}
 	}
 	closedir(dirp);
 	arr_dtr(&dp_arr);
