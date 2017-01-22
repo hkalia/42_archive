@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_z.c                                      :+:      :+:    :+:   */
+/*   arr_reverse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 14:10:39 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 16:09:17 by hkalia           ###   ########.fr       */
+/*   Created: 2017/01/21 16:17:22 by hkalia            #+#    #+#             */
+/*   Updated: 2017/01/21 16:17:30 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_stdio.h>
-#include <stdlib.h>
+#include <arr.h>
 
-int8_t	ft_printf_z(t_ft_printf *s)
+void	arr_reverse(t_arr *src)
 {
-	GRD1(s->int_len_mod != 0, arr_dtr(&s->ret), -1);
-	s->int_len_mod = 6;
-	++s->fmt;
-	return (0);
+	size_t	i;
+	size_t	j;
+
+	if (src == 0)
+		return ;
+	i = 0;
+	j = src->len - 1;
+	while (j > i)
+	{
+		arr_swap(src, i, j);
+		++i;
+		--j;
+	}
 }

@@ -6,12 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:08:42 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:27:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:39:45 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arr.h>
-#include <ft_stdlib.h>
 #include <ft_string.h>
 
 int8_t	arr_insertat(t_arr *dst, size_t i, const void *src, size_t src_len)
@@ -22,13 +21,14 @@ int8_t	arr_insertat(t_arr *dst, size_t i, const void *src, size_t src_len)
 		, i > dst->cap ? (i - dst->cap) + src_len : src_len) == -1, -1);
 	if (dst->len > i)
 	{
-		ft_memmove(&dst->arr[i + src_len], &dst->arr[i], dst->len - i);
-		ft_memcpy(&dst->arr[i], src, src_len);
+		ft_memmove(ARR_INDEX(dst, i + src_len), ARR_INDEX(dst, i)
+					, (dst->len - i) * dst->elm);
+		ft_memcpy(ARR_INDEX(dst, i), src, src_len * dst->elm);
 		dst->len += src_len;
 	}
 	else
 	{
-		ft_memcpy(&dst->arr[i], src, src_len);
+		ft_memcpy(ARR_INDEX(dst, i), src, src_len * dst->elm);
 		dst->len = i + src_len;
 	}
 	return (0);

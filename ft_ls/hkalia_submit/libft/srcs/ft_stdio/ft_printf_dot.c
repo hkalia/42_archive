@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:50:33 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 15:51:48 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/18 16:27:36 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int8_t	dot_handler_ux(t_ft_printf *s)
 	char	*tmp;
 	int		diff;
 
-	if (s->flg_dot == 1 && s->int_dot == 0 && s->new.arr[0] == '0')
+	if (s->flg_dot == 1 && s->int_dot == 0 && ((char *)s->new.arr)[0] == '0')
 	{
 		GRD(arr_removeat(&s->new, 0, s->new.len) == -1, -1);
 		return (0);

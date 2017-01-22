@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:49 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/19 14:53:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:40:49 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,17 @@ int8_t			ft_printf_p(t_ft_printf *s)
 	uintmax_t	tmp;
 
 	tmp = (uintmax_t)va_arg(*s->ap, void *);
-	GRD1((s->new.arr = (uint8_t *)ft_itoa_base(tmp, 16, "0123456789abcdef"))
-		== 0, free(s->ret.arr), -1);
+	GRD1((s->new.arr = ft_itoa_base(tmp, 16, "0123456789abcdef")) == 0
+		, arr_dtr(&s->ret), -1);
+	s->new.elm = 1;
 	s->new.len = ft_strlen((char *)s->new.arr);
 	s->new.cap = s->new.len + 1;
-	GRD2(dot_handler_p(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
-	GRD2(arr_insertat(&s->new, 0, "0x", 2) == -1, free(s->new.arr)
-		, free(s->ret.arr), -1);
-	GRD2(width_handler_p(s) == -1, free(s->new.arr), free(s->ret.arr), -1);
+	GRD2(dot_handler_p(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
+	GRD2(arr_insertat(&s->new, 0, "0x", 2) == -1, arr_dtr(&s->new)
+		, arr_dtr(&s->ret), -1);
+	GRD2(width_handler_p(s) == -1, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	GRD2(arr_insertat(&s->ret, s->ret.len, s->new.arr, s->new.len) == -1
-		, free(s->new.arr), free(s->ret.arr), -1);
+		, arr_dtr(&s->new), arr_dtr(&s->ret), -1);
 	arr_dtr(&s->new);
 	++s->fmt;
 	return (1);

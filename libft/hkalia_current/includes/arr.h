@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:03:28 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/21 14:48:19 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/21 16:23:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int8_t			arr_insertat(t_arr *dst, size_t i, const void *src
 							, size_t src_len);
 int8_t			arr_removeat(t_arr *src, size_t i, size_t len);
 void			arr_swap(t_arr *src, size_t i, size_t j);
+void			arr_reverse(t_arr *src);
 void			arr_qsort(t_arr *src, int (*cmp)(const void *, const void *
 							, size_t));
 void			arr_qsort_r(t_arr *src, void *thunk, int (*cmp)(const void *

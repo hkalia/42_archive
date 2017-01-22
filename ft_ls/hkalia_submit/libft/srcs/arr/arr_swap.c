@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_z.c                                      :+:      :+:    :+:   */
+/*   arr_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 14:10:39 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 16:09:17 by hkalia           ###   ########.fr       */
+/*   Created: 2017/01/21 12:45:27 by hkalia            #+#    #+#             */
+/*   Updated: 2017/01/21 14:40:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_stdio.h>
-#include <stdlib.h>
+#include <arr.h>
 
-int8_t	ft_printf_z(t_ft_printf *s)
+void	arr_swap(t_arr *src, size_t i, size_t j)
 {
-	GRD1(s->int_len_mod != 0, arr_dtr(&s->ret), -1);
-	s->int_len_mod = 6;
-	++s->fmt;
-	return (0);
+	uint8_t	tmp;
+	uint8_t	*a;
+	uint8_t	*b;
+	size_t	cpyidx;
+
+	if (i > src->len || j > src->len || i == j)
+		return ;
+	a = ARR_INDEX(src, i);
+	b = ARR_INDEX(src, j);
+	cpyidx = 0;
+	while (cpyidx < src->elm)
+	{
+		tmp = a[cpyidx];
+		a[cpyidx] = b[cpyidx];
+		b[cpyidx] = tmp;
+		cpyidx++;
+	}
 }

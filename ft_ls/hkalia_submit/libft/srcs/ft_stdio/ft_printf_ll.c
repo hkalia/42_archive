@@ -15,7 +15,7 @@
 
 int8_t	ft_printf_ll(t_ft_printf *s)
 {
-	GRD1(s->int_len_mod != 0, free(s->ret.arr), -1);
+	GRD1(s->int_len_mod != 0, arr_dtr(&s->ret), -1);
 	s->int_len_mod = 4;
 	s->fmt += 2;
 	return (0);

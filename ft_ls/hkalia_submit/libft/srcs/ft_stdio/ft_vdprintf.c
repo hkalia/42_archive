@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_z.c                                      :+:      :+:    :+:   */
+/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 14:10:39 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/18 16:09:17 by hkalia           ###   ########.fr       */
+/*   Created: 2016/11/10 15:50:32 by hkalia            #+#    #+#             */
+/*   Updated: 2016/12/24 13:14:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int8_t	ft_printf_z(t_ft_printf *s)
+int		ft_vdprintf(int fd, const char *fmt, va_list *ap)
 {
-	GRD1(s->int_len_mod != 0, arr_dtr(&s->ret), -1);
-	s->int_len_mod = 6;
-	++s->fmt;
-	return (0);
+	char	*ret;
+	int		r;
+
+	if (fmt == 0 || *fmt == 0 || fd < 0)
+		return (0);
+	GRD((r = ft_vasprintf(&ret, fmt, ap)) == -1, -1);
+	GRD1(write(fd, ret, r) == -1, free(ret), -1);
+	free(ret);
+	return (r);
 }
