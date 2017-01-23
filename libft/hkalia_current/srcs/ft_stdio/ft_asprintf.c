@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:50:32 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/24 13:15:43 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/23 15:13:39 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int		ft_asprintf(char **ret, const char *fmt, ...)
 		return (0);
 	va_start(ap, fmt);
 	GRD((r = ft_vasprintf(ret, fmt, &ap)) == -1, -1);
-	write(1, ret, r);
-	free(ret);
 	va_end(ap);
 	return (r);
 }
