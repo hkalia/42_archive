@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/14 10:26:10 by hkalia           ###   ########.fr        #
+#    Updated: 2017/01/23 15:04:58 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra
 CFLAGS		+=	-Werror
 CFLAGS		+=	-I includes -I libft/includes
-CFLAGS		+=	-fsanitize=address
+#CFLAGS		+=	-fsanitize=address
 LDFLAGS		+=	-L libft/ -lft
-LDFLAGS		+=	-fsanitize=address
+#LDFLAGS		+=	-fsanitize=address
 
 LIBFT		:=	libft/libft.a
 

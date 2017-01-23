@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:25:15 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/14 09:58:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/23 14:39:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <time.h>
+# include <sys/syslimits.h>
+
+typedef struct	s_file
+{
+	char		*name;
+	struct stat	detail;
+}				t_file;
 
 uint8_t	 g_ft_ls_flgs = 0;
 
