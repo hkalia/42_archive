@@ -5,68 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/03 11:52:51 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/23 15:04:58 by hkalia           ###   ########.fr        #
+#    Created: 2017/01/24 14:41:06 by hkalia            #+#    #+#              #
+#    Updated: 2017/01/24 14:46:24 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	ft_ls
-SHELL		:=	/bin/zsh
+NAME	=	ft_ls
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -I libft/includes
 
-CC			:=	gcc
-CFLAGS		+=	-Wall -Wextra
-CFLAGS		+=	-Werror
-CFLAGS		+=	-I includes -I libft/includes
-#CFLAGS		+=	-fsanitize=address
-LDFLAGS		+=	-L libft/ -lft
-#LDFLAGS		+=	-fsanitize=address
-
-LIBFT		:=	libft/libft.a
-
-FILES		:=	main
-#FILES		+=	alloc_wrap
-SRC			:=	$(addprefix srcs/, $(addsuffix .c, $(FILES)))
-OBJ			:=	$(SRC:.c=.o)
-
-# MATH
-
-MAX			:=	$(words $(OBJ))
-n			:=	x
-increment	=	$1 x
-COUNTER		=	$(words $n)$(eval n := $(call increment,$n))
-
-# RULES
-
-.PHONY: all clean norm
-
+.PHONY: all clean
 all: $(NAME)
 
-$(LIBFT):
-	@make -C libft/
+$(NAME):
+	$(CC) $(CFLAGS) main.c libft.a -o $@
 
-$(OBJ): %.o: %.c
-	@printf "\r\e[31mCompiling...(%d/%d)\e[0m" $(COUNTER) $(MAX)
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(LIBFT) $(OBJ)
-	@printf "\r\e[32mCompiling...(%d/%d)[DONE]\n\e[0m" $(MAX) $(MAX)
-	@printf "\e[32mLinking... \e[0m"
-	@$(CC) $(LDFLAGS) $(OBJ) -o $(NAME)
-	@printf "\e[32m[DONE]\e[0m\n"
-
-clean:
-	@printf "\e[31mDeleting object files... \e[0m"
-	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\e[0m\n"
-
-fclean: clean
-	@printf "\e[31mDeleting %s... \e[0m" $(NAME)
-	@rm -f $(NAME)
-	@printf "\e[32m[DONE]\e[0m\n"
+fclean:
+	@rm -f ft_ls
 
 re: fclean all
-
-habib: re
-	@printf "\e[31mDeleting object files... \e[0m"
-	@rm -f $(OBJ)
-	@printf "\e[32m[DONE]\e[0m\n"

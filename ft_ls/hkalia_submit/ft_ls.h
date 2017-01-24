@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:25:15 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/23 14:39:46 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:44:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
 # endif
 
-# include <libft.h>
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -39,7 +39,5 @@ typedef struct	s_file
 	char		*name;
 	struct stat	detail;
 }				t_file;
-
-uint8_t	 g_ft_ls_flgs = 0;
 
 #endif

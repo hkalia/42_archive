@@ -6,13 +6,15 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/23 15:05:40 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:41:55 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ls.h>
+#include "ft_ls.h"
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
+uint8_t	g_ft_ls_flgs = 0;
 
 void	lhandler_3(char *path)
 {
@@ -147,6 +149,8 @@ int8_t	printer(char *path)
 	struct dirent	*dp;
 	t_arr			files;
 	size_t			i;
+	t_file			*tmp;
+	char			*tmp_c;
 
 	GRD((dirp = opendir(path)) == 0, -1);
 	GRD(arr_init(&files, 10, sizeof(t_file)) == -1, -1);
@@ -157,6 +161,7 @@ int8_t	printer(char *path)
 		GRD2(assign(&files, path, dp->d_name) == -1, closedir(dirp)
 			, arr_dtr(&files), -1);
 	}
+	tmp = (t_file *)files.arr;
 	if (g_ft_ls_flgs & 0x10)
 		arr_qsort(&files, time_compare);
 	else
@@ -169,13 +174,58 @@ int8_t	printer(char *path)
 	{
 		i = 0;
 		while (i < files.len)
+			printf("%s\n", tmp[i++].name);
+	}
+	if (g_ft_ls_flgs & 0x2)
+	{
+		i = 0;
+		while (i < files.len)
 		{
-			printf("%s\n", ((t_file *)ARR_INDEX(&files, i))->name);
+			if (S_ISDIR(tmp[i].detail.st_mode))
+			{
+				asprintf(&tmp_c, "%s/%s", path, tmp[i].name);
+				printf("\n%s:\n", tmp_c);
+				GRD(printer(tmp_c) == -1, -1);
+				free(tmp_c);
+			}
 			++i;
 		}
 	}
 	closedir(dirp);
 	arr_dtr(&files);
+	return (0);
+}
+
+int		compare_1(const void *a, const void *b, size_t elm)
+{
+	(void)elm;
+	return (ft_strcmp((*(char **)a), (*(char **)b)));
+}
+
+int8_t	handle_args(int i, int argc, char **argv)
+{
+	t_arr	names;
+	size_t	j;
+	char	**tmp;
+
+	GRD(arr_init(&names, 4, sizeof(char *)) == -1, -1);
+	while (i < argc)
+	{
+		GRD1(arr_insertat(&names, names.len, &argv[i], 1) == -1
+			, arr_dtr(&names), -1);
+		++i;
+	}
+	arr_qsort(&names, compare_1);
+	tmp = (char **)names.arr;
+	j = 0;
+	while (j < names.len)
+	{
+		printf("%s:\n", tmp[j]);
+		GRD(printer(tmp[j]) == -1, -1);
+		if (names.len - j != 1)
+			printf("\n");
+		++j;
+	}
 	return (0);
 }
 
@@ -209,13 +259,14 @@ int8_t	parser(int argc, char **argv)
 		++i;
 	}
 	if (i < argc)
-		while (i < argc)
-		{
-			printer(argv[i]);
-			++i;
-		}
+	{
+		if (argc - i == 1)
+			GRD(printer(argv[i + 1]) == -1, -1);
+		else
+			GRD(handle_args(i, argc, argv) == -1, -1);
+	}
 	else
-		printer(".");
+		GRD(printer(".") == -1, -1);
 	return (0);
 }
 
