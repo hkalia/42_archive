@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/24 14:41:55 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:26:51 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,48 +70,44 @@ void	lhandler_1(mode_t mode)
 	printf("%c", c);
 }
 
-int8_t	lhandler(t_arr *files, char *path)
+int8_t	lhandler(t_arr *files)
 {
 	t_file		*tmp;
-	char		*tmp_p;
 	int			widths[5];
 	long long	blks;
 	size_t		i;
 
-	(void)path;
 	tmp = (t_file *)files->arr;
 	ft_bzero(widths, 5 * sizeof(int));
 	blks = 0;
 	i = 0;
 	while (i < files->len)
 	{
-		widths[0] = MAX(widths[0], (int)ft_nbrlen(tmp[i].detail.st_nlink));
-		widths[1] = MAX(widths[1], (int)ft_strlen(getpwuid(tmp[i].detail.st_uid)
+		widths[0] = MAX(widths[0], (int)ft_nbrlen(tmp[i].info.st_nlink));
+		widths[1] = MAX(widths[1], (int)ft_strlen(getpwuid(tmp[i].info.st_uid)
 													->pw_name));
-		widths[2] = MAX(widths[2], (int)ft_strlen(getgrgid(tmp[i].detail.st_gid)
+		widths[2] = MAX(widths[2], (int)ft_strlen(getgrgid(tmp[i].info.st_gid)
 													->gr_name));
-		widths[3] = MAX(widths[3], (int)ft_nbrlen(tmp[i].detail.st_size));
-		blks += tmp[i].detail.st_blocks;
+		widths[3] = MAX(widths[3], (int)ft_nbrlen(tmp[i].info.st_size));
+		blks += tmp[i].info.st_blocks;
 		++i;
 	}
 	printf("total %lld\n", blks);
 	i = 0;
 	while (i < files->len)
 	{
-		lhandler_1(tmp[i].detail.st_mode);
-		lhandler_2(tmp[i].detail.st_mode);
-		asprintf(&tmp_p, "%s/%s", path, tmp[i].name);
-		printf(listxattr(tmp_p, 0, 0, XATTR_NOFOLLOW) > 0 ? "@" : " ");
-		printf(" %*d", widths[0], tmp[i].detail.st_nlink);
-		printf(" %-*s ", widths[1], getpwuid(tmp[i].detail.st_uid)->pw_name);
-		printf(" %-*s ", widths[2], getgrgid(tmp[i].detail.st_gid)->gr_name);
-		printf(" %*lld", widths[3], tmp[i].detail.st_size);
-		printf(" %.12s", &ctime(&tmp[i].detail.st_mtimespec.tv_sec)[4]);
-		printf(" %s", tmp[i].name);
-		if (S_ISLNK(tmp[i].detail.st_mode))
-			lhandler_3(tmp_p);
+		lhandler_1(tmp[i].info.st_mode);
+		lhandler_2(tmp[i].info.st_mode);
+		printf(listxattr(tmp[i].path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@" : " ");
+		printf(" %*d", widths[0], tmp[i].info.st_nlink);
+		printf(" %-*s ", widths[1], getpwuid(tmp[i].info.st_uid)->pw_name);
+		printf(" %-*s ", widths[2], getgrgid(tmp[i].info.st_gid)->gr_name);
+		printf(" %*lld", widths[3], tmp[i].info.st_size);
+		printf(" %.12s", &ctime(&tmp[i].info.st_mtimespec.tv_sec)[4]);
+		printf(" %s", tmp[i].basename);
+		if (S_ISLNK(tmp[i].info.st_mode))
+			lhandler_3(tmp[i].path);
 		printf("\n");
-		free(tmp_p);
 		++i;
 	}
 	return (0);
@@ -120,47 +116,59 @@ int8_t	lhandler(t_arr *files, char *path)
 int		compare(const void *a, const void *b, size_t elm)
 {
 	(void)elm;
-	return (ft_strcmp(((t_file *)a)->name, ((t_file *)b)->name));
+	return (ft_strcmp(((t_file *)a)->basename, ((t_file *)b)->basename));
 }
 
 int		time_compare(const void *a, const void *b, size_t elm)
 {
 	(void)elm;
-	return (((t_file *)b)->detail.st_mtimespec.tv_sec
-			- ((t_file *)a)->detail.st_mtimespec.tv_sec);
+	return (((t_file *)b)->info.st_mtimespec.tv_sec
+			- ((t_file *)a)->info.st_mtimespec.tv_sec);
 }
 
-int8_t	assign(t_arr *files, char *path, char *name)
+static void	del(t_arr *files)
 {
-	char	*tmp;
-	t_file	tmp_s;
+	t_file	*tmp;
+	size_t	i;
 
-	tmp_s.name = name;
-	asprintf(&tmp, "%s/%s", path, name);
-	lstat(tmp, &tmp_s.detail);
-	GRD1(arr_insertat(files, files->len, &tmp_s, 1) == -1, free(tmp), -1);
-	free(tmp);
-	return (0);
+	tmp = (t_file *)files->arr;
+	i = 0;
+	while (i < files->len)
+	{
+		free(tmp[i].path);
+		free(tmp[i].basename);
+		++i;
+	}
+	arr_dtr(files);
 }
 
-int8_t	printer(char *path)
+int8_t	open_dir(t_arr *files, char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
-	t_arr			files;
-	size_t			i;
-	t_file			*tmp;
-	char			*tmp_c;
+	t_file			tmp;
 
 	GRD((dirp = opendir(path)) == 0, -1);
-	GRD(arr_init(&files, 10, sizeof(t_file)) == -1, -1);
+	GRD(arr_init(files, 10, sizeof(t_file)) == -1, -1);
 	while ((dp = readdir(dirp)) != 0)
 	{
-		if (dp->d_name[0] == '.' && !(g_ft_ls_flgs & 0x4))
-			continue;
-		GRD2(assign(&files, path, dp->d_name) == -1, closedir(dirp)
-			, arr_dtr(&files), -1);
+		asprintf(&tmp.path, "%s/%s", path, dp->d_name);
+		tmp.basename = ft_strdup(dp->d_name);
+		lstat(tmp.path, &tmp.info);
+		GRD2(arr_insertat(files, files->len, &tmp, 1) == -1, del(files)
+			, closedir(dirp), -1);
 	}
+	closedir(dirp);
+	return (0);
+}
+
+int8_t	print_dir(char *path)
+{
+	t_arr			files;
+	t_file			*tmp;
+	size_t			i;
+
+	GRD(open_dir(&files, path) == -1, -1);
 	tmp = (t_file *)files.arr;
 	if (g_ft_ls_flgs & 0x10)
 		arr_qsort(&files, time_compare);
@@ -169,30 +177,29 @@ int8_t	printer(char *path)
 	if (g_ft_ls_flgs & 0x8)
 		arr_reverse(&files);
 	if (g_ft_ls_flgs & 0x1)
-		lhandler(&files, path);
+		lhandler(&files);
 	else
 	{
 		i = 0;
 		while (i < files.len)
-			printf("%s\n", tmp[i++].name);
+			printf("%s\n", tmp[i++].basename);
 	}
 	if (g_ft_ls_flgs & 0x2)
 	{
 		i = 0;
 		while (i < files.len)
 		{
-			if (S_ISDIR(tmp[i].detail.st_mode))
+			if (S_ISDIR(tmp[i].info.st_mode)
+				&& ft_strcmp(tmp[i].basename, ".") != 0
+				&& ft_strcmp(tmp[i].basename, "..") != 0)
 			{
-				asprintf(&tmp_c, "%s/%s", path, tmp[i].name);
-				printf("\n%s:\n", tmp_c);
-				GRD(printer(tmp_c) == -1, -1);
-				free(tmp_c);
+				printf("\n%s:\n", path);
+				GRD1(print_dir(path) == -1, del(&files), -1);
 			}
 			++i;
 		}
 	}
-	closedir(dirp);
-	arr_dtr(&files);
+	del(&files);
 	return (0);
 }
 
@@ -221,11 +228,34 @@ int8_t	handle_args(int i, int argc, char **argv)
 	while (j < names.len)
 	{
 		printf("%s:\n", tmp[j]);
-		GRD(printer(tmp[j]) == -1, -1);
+		GRD(print_dir(tmp[j]) == -1, -1);
 		if (names.len - j != 1)
 			printf("\n");
 		++j;
 	}
+	return (0);
+}
+
+char	*get_parent(char *path)
+{
+	size_t	len;
+
+	if ((len = (ft_strrchr(path, '/') - path)) <= 0)
+		return (ft_strdup("."));
+	else
+		return (ft_strndup(path, len));
+}
+
+int8_t	handle_one(char *path)
+{
+	char			*parent;
+	t_arr			files;
+
+	GRD((parent = get_parent(path)) == 0, -1);
+	printf("%s\n", parent);
+	GRD1(open_dir(&files, parent) == -1, free(parent), -1);
+	free(parent);
+	del(&files);
 	return (0);
 }
 
@@ -239,8 +269,8 @@ int8_t	parser(int argc, char **argv)
 	{
 		if (argv[i][1] == '-')
 			break ;
-		j = 1;
-		while (argv[i][j] != 0)
+		j = 0;
+		while (argv[i][++j] != 0)
 		{
 			if (argv[i][j] == 'l')
 				g_ft_ls_flgs |= 0x1;
@@ -252,28 +282,28 @@ int8_t	parser(int argc, char **argv)
 				g_ft_ls_flgs |= 0x8;
 			else if (argv[i][j] == 't')
 				g_ft_ls_flgs |= 0x10;
+			else if (argv[i][j] == '1');
 			else
 				return (-1);
-			++j;
 		}
 		++i;
 	}
 	if (i < argc)
 	{
 		if (argc - i == 1)
-			GRD(printer(argv[i + 1]) == -1, -1);
+			GRD(handle_one(argv[i]) == -1, -1);
 		else
 			GRD(handle_args(i, argc, argv) == -1, -1);
 	}
 	else
-		GRD(printer(".") == -1, -1);
+		GRD(print_dir(".") == -1, -1);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	if (argc == 1)
-		GRD(printer(".") == -1, -1);
+		GRD(print_dir(".") == -1, -1);
 	else if (argc > 1)
 		GRD(parser(argc, argv) == -1, -1);
 	else

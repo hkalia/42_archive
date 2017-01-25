@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:25:15 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/24 14:44:56 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:05:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 
 typedef struct	s_file
 {
-	char		*name;
-	struct stat	detail;
+	char		*path;
+	char		*basename;
+	struct stat	info;
 }				t_file;
 
 #endif
