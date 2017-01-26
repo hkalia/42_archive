@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 15:28:07 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/25 14:26:51 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:24:21 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int8_t	lhandler(t_arr *files)
 	i = 0;
 	while (i < files->len)
 	{
+		if (tmp[i].basename[0] == '.' && !(g_ft_ls_flgs & 0x4))
+			continue ;
 		widths[0] = MAX(widths[0], (int)ft_nbrlen(tmp[i].info.st_nlink));
 		widths[1] = MAX(widths[1], (int)ft_strlen(getpwuid(tmp[i].info.st_uid)
 													->pw_name));
@@ -96,6 +98,8 @@ int8_t	lhandler(t_arr *files)
 	i = 0;
 	while (i < files->len)
 	{
+		if (tmp[i].basename[0] == '.' && !(g_ft_ls_flgs & 0x4))
+			continue ;
 		lhandler_1(tmp[i].info.st_mode);
 		lhandler_2(tmp[i].info.st_mode);
 		printf(listxattr(tmp[i].path, 0, 0, XATTR_NOFOLLOW) > 0 ? "@" : " ");
@@ -142,7 +146,7 @@ static void	del(t_arr *files)
 	arr_dtr(files);
 }
 
-int8_t	open_dir(t_arr *files, char *path)
+int8_t	get_dir(t_arr *files, char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -153,8 +157,16 @@ int8_t	open_dir(t_arr *files, char *path)
 	while ((dp = readdir(dirp)) != 0)
 	{
 		asprintf(&tmp.path, "%s/%s", path, dp->d_name);
-		tmp.basename = ft_strdup(dp->d_name);
-		lstat(tmp.path, &tmp.info);
+		GRD2((tmp.basename = ft_strdup(dp->d_name)) == 0, del(files)
+			, closedir(dirp), -1);
+		if (lstat(tmp.path, &tmp.info) == -1)
+		{
+			free(tmp.path);
+			free(tmp.basename);
+			del(files);
+			closedir(dirp);
+			return (-1);
+		}
 		GRD2(arr_insertat(files, files->len, &tmp, 1) == -1, del(files)
 			, closedir(dirp), -1);
 	}
@@ -168,7 +180,7 @@ int8_t	print_dir(char *path)
 	t_file			*tmp;
 	size_t			i;
 
-	GRD(open_dir(&files, path) == -1, -1);
+	GRD(get_dir(&files, path) == -1, -1);
 	tmp = (t_file *)files.arr;
 	if (g_ft_ls_flgs & 0x10)
 		arr_qsort(&files, time_compare);
@@ -182,7 +194,11 @@ int8_t	print_dir(char *path)
 	{
 		i = 0;
 		while (i < files.len)
+		{
+			if (tmp[i].basename[0] == '.' && !(g_ft_ls_flgs & 0x4))
+				continue ;
 			printf("%s\n", tmp[i++].basename);
+		}
 	}
 	if (g_ft_ls_flgs & 0x2)
 	{
@@ -190,8 +206,8 @@ int8_t	print_dir(char *path)
 		while (i < files.len)
 		{
 			if (S_ISDIR(tmp[i].info.st_mode)
-				&& ft_strcmp(tmp[i].basename, ".") != 0
-				&& ft_strcmp(tmp[i].basename, "..") != 0)
+				&& !(ft_strcmp(tmp[i].basename, ".") == 0
+				|| ft_strcmp(tmp[i].basename, "..") == 0))
 			{
 				printf("\n%s:\n", path);
 				GRD1(print_dir(path) == -1, del(&files), -1);
@@ -203,59 +219,66 @@ int8_t	print_dir(char *path)
 	return (0);
 }
 
-int		compare_1(const void *a, const void *b, size_t elm)
+int8_t	print_file(t_file file)
 {
-	(void)elm;
-	return (ft_strcmp((*(char **)a), (*(char **)b)));
+	(void)file;
+	return (0);
 }
 
-int8_t	handle_args(int i, int argc, char **argv)
+char	*ft_basename(char *path)
 {
-	t_arr	names;
-	size_t	j;
-	char	**tmp;
+	char	*base;
 
-	GRD(arr_init(&names, 4, sizeof(char *)) == -1, -1);
-	while (i < argc)
+	base = path;
+	while (*path)
 	{
-		GRD1(arr_insertat(&names, names.len, &argv[i], 1) == -1
-			, arr_dtr(&names), -1);
-		++i;
+		if (*path++ == '/')
+			base = path;
 	}
-	arr_qsort(&names, compare_1);
-	tmp = (char **)names.arr;
-	j = 0;
-	while (j < names.len)
+	return (base);
+}
+
+int8_t	get_info(t_file *ret, char *path)
+{
+	if (ft_strchr(path, '/') != 0)
 	{
-		printf("%s:\n", tmp[j]);
-		GRD(print_dir(tmp[j]) == -1, -1);
-		if (names.len - j != 1)
-			printf("\n");
-		++j;
+		GRD((ret->path = ft_strdup(path)) == 0, -1);
+		GRD1((ret->basename = ft_strdup(ft_basename(path))) == 0
+			, free(ret->path), -1);
+		GRD2(lstat(path, &ret->info) == -1, free(ret->path), free(ret->basename)
+			, -1);
+	}
+	else
+	{
+		asprintf(&ret->path, "./%s", path);
+		GRD1((ret->basename = ft_strdup(ft_basename(path))) == 0
+			, free(ret->path), -1);
+		GRD2(lstat(ret->path, &ret->info) == -1, free(ret->path)
+			, free(ret->basename), -1);
 	}
 	return (0);
 }
 
-char	*get_parent(char *path)
+int8_t	handle_args(int i, int argc, char **argv)
 {
-	size_t	len;
+	t_arr	files;
+	t_file	tmp;
+	size_t	j;
 
-	if ((len = (ft_strrchr(path, '/') - path)) <= 0)
-		return (ft_strdup("."));
+	GRD(arr_init(&files, (argc - i) + 2, sizeof(t_file)) == -1, -1);
+	while (i < argc)
+	{
+		GRD1(get_info(&tmp, argv[i]) == -1, del(&files), -1);
+		GRD3(arr_insertat(&files, files.len, &tmp, 1) == -1, free(tmp.path)
+			, free(tmp.basename), del(&files), -1);
+		++i;
+	}
+	if (g_ft_ls_flgs & 0x10)
+		arr_qsort(&files, time_compare);
 	else
-		return (ft_strndup(path, len));
-}
-
-int8_t	handle_one(char *path)
-{
-	char			*parent;
-	t_arr			files;
-
-	GRD((parent = get_parent(path)) == 0, -1);
-	printf("%s\n", parent);
-	GRD1(open_dir(&files, parent) == -1, free(parent), -1);
-	free(parent);
-	del(&files);
+		arr_qsort(&files, compare);
+	if (g_ft_ls_flgs & 0x8)
+		arr_reverse(&files);
 	return (0);
 }
 
@@ -289,12 +312,7 @@ int8_t	parser(int argc, char **argv)
 		++i;
 	}
 	if (i < argc)
-	{
-		if (argc - i == 1)
-			GRD(handle_one(argv[i]) == -1, -1);
-		else
-			GRD(handle_args(i, argc, argv) == -1, -1);
-	}
+		GRD(handle_args(i, argc, argv) == -1, -1);
 	else
 		GRD(print_dir(".") == -1, -1);
 	return (0);
