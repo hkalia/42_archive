@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/21 16:22:30 by hkalia           ###   ########.fr        #
+#    Updated: 2017/01/28 17:52:39 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,12 @@ LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-ARR			:=	arr_dtr arr_init arr_insertat arr_qsort_r arr_qsort			\
-				arr_reverse arr_swap arr_removeat arr_reserve arr_tostr
-CHR			:=	ft_putchar_fd
+CHR			:=	ft_putchar_fd ft_putchar
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
 FT_STDIO	:=	ft_printf ft_dprintf ft_asprintf ft_vprintf ft_vdprintf		\
-				ft_vasprintf ft_putchar ft_printf_flags ft_printf_width		\
+				ft_vasprintf ft_printf_flags ft_printf_width		\
 				ft_printf_dot ft_printf_hh ft_printf_h ft_printf_l			\
 				ft_printf_ll ft_printf_j ft_printf_z ft_printf_d			\
 				ft_printf_o ft_printf_u ft_printf_x ft_printf_cap_x			\
@@ -55,8 +53,7 @@ STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
 				ft_strmapi ft_strnequ ft_strnew ft_strsplit ft_strsub		\
 				ft_strtrim
 TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
-FILES		:=	$(addprefix arr/, $(ARR))				\
-				$(addprefix chr/, $(CHR))				\
+FILES		:=	$(addprefix chr/, $(CHR))				\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
 				$(addprefix ft_stdio/, $(FT_STDIO))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\

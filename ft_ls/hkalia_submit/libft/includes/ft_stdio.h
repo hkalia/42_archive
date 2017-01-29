@@ -6,12 +6,23 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/21 15:04:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/28 13:29:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STDIO_H
 # define FT_STDIO_H
+
+# ifndef GRDS
+#  define GRD1(a, b) do{if(a){b;}}while(0)
+#  define GRD2(a, b, c) do{if(a){b;c;}}while(0)
+#  define GRD3(a, b, c, d) do{if(a){b;c;d;}}while(0)
+#  define GRD4(a, b, c, d, e) do{if(a){b;c;d;e;}}while(0)
+#  define GRD5(a, b, c, d, e, f) do{if(a){b;c;d;e;f;}}while(0)
+#  define GRD6(a, b, c, d, e, f, g) do{if(a){b;c;d;e;f;g;}}while(0)
+#  define GRD7(a, b, c, d, e, f, g, h) do{if(a){b;c;d;e;f;g;h;}}while(0)
+#  define GRD8(a, b, c, d, e, f, g, h, i) do{if(a){b;c;d;e;f;g;h;i;}}while(0)
+# endif
 
 # include <stddef.h>
 # include <stdint.h>
@@ -19,12 +30,7 @@
 # include <stdarg.h>
 # include "arr.h"
 
-# ifndef GRDS
-#  define GRD(a, b) do{if(a){return(b);}}while(0)
-#  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
-#  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
-#  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
-# endif
+
 
 /*
 **	if you add to the below struct, please be sure to update the dispatcher
