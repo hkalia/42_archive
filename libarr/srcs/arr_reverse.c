@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 16:17:22 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/28 17:46:54 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:10:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <arr.h>
+#include "arr_private.h"
 
 void	arr_swap(t_arr *src, size_t i, size_t j)
 {

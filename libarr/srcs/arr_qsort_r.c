@@ -6,11 +6,11 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 13:04:50 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/28 17:47:16 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:10:56 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <arr.h>
+#include "arr_private.h"
 #include <stdio.h>
 
 #define SWAP(a, b) tmp = a; a = b; b = tmp;
