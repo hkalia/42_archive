@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:27:31 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 14:27:52 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:30:14 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define CHR_H
 
 int	ft_putchar_fd(int src, int fd);
+int	ft_putchar(int src);
 
 #endif

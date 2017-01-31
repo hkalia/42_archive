@@ -6,14 +6,13 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:57:57 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/20 15:15:03 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:32:41 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "arr.h"
 # include "ft_ctype.h"
 # include "ft_stdio.h"
 # include "ft_stdlib.h"

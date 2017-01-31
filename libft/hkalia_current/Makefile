@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/28 17:52:39 by hkalia           ###   ########.fr        #
+#    Updated: 2017/01/31 15:29:44 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,6 @@ STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
 TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
 FILES		:=	$(addprefix chr/, $(CHR))				\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
-				$(addprefix ft_stdio/, $(FT_STDIO))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
 				$(addprefix gnl/, $(GNL))				\

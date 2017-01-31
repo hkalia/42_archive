@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:09:37 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/10 14:58:38 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:31:01 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #  define GRD1(a, b, c) do{if(a){b;return(c);}}while(0)
 #  define GRD2(a, b, c, d) do{if(a){b;c;return(d);}}while(0)
 #  define GRD3(a, b, c, d, e) do{if(a){b;c;d;return(e);}}while(0)
+#  define GRD4(a, b, c, d, e, f) do{if(a){b;c;d;e;return(f);}}while(0)
+#  define GRD5(a, b, c, d, e, f, g) do{if(a){b;c;d;e;f;return(g);}}while(0)
+#  define GRD6(a, b, c, d, e, f, g, h) do{if(a){b;c;d;e;f;g;return(h);}}while(0)
 # endif
 
 # include <stddef.h>
