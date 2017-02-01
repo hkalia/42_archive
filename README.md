@@ -1,6 +1,15 @@
 # 42
-Piscine C
 
-Libft
+piscine_c
 
-Pull request are welcome!! If you wish to merge into the main branch, please follow the naming scheme.
+libft
+
+fillit
+
+get_next_line
+
+ft_printf
+
+fdf
+
+ft_ls
