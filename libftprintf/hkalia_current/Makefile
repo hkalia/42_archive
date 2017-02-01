@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/30 12:04:04 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/01 12:22:11 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,18 @@ SHELL		:=	/bin/zsh
 CC			:=	gcc
 CFLAGS		+=	-Wall -Wextra -I includes
 CFLAGS		+=	-Werror
-#CFLAGS		+=	-fsanitize=address
+#CFLAGS		+=	-g -fsanitize=address
 LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
-#LDFLAGS		+=	-fsanitize=address
+#LDFLAGS		+=	-g -fsanitize=address
 
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-FT_STDIO	:=	ft_printf ft_dprintf ft_asprintf ft_vprintf ft_vdprintf		\
-				ft_vasprintf ft_printf_flags ft_printf_width		\
-				ft_printf_dot ft_printf_hh ft_printf_h ft_printf_l			\
-				ft_printf_ll ft_printf_j ft_printf_z ft_printf_d			\
-				ft_printf_o ft_printf_u ft_printf_x ft_printf_cap_x			\
-				ft_printf_cap_d ft_printf_cap_o ft_printf_cap_u				\
-				ft_printf_cap_c ft_printf_c ft_printf_cap_s ft_printf_s		\
-				ft_printf_p ft_printf_mod
+FILES		:=	ft_printf ft_printf_arr_1 ft_printf_arr_2 ft_printf_arr_3	\
+				ft_printf_begin ft_printf_c ft_printf_d ft_printf_extras_1	\
+				ft_printf_extras_2 ft_printf_extras_3 ft_printf_len_mod_1	\
+				ft_printf_len_mod_2 ft_printf_o ft_printf_p ft_printf_s		\
+				ft_printf_u ft_printf_x ft_vasprintf
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

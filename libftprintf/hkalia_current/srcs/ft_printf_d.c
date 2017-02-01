@@ -6,16 +6,15 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:02:41 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 14:13:36 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/01 12:24:24 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
-#include <sys/types.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-static int8_t	width_h_d(t_ft_printf *s)
+static int8_t	width_h(t_ft_printf *s)
 {
 	char	*tmp;
 	int		diff;
@@ -29,12 +28,12 @@ static int8_t	width_h_d(t_ft_printf *s)
 		ft_printf_memset(tmp, s->flgs & 0x10 ? '0' : ' ', diff);
 		GRD1(ft_printf_arr_insertm(&s->new, s->flgs & 0x1 ? s->new.len : 0 + flg
 			, tmp, diff) == -1, free(tmp), -1);
-			free(tmp);
-		}
-		return (0);
+		free(tmp);
+	}
+	return (0);
 }
 
-static int8_t	dot_h_d(t_ft_printf *s)
+static int8_t	dot_h(t_ft_printf *s)
 {
 	char	*tmp;
 	int		diff;
@@ -89,18 +88,14 @@ int8_t			ft_printf_d(t_ft_printf_arr *ret, const char **fmt, va_list arg
 	s->new.cap = s->new.len + 1;
 	if (s->flgs & 0x20 && s->flgs & 0x10)
 		s->flgs &= ~0x10;
-	GRD2(dot_h_d(s) == -1, ft_printf_arr_dtr(&s->new), ft_printf_arr_dtr(ret)
+	GRD2(dot_h(s) == -1, ft_printf_arr_dtr(&s->new), ft_printf_arr_dtr(ret)
 		, -1);
 	if (s->new.ptr[0] != '-' && (s->flgs & 0x2 || s->flgs & 0x4))
 		GRD(ft_printf_arr_insert(&s->new, 0, s->flgs & 0x2 ? "+" : " ") == -1
 			, -1);
-	GRD2(width_h_d(s) == -1, ft_printf_arr_dtr(&s->new), ft_printf_arr_dtr(ret)
+	GRD2(width_h(s) == -1, ft_printf_arr_dtr(&s->new), ft_printf_arr_dtr(ret)
 		, -1);
-	GRD2(ft_printf_arr_appendarr(ret, &s->new) == -1, ft_printf_arr_dtr(&s->new)
-		, ft_printf_arr_dtr(ret), -1);
-	ft_printf_arr_dtr(&s->new);
-	++*fmt;
-	return (1);
+	return (ft_printf_line(ret, fmt, s));
 }
 
 int8_t			ft_printf_cap_d(t_ft_printf_arr *ret, const char **fmt

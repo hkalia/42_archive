@@ -1,70 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_extras_mem.c                             :+:      :+:    :+:   */
+/*   ft_printf_extras.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:23:38 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 13:30:21 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/01 10:02:50 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
+#include <stdlib.h>
 
-void	ft_printf_bzero(void *src, size_t len)
+size_t	ft_printf_strlen(const char *src)
 {
-	unsigned char	*src_cpy;
+	const char	*src_cpy;
 
-	src_cpy = (unsigned char *)src;
-	while (len--)
-		*src_cpy++ = 0;
+	src_cpy = src;
+	while (*src_cpy)
+		++src_cpy;
+	return (src_cpy - src);
 }
 
-void	*ft_printf_memset(void *dst, int src, size_t len)
+char	*ft_printf_strdup(const char *src)
 {
-	unsigned char	*dst_cpy;
+	size_t	i;
+	size_t	src_len;
+	char	*dst;
 
-	dst_cpy = (unsigned char *)dst;
-	while (len > 0)
+	i = 0;
+	src_len = ft_printf_strlen(src);
+	GRD((dst = malloc(sizeof(char) * (src_len + 1))) == 0, 0);
+	while (i < src_len)
 	{
-		*dst_cpy = (unsigned char)src;
-		len--;
-		dst_cpy++;
+		dst[i] = src[i];
+		i++;
 	}
+	dst[i] = '\0';
 	return (dst);
 }
 
-void	*ft_printf_memcpy(void *dst, const void *src, size_t len)
+char	*ft_printf_strchr(const char *src, int src_x)
 {
-	unsigned char		*dst_cpy;
-	const unsigned char	*src_cpy;
-
-	dst_cpy = (unsigned char *)dst;
-	src_cpy = (const unsigned char *)src;
-	while (len-- > 0)
-		*dst_cpy++ = *src_cpy++;
-	return (dst);
-}
-
-void	*ft_printf_memmove(void *dst, const void *src, size_t len)
-{
-	unsigned char	*src_cpy;
-	unsigned char	*dst_cpy;
-
-	src_cpy = (unsigned char *)src;
-	dst_cpy = (unsigned char *)dst;
-	if (src_cpy < dst_cpy)
+	while (*src != (char)src_x)
 	{
-		src_cpy = src_cpy + len - 1;
-		dst_cpy = dst_cpy + len - 1;
-		while (len-- > 0)
-			*dst_cpy-- = *src_cpy--;
+		GRD(*src == 0, 0);
+		src++;
 	}
-	else
-	{
-		while (len-- > 0)
-			*dst_cpy++ = *src_cpy++;
-	}
-	return (dst);
+	return ((char *)src);
 }

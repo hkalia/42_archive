@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   ft_printf_len_mod_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 15:50:32 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 14:07:02 by hkalia           ###   ########.fr       */
+/*   Created: 2017/02/01 09:29:34 by hkalia            #+#    #+#             */
+/*   Updated: 2017/02/01 10:08:53 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
-#include <stdlib.h>
-#include <unistd.h>
 
-int		ft_dprintf(int fd, const char *fmt, ...)
+int8_t		ft_printf_z(t_ft_printf_arr *ret, const char **fmt, va_list arg
+						, t_ft_printf *s)
 {
-	va_list	ap;
-	char	*ret;
-	int		r;
-
-	if (fmt == 0 || *fmt == 0 || fd < 0)
-		return (0);
-	va_start(ap, fmt);
-	GRD((r = ft_vasprintf(&ret, fmt, &ap)) == -1, -1);
-	GRD2(write(fd, ret, r) == -1, free(ret), va_end(ap), -1);
-	free(ret);
-	va_end(ap);
-	return (r);
+	(void)arg;
+	GRD1(s->len_mod != 0, ft_printf_arr_dtr(ret), -1);
+	s->len_mod = 6;
+	++*fmt;
+	return (0);
 }

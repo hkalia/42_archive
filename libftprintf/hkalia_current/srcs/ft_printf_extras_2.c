@@ -1,86 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_extras_nbr.c                             :+:      :+:    :+:   */
+/*   ft_printf_extras_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:23:38 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 13:40:19 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/01 10:02:47 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
-#include <stdlib.h>
-#include <stdbool.h>
 
-static short	ft_printf_nbrlen(intmax_t src)
+void	ft_printf_bzero(void *src, size_t len)
 {
-	short	ret;
+	unsigned char	*src_cpy;
 
-	if (src == 0)
-		return (1);
-	ret = src < 0 ? 1 : 0;
-	while (src != 0)
-	{
-		src = src / 10;
-		++ret;
-	}
-	return (ret);
+	src_cpy = (unsigned char *)src;
+	while (len--)
+		*src_cpy++ = 0;
 }
 
-char			*ft_printf_itoa(intmax_t src)
+void	*ft_printf_memset(void *dst, int src, size_t len)
 {
-	short		src_len;
-	bool		flg_neg;
-	uintmax_t	src_cpy;
-	char		*ret;
+	unsigned char	*dst_cpy;
 
-	src_len = ft_printf_nbrlen(src);
-	GRD((ret = malloc(sizeof(char) * (src_len + 1))) == 0, 0);
-	flg_neg = (src < 0) ? 1 : 0;
-	src_cpy = src;
-	src_cpy = flg_neg ? -src_cpy : src_cpy;
-	while (--src_len)
+	dst_cpy = (unsigned char *)dst;
+	while (len > 0)
 	{
-		ret[src_len] = src_cpy % 10 + '0';
-		src_cpy = src_cpy / 10;
+		*dst_cpy = (unsigned char)src;
+		len--;
+		dst_cpy++;
 	}
-	ret[src_len] = flg_neg ? '-' : src_cpy % 10 + '0';
-	return (ret);
+	return (dst);
 }
 
-static short	ft_nbrlen_base(uintmax_t src, short base)
+void	*ft_printf_memcpy(void *dst, const void *src, size_t len)
 {
-	short	ret;
+	unsigned char		*dst_cpy;
+	const unsigned char	*src_cpy;
 
-	ret = 0;
-	if (src == 0)
-		return (1);
-	while (src != 0)
-	{
-		src = src / base;
-		++ret;
-	}
-	return (ret);
+	dst_cpy = (unsigned char *)dst;
+	src_cpy = (const unsigned char *)src;
+	while (len-- > 0)
+		*dst_cpy++ = *src_cpy++;
+	return (dst);
 }
 
-char			*ft_printf_itoa_base(uintmax_t src, short base
-									, const char *spec)
+void	*ft_printf_memmove(void *dst, const void *src, size_t len)
 {
-	short	src_len;
-	char	*ret;
+	unsigned char	*src_cpy;
+	unsigned char	*dst_cpy;
 
-	if (base < 2)
-		return (0);
-	src_len = ft_nbrlen_base(src, base);
-	GRD((ret = malloc(sizeof(char) * (src_len + 1))) == 0, 0);
-	ft_printf_bzero(ret, src_len + 1);
-	while (--src_len)
+	src_cpy = (unsigned char *)src;
+	dst_cpy = (unsigned char *)dst;
+	if (src_cpy < dst_cpy)
 	{
-		ret[src_len] = spec[src % base];
-		src = src / base;
+		src_cpy = src_cpy + len - 1;
+		dst_cpy = dst_cpy + len - 1;
+		while (len-- > 0)
+			*dst_cpy-- = *src_cpy--;
 	}
-	ret[src_len] = spec[src % base];
-	return (ret);
+	else
+	{
+		while (len-- > 0)
+			*dst_cpy++ = *src_cpy++;
+	}
+	return (dst);
 }

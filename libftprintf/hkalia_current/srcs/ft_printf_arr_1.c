@@ -1,71 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_arr_insert.c                             :+:      :+:    :+:   */
+/*   ft_printf_arr_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/12 13:08:42 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/30 14:40:36 by hkalia           ###   ########.fr       */
+/*   Created: 2017/01/28 16:14:18 by hkalia            #+#    #+#             */
+/*   Updated: 2017/02/01 11:49:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
+#include <stdlib.h>
 
-int8_t	ft_printf_arr_insert(t_ft_printf_arr *dst, size_t idx, const void *src)
+int8_t	ft_printf_arr_init(t_ft_printf_arr *src, size_t cap)
 {
-	GRD(dst == 0, -1);
-	GRD(dst->cap == 0, -1);
-	if (idx > dst->len)
-		GRD(ft_printf_arr_resize(dst, idx) == -1, -1);
-	GRD(ft_printf_arr_reserve(dst, 1) == -1, -1);
-	if (idx < dst->len)
-		ft_printf_memmove(&dst->ptr[idx + 1], &dst->ptr[idx], dst->len - idx);
-	ft_printf_memcpy(&dst->ptr[idx], src, 1);
-	++dst->len;
+	GRD(src == 0 || cap == 0, -1);
+	ft_printf_bzero(src, sizeof(t_ft_printf_arr));
+	GRD((src->ptr = malloc(cap)) == 0, -1);
+	src->cap = cap;
 	return (0);
 }
 
-int8_t	ft_printf_arr_insertm(t_ft_printf_arr *dst, size_t idx, const void *src
-								, size_t src_len)
+int8_t	ft_printf_arr_reserve(t_ft_printf_arr *src, size_t sze)
 {
-	GRD(dst == 0, -1);
-	GRD(dst->cap == 0, -1);
-	GRD(src_len == 0, 0);
-	if (idx > dst->len)
-		GRD(ft_printf_arr_resize(dst, idx) == -1, -1);
-	GRD(ft_printf_arr_reserve(dst, src_len) == -1, -1);
-	if (idx < dst->len)
-		ft_printf_memmove(&dst->ptr[idx + src_len], &dst->ptr[idx]
-								, dst->len - idx);
-	ft_printf_memcpy(&dst->ptr[idx], src, src_len);
-	dst->len += src_len;
+	char	*tmp;
+
+	GRD(src == 0, -1);
+	GRD(src->cap == 0, -1);
+	if (src->len + sze > src->cap)
+	{
+		while (src->len + sze > src->cap)
+			src->cap = 2 * src->cap;
+		GRD((tmp = malloc(src->cap)) == 0, -1);
+		ft_printf_memcpy(tmp, src->ptr, src->len);
+		free(src->ptr);
+		src->ptr = tmp;
+	}
 	return (0);
 }
 
-int8_t	ft_printf_arr_insertarr(t_ft_printf_arr *dst, size_t idx
-								, t_ft_printf_arr *src)
-{
-	GRD(dst == 0, -1);
-	GRD(dst->cap == 0, -1);
-	GRD(src->len == 0, 0);
-	if (idx > dst->len)
-		GRD(ft_printf_arr_resize(dst, idx) == -1, -1);
-	GRD(ft_printf_arr_reserve(dst, src->len) == -1, -1);
-	if (idx < dst->len)
-		ft_printf_memmove(&dst->ptr[idx + src->len], &dst->ptr[idx]
-							, dst->len - idx);
-	ft_printf_memcpy(&dst->ptr[idx], src->ptr, src->len);
-	dst->len += src->len;
-	return (0);
-}
-
-int8_t	ft_printf_arr_removem(t_ft_printf_arr *src, size_t idx, size_t len)
+int8_t	ft_printf_arr_resize(t_ft_printf_arr *src, size_t sze)
 {
 	GRD(src == 0, -1);
-	GRD(src->cap == 0 || idx + len > src->len, -1);
-	ft_printf_memmove(&src->ptr[idx], &src->ptr[idx + len]
-						, src->len - (idx + len));
-	src->len -= len;
+	GRD(src->cap == 0, -1);
+	if (src->len < sze)
+	{
+		GRD(ft_printf_arr_reserve(src, sze - src->len) == -1, -1);
+		ft_printf_bzero(&src->ptr[src->len], sze - src->len);
+	}
+	src->len = sze;
 	return (0);
+}
+
+char	*ft_printf_arr_tostr(t_ft_printf_arr *src)
+{
+	GRD(src == 0, 0);
+	GRD(src->cap == 0, 0);
+	if (src->len != src->cap)
+		if (src->ptr[src->len] == 0)
+			return (src->ptr);
+	GRD(ft_printf_arr_append(src, "") == -1, 0);
+	--src->len;
+	return (src->ptr);
+}
+
+void	ft_printf_arr_dtr(t_ft_printf_arr *src)
+{
+	if (src == 0)
+		return ;
+	if (src->cap > 0)
+		free(src->ptr);
+	ft_printf_bzero(src, sizeof(t_ft_printf_arr));
 }

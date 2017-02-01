@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 12:09:59 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 14:58:18 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/01 11:02:33 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ typedef struct		s_ft_printf
 	uint8_t			len_mod;
 }					t_ft_printf;
 
+int					ft_vasprintf(char **ret, const char *fmt, va_list arg);
+int8_t				ft_printf_line(t_ft_printf_arr *ret, const char **fmt
+									, t_ft_printf *s);
 int8_t				ft_printf_flags(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_width(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
-int8_t				ft_printf_width_h_ou(t_ft_printf *s);
+int8_t				ft_printf_width_h(t_ft_printf *s);
 int8_t				ft_printf_dot(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_dot_h_ux(t_ft_printf *s);
@@ -63,6 +66,7 @@ int8_t				ft_printf_j(t_ft_printf_arr *ret, const char **fmt
 								, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_z(t_ft_printf_arr *ret, const char **fmt
 								, va_list arg, t_ft_printf *s);
+uintmax_t			ft_printf_len_mod_oux(va_list arg, t_ft_printf *s);
 int8_t				ft_printf_d(t_ft_printf_arr *ret, const char **fmt
 								, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_o(t_ft_printf_arr *ret, const char **fmt
@@ -79,6 +83,7 @@ int8_t				ft_printf_cap_o(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_cap_u(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
+int					ft_printf_wctomb(char *s, wchar_t wchar);
 int8_t				ft_printf_cap_c(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_c(t_ft_printf_arr *ret, const char **fmt
@@ -91,15 +96,11 @@ int8_t				ft_printf_p(t_ft_printf_arr *ret, const char **fmt
 								, va_list arg, t_ft_printf *s);
 int8_t				ft_printf_mod(t_ft_printf_arr *ret, const char **fmt
 									, va_list arg, t_ft_printf *s);
-
-uintmax_t			ft_printf_get_input_ux(t_ft_printf *s);
-
 int8_t				ft_printf_arr_init(t_ft_printf_arr *src, size_t cap);
 int8_t				ft_printf_arr_reserve(t_ft_printf_arr *src, size_t sze);
 int8_t				ft_printf_arr_resize(t_ft_printf_arr *src, size_t sze);
 char				*ft_printf_arr_tostr(t_ft_printf_arr *src);
 void				ft_printf_arr_dtr(t_ft_printf_arr *src);
-
 int8_t				ft_printf_arr_insert(t_ft_printf_arr *dst, size_t idx
 										, const void *src);
 int8_t				ft_printf_arr_insertm(t_ft_printf_arr *dst, size_t idx
@@ -108,24 +109,20 @@ int8_t				ft_printf_arr_insertarr(t_ft_printf_arr *dst, size_t idx
 											, t_ft_printf_arr *src);
 int8_t				ft_printf_arr_removem(t_ft_printf_arr *src, size_t idx
 											, size_t len);
-
 int8_t				ft_printf_arr_append(t_ft_printf_arr *dst, const void *src);
 int8_t				ft_printf_arr_appendm(t_ft_printf_arr *dst, const void *src
 											, size_t src_len);
 int8_t				ft_printf_arr_appendarr(t_ft_printf_arr *dst
 											, t_ft_printf_arr *src);
-
 void				ft_printf_bzero(void *src, size_t len);
 void				*ft_printf_memset(void *dst, int src, size_t len);
 void				*ft_printf_memcpy(void *dst, const void *src, size_t len);
 void				*ft_printf_memmove(void *dst, const void *src, size_t len);
-
 size_t				ft_printf_strlen(const char *src);
 char				*ft_printf_strdup(const char *src);
 char				*ft_printf_strchr(const char *src, int src_x);
-
-char			*ft_printf_itoa(intmax_t src);
-char			*ft_printf_itoa_base(uintmax_t src, short base
-									, const char *spec);
+char				*ft_printf_itoa(intmax_t src);
+char				*ft_printf_itoa_base(uintmax_t src, short base
+										, const char *spec);
 
 #endif

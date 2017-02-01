@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:53:00 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/30 12:12:05 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/01 09:23:42 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	ft_asprintf(char **ret, const char *fmt, ...);
 
 # if defined(_VA_LIST) || defined(va_arg)
 
-int	ft_vprintf(const char *fmt, va_list args);
-int	ft_vdprintf(int fd, const char *fmt, va_list args);
-int	ft_vasprintf(char **ret, const char *fmt, va_list args);
+int	ft_vprintf(const char *fmt, va_list arg);
+int	ft_vdprintf(int fd, const char *fmt, va_list arg);
+int	ft_vasprintf(char **ret, const char *fmt, va_list arg);
 
 # endif
 
