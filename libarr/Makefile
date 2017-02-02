@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/30 11:58:50 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/01 12:48:12 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LDFLAGS		+=	-L . $(subst .a,,$(subst lib,-l,$(NAME)))
 SRC_DIR		:=	srcs
 TEST		:=	test.c
 
-FILES		:=	arr_insert arr_main arr_other arr_qsort_r arr_qsort	\
-				arr_removem arr_reverse
+FILES		:=	arr_append arr_insert arr_main arr_other arr_qsort_r	\
+				arr_qsort arr_removem arr_reverse
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)
