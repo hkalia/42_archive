@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:08:42 by hkalia            #+#    #+#             */
-/*   Updated: 2017/02/02 10:10:20 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:40:32 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int8_t	arr_appendm(t_arr *dst, const void *src, size_t src_len)
 		tmp = (uint8_t *)src;
 		i = 0;
 		while (i < src_len)
+		{
 			GRD(dst->elm.dup(ARR_IDX(dst, dst->len + i)
 				, &tmp[i * dst->elm.sze]) == -1, -1);
+			++i;
+		}
 	}
 	else
 		arr_memcpy(ARR_IDX(dst, dst->len), src, src_len * dst->elm.sze);
@@ -60,8 +63,11 @@ int8_t	arr_appendarr(t_arr *dst, t_arr *src)
 	{
 		i = 0;
 		while (i < src->len)
+		{
 			GRD(dst->elm.dup(ARR_IDX(dst, dst->len + i), ARR_IDX(src, i)) == -1
 				, -1);
+			++i;
+		}
 	}
 	else
 		arr_memcpy(ARR_IDX(dst, dst->len), ARR_IDX(src, 0)

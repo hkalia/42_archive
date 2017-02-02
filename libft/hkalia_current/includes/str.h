@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 15:27:39 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 15:31:31 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:19:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,16 @@
 
 # include <stddef.h>
 
-void	ft_putendl_fd(const char *src, int fd);
+void	ft_putendl_fd(int fd, const char *src);
 void	ft_putendl(const char *src);
-void	ft_putstr_fd(const char *src, int fd);
+void	ft_putstr_fd(int fd, const char *src);
 void	ft_putstr(const char *src);
 void	ft_strclr(char *src);
-void	ft_strdel_2(int count, ...);
 void	ft_strdel(char **src);
 int		ft_strequ(const char *src1, const char *src2);
-char	*ft_strextend(char *src, size_t len);
 void	ft_striter(char *src, void (*f)(char *));
 void	ft_striteri(char *src, void (*f)(unsigned int, char *));
-char	*ft_strjoin_2(char *src1, char *src2);
 char	*ft_strjoin(const char *src1, const char *src2);
-size_t	ft_strlen_2(const char *src);
 char	*ft_strmap(const char *src, char (*f)(char));
 char	*ft_strmapi(const char *src, char (*f)(unsigned int, char));
 int		ft_strnequ(const char *src1, const char *src2, size_t len);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:15 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/29 10:17:59 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:21:46 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <str.h>
 #include <unistd.h>
 
-void	ft_putstr_fd(const char *src, int fd)
+void	ft_putstr_fd(int fd, const char *src)
 {
 	while (*src)
 	{

@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:04 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:22:16 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:20:57 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <chr.h>
 #include <unistd.h>
 
-void	ft_putendl_fd(const char *src, int fd)
+void	ft_putendl_fd(int fd, const char *src)
 {
 	while (*src)
 	{
 		write(fd, src, 1);
 		src++;
 	}
-	ft_putchar_fd('\n', fd);
+	ft_putchar_fd(fd, '\n');
 }

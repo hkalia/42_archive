@@ -6,7 +6,7 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 13:08:42 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 15:11:25 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:46:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int8_t	arr_insert(t_arr *dst, size_t idx, const void *src)
 int8_t	arr_insertm(t_arr *dst, size_t idx, const void *src, size_t src_len)
 {
 	size_t	i;
-	uint8_t	*tmp;
 
 	GRD(dst == 0, -1);
 	GRD(dst->cap == 0, -1);
@@ -46,11 +45,13 @@ int8_t	arr_insertm(t_arr *dst, size_t idx, const void *src, size_t src_len)
 					, (dst->len - idx) * dst->elm.sze);
 	if (dst->elm.dup != 0)
 	{
-		tmp = (uint8_t *)src;
 		i = 0;
 		while (i < src_len)
+		{
 			GRD(dst->elm.dup(ARR_IDX(dst, idx + i)
-				, &tmp[i * dst->elm.sze]) == -1, -1);
+				, &((uint8_t *)src)[i * dst->elm.sze]) == -1, -1);
+			++i;
+		}
 	}
 	else
 		arr_memcpy(ARR_IDX(dst, idx), src, src_len * dst->elm.sze);
@@ -75,8 +76,11 @@ int8_t	arr_insertarr(t_arr *dst, size_t idx, t_arr *src)
 	{
 		i = 0;
 		while (i < src->len)
+		{
 			GRD(dst->elm.dup(ARR_IDX(dst, idx + i), ARR_IDX(src, i)) == -1
 				, -1);
+			++i;
+		}
 	}
 	else
 		arr_memcpy(ARR_IDX(dst, idx), ARR_IDX(src, 0), src->len * dst->elm.sze);

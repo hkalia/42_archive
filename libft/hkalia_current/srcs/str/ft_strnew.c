@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:11 by hkalia            #+#    #+#             */
-/*   Updated: 2016/10/14 12:30:48 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:27:45 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ char	*ft_strnew(size_t len)
 {
 	char	*new;
 
-	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
+	GRD((new = malloc(sizeof(char) * (len + 1))) == 0, 0);
 	while (len)
 	{
 		new[len] = 0;

@@ -6,29 +6,25 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:10 by hkalia            #+#    #+#             */
-/*   Updated: 2016/12/15 15:21:53 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:17:03 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <nbr.h>
 #include <chr.h>
-#include <unistd.h>
 
-void	ft_putnbr_fd(int src, int fd)
+void	ft_putnbr_fd(int fd, intmax_t src)
 {
-	long	src_cpy;
-
-	src_cpy = src;
-	if (src_cpy < 0)
+	if (src < 0)
 	{
-		ft_putchar_fd('-', fd);
-		src_cpy = -src_cpy;
+		ft_putchar_fd(fd, '-');
+		src = -src;
 	}
-	if (src_cpy > 9)
+	if (src > 9)
 	{
-		ft_putnbr_fd(src_cpy / 10, fd);
-		ft_putnbr_fd(src_cpy % 10, fd);
+		ft_putnbr_fd(fd, src / 10);
+		ft_putnbr_fd(fd, src % 10);
 	}
 	else
-		ft_putchar_fd(src_cpy + '0', fd);
+		ft_putchar_fd(fd, src + '0');
 }

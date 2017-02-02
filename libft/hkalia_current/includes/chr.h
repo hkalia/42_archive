@@ -6,14 +6,14 @@
 /*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:27:31 by hkalia            #+#    #+#             */
-/*   Updated: 2017/01/31 15:30:14 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:15:00 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHR_H
 # define CHR_H
 
-int	ft_putchar_fd(int src, int fd);
+int	ft_putchar_fd(int fd, int src);
 int	ft_putchar(int src);
 
 #endif

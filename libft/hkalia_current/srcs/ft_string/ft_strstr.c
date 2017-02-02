@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:40:23 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 08:56:45 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:56:23 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ char	*ft_strstr(const char *big, const char *lit)
 		}
 		big++;
 	}
-	return (NULL);
+	return (0);
 }

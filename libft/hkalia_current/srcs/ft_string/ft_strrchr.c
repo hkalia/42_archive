@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 20:51:36 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/30 20:58:41 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 11:56:17 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*ft_strrchr(const char *src, int src_x)
 	}
 	if (src[i] == src_x)
 		return ((char *)src + i);
-	return (NULL);
+	return (0);
 }

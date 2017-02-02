@@ -6,7 +6,7 @@
 #    By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/03 09:01:59 by hkalia            #+#    #+#              #
-#    Updated: 2017/01/31 15:29:44 by hkalia           ###   ########.fr        #
+#    Updated: 2017/02/02 13:12:49 by hkalia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,42 +27,28 @@ CHR			:=	ft_putchar_fd ft_putchar
 FT_CTYPE	:=	ft_isalnum ft_isalpha ft_isascii ft_isblank ft_iscntrl		\
 				ft_isdigit ft_isgraph ft_islower ft_isprint ft_ispunct		\
 				ft_isspace ft_isupper ft_isxdigit ft_tolower ft_toupper
-FT_STDIO	:=	ft_printf ft_dprintf ft_asprintf ft_vprintf ft_vdprintf		\
-				ft_vasprintf ft_printf_flags ft_printf_width		\
-				ft_printf_dot ft_printf_hh ft_printf_h ft_printf_l			\
-				ft_printf_ll ft_printf_j ft_printf_z ft_printf_d			\
-				ft_printf_o ft_printf_u ft_printf_x ft_printf_cap_x			\
-				ft_printf_cap_d ft_printf_cap_o ft_printf_cap_u				\
-				ft_printf_cap_c ft_printf_c ft_printf_cap_s ft_printf_s		\
-				ft_printf_p ft_printf_mod
-FT_STDLIB	:=	ft_abs ft_atoi ft_calloc ft_wctomb
+FT_STDLIB	:=	ft_abs ft_atoi
 FT_STRING	:=	ft_bzero ft_memccpy ft_memchr ft_memcmp ft_memcpy			\
 				ft_memmove ft_memset ft_strcat ft_strchr ft_strcmp			\
 				ft_strcpy ft_strdup ft_strlcat ft_strlen ft_strncat			\
 				ft_strncmp ft_strncpy ft_strndup ft_strnlen ft_strnstr		\
 				ft_strrchr ft_strstr
-GNL			:=	gnl
 LST			:=	ft_lstadd ft_lstaddend ft_lstdel ft_lstdelone ft_lstiter	\
 				ft_lstmap ft_lstnew
-MEM			:=	ft_memalloc ft_memdel ft_realloc ft_reallocf
-NBR			:=	ft_itoa_base ft_itoa ft_nbrlen_base ft_nbrlen				\
-				ft_putnbr_base ft_putnbr_fd ft_putnbr
+MEM			:=	ft_memalloc ft_memdel
+NBR			:=	ft_itoa ft_nbrlen ft_putnbr_fd ft_putnbr
 STR			:=	ft_putendl_fd ft_putendl ft_putstr_fd ft_putstr ft_strclr	\
-				ft_strdel_2 ft_strdel ft_strequ ft_strextend ft_striter		\
-				ft_striteri ft_strjoin_2 ft_strjoin ft_strlen_2 ft_strmap	\
-				ft_strmapi ft_strnequ ft_strnew ft_strsplit ft_strsub		\
-				ft_strtrim
-TBL			:=	ft_puttbl ft_tbldel ft_tblnew_2 ft_tblnew
+				ft_strdel ft_strequ ft_striter ft_striteri ft_strjoin		\
+				ft_strmap ft_strmapi ft_strnequ ft_strnew ft_strsplit		\
+				ft_strsub ft_strtrim
 FILES		:=	$(addprefix chr/, $(CHR))				\
 				$(addprefix ft_ctype/, $(FT_CTYPE))		\
 				$(addprefix ft_stdlib/, $(FT_STDLIB))	\
 				$(addprefix ft_string/, $(FT_STRING))	\
-				$(addprefix gnl/, $(GNL))				\
 				$(addprefix lst/, $(LST))				\
 				$(addprefix mem/, $(MEM))				\
 				$(addprefix nbr/, $(NBR))				\
 				$(addprefix str/, $(STR))				\
-				$(addprefix tbl/, $(TBL))				\
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 OBJ			:=	$(SRC:.c=.o)

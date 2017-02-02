@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkalia <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hkalia <hkalia@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:39:51 by hkalia            #+#    #+#             */
-/*   Updated: 2016/09/27 14:37:15 by hkalia           ###   ########.fr       */
+/*   Updated: 2017/02/02 12:26:59 by hkalia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <str.h>
+#include <ft_string.h>
 #include <stdlib.h>
 
 char	*ft_strmap(const char *src, char (*f)(char))
@@ -21,13 +22,9 @@ char	*ft_strmap(const char *src, char (*f)(char))
 
 	i = 0;
 	src_len = 0;
-	if (src == 0)
-		return (0);
-	if (*src)
-		while (src[src_len])
-			src_len++;
-	if (!(new = (char *)malloc(sizeof(char) * (src_len + 1))))
-		return (0);
+	GRD(src == 0, 0);
+	src_len = ft_strlen(src);
+	GRD((new = malloc(sizeof(char) * (src_len + 1))) == 0, 0);
 	while (i < src_len)
 	{
 		new[i] = src[i];
