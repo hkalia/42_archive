@@ -1,0 +1,3 @@
+[submodule "push_swap"]
+	path = push_swap
+	url = https://github.com/hkalia/Push_Swap.git
